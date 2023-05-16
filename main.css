@@ -1,0 +1,48 @@
+:root{
+    --green: #00FF00;
+    --white: #FFFFFF;
+    --black: #000000;
+
+}
+/*
+*selector: body and ul are the selctors of the two rules and are used to select which elements the styles apply to
+*ul selector selects the <ul> HTML element in the page to apply styles to it
+*/
+body{
+    background: var(--bg);
+    color: var(--fontColor);
+    font-family: helvetica;
+}
+
+li {
+    list-style: circle;
+  }
+  
+  .list {
+    list-style: square;
+  }
+  
+  
+  .light-theme{
+    --bg: var(--green);
+    --fontColor: var(--black);
+    --btnBg: var(--black);
+    --btnFontColor: var(--white);
+  }
+  .dark-theme{
+    --bg: var(--black);
+    --fontColor: var(--green);
+    --btnBg: var(--white);
+    --btnFontColor: var(--black);
+  }
+  .btn {
+    position: absolute;
+    top: 10px;
+    left: 425px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    color: var(--btnFontColor);
+    background-color: var(--btnBg);
+  }
