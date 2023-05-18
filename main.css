@@ -47,6 +47,15 @@ li {
     background-color: var(--btnBg);
   }
   
+  .music-btn{
+    position: relative;
+  }
+  .sheets-btn{
+    position: relative;
+  }
+  .videos-btn{
+    position: relative;
+  }
 img {
   width: 40em;
   max-width:90%;

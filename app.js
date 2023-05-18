@@ -5,7 +5,9 @@
 *is now a reference to the button in the page.
 */
 const switcher = document.querySelector('.btn');
-
+const musicBTN = document.querySelector('.music-btn');
+const videosBTN = document.querySelector('.videos-btn');
+const sheetsBTN = document.querySelector('.sheets-btn');
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
@@ -22,4 +24,17 @@ switcher.addEventListener('click', function(){
     }
     console.log('current class name: ' + className);
     
+});
+
+musicBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "music.html";
+});
+videosBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "videos.html";
+});
+sheetsBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "sheets.html";
 });
