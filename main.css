@@ -1,6 +1,6 @@
 :root{
     
-    --white: #FFFFFF;
+    --white: #fefff1;
     --black: #000000;
 
 }
@@ -56,7 +56,16 @@ li {
   .videos-btn{
     position: relative;
   }
+  .orange-btn{
+    position: relative;
+  }
+  .three-btn{
+    position: relative;
+  }
+  .flashed-btn{
+    position: relative;
+  }
 img {
-  width: 40em;
+  width: 20em;
   max-width:90%;
 }
