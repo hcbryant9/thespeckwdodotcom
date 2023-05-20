@@ -1,8 +1,31 @@
 'use strict';
+
 /*
 *The document.querySelector function uses CSS selectors, 
 *just like the ones you used in your CSS file. switcher 
 *is now a reference to the button in the page.
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBVQnDJY2l9fwGDI8BQ3_cNNN0HSwQcq60",
+  authDomain: "thespeckwdo.firebaseapp.com",
+  projectId: "thespeckwdo",
+  storageBucket: "thespeckwdo.appspot.com",
+  messagingSenderId: "612647361206",
+  appId: "1:612647361206:web:682f8f707d662c432f2417",
+  measurementId: "G-JY9QRHFPKC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 */
 const switcher = document.querySelector('.btn');
 const musicBTN = document.querySelector('.music-btn');
