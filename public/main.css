@@ -36,6 +36,7 @@ li {
     --btnFontColor: var(--black);
   }
   .btn {
+    -webkit-appearance: none;
     position: absolute;
     top: 40px;
     left: 10px;
