@@ -1,0 +1,26 @@
+{
+  "name": "thespeckwdodotcom",
+  "version": "1.0.0",
+  "description": "website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcbryant9/thespeckwdodotcom.git"
+  },
+  "keywords": [
+    "html"
+  ],
+  "author": "henry bryant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcbryant9/thespeckwdodotcom/issues"
+  },
+  "homepage": "https://github.com/hcbryant9/thespeckwdodotcom#readme",
+  "devDependencies": {
+    "firebase-tools": "^12.2.1"
+  }
+}
