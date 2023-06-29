@@ -68,10 +68,5 @@ li {
   }
 img {
   width: 20em;
-  max-width:90%;
-}
-img2{
-  width: 20em;
-  max-width:60%;
-  
+  max-width:20%;
 }
