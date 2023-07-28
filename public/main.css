@@ -46,7 +46,7 @@ li {
     border-radius: 50%;
     border: none;
     color: var(--btnFontColor);
-    background-color: var(--btnBg);
+    background-color: #fefff1;
     visibility: hidden;
   }
   
