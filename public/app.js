@@ -26,7 +26,7 @@ switcher.addEventListener('click', function(){
     
 });
 
-musicBTN.addEventListener('click',function(){
+musicBTN.addEventListener("click",function(){
     console.log('button clicked');
     window.location.href = "music.html";
 });
