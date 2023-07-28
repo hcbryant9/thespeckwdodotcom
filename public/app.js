@@ -8,6 +8,8 @@ const seoulBTN = document.getElementById("seoul");
 const flashedBTN = document.getElementById("flashed");
 const julyBTN = document.getElementById("july");
 const orangeBTN = document.getElementById("orange");
+
+
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
