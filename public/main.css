@@ -49,24 +49,56 @@ li {
     background-color: var(--btnBg);
   }
   
-  .music-btn{
-    position: relative;
+  /* CSS */
+  .index-btn {
+    background-image: linear-gradient(#f7f8fa ,#e7e9ec);
+    border-color: #000000 #000000 #000000;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    font-size: 12px;
+    height: 20px;
+    font-size: 13px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 7px;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
   }
-  .sheets-btn{
-    position: relative;
+
+  .index-btn:active {
+    border-bottom-color: #a2a6ac;
   }
-  .videos-btn{
-    position: relative;
+
+  .index-btn:active:hover {
+    border-bottom-color: #626468;
+   
   }
-  .orange-btn{
-    position: relative;
+
+  .index-btn:hover {
+    border-color: #a3a3a3 #a3a3a3 #a3a3a3;
+    
   }
-  .three-btn{
-    position: relative;
+
+  .index-btn:focus {
+    border-color: #a2a6ac;
+  
+    box-shadow: none;
+    outline: 1;
   }
-  .flashed-btn{
-    position: relative;
-  }
+  
+  
 img {
   width: 20em;
   max-width:80%;

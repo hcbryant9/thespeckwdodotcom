@@ -2,12 +2,12 @@
 
 
 const switcher = document.querySelector('.btn');
-const musicBTN = document.querySelector('.music-btn');
-const videosBTN = document.querySelector('.videos-btn');
-const sheetsBTN = document.querySelector('.sheets-btn');
-const flashedBTN = document.querySelector('.flashed-btn');
-const threeBTN = document.querySelector('.three-btn');
-const orangeBTN = document.querySelector('.orange-btn');
+const musicBTN = document.getElementById("music");
+const videosBTN = document.getElementById("mp4s");
+const seoulBTN = document.getElementById("seoul");
+const flashedBTN = document.getElementById("flashed");
+const julyBTN = document.getElementById("july");
+const orangeBTN = document.getElementById("orange");
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
@@ -34,7 +34,7 @@ videosBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "videos.html";
 });
-sheetsBTN.addEventListener('click',function(){
+seoulBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "sheets.html";
 });
@@ -42,7 +42,7 @@ orangeBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "orange.html";
 });
-threeBTN.addEventListener('click',function(){
+julyBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "three.html";
 });
