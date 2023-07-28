@@ -47,6 +47,7 @@ li {
     border: none;
     color: var(--btnFontColor);
     background-color: var(--btnBg);
+    visibility: hidden;
   }
   
   /* CSS */
