@@ -76,6 +76,7 @@ li {
     -webkit-user-select: none;
     touch-action: manipulation;
     white-space: nowrap;
+    align-items: center;
   }
 
   .index-btn:active {
