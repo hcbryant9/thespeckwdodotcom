@@ -104,5 +104,15 @@ li {
 img {
   width: 20em;
   max-width:80%;
+  transition: transform 0.5s ease-in-out; /* Smooth rotation animation */
+  transform-style: preserve-3d; /* Enable 3D transformations */
 }
+
+#rotateImage {
+  width: 200px; /* Set your desired width */
+  height: 200px; /* Set your desired height */
+  transition: transform 0.5s ease-in-out; /* Smooth rotation animation */
+  transform-style: preserve-3d; /* Enable 3D transformations */
+}
+
   
