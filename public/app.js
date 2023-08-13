@@ -10,7 +10,7 @@ const seoulBTN = document.getElementById("seoul");
 const flashedBTN = document.getElementById("flashed");
 const julyBTN = document.getElementById("july");
 const orangeBTN = document.getElementById("orange");
-
+const edinburghBTN = document.getElementById("edinburgh");
 
 //adding event handler for the click event
 
@@ -54,7 +54,10 @@ flashedBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "flashed.html";
 });
-
+edinburghBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "edinburgh.html";
+})
 function rotate3D() {
     rotationDegreeX += 1; // Adjust the rotation angles as needed
     rotationDegreeY += 2;
