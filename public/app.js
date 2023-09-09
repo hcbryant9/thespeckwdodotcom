@@ -11,7 +11,7 @@ const flashedBTN = document.getElementById("flashed");
 const julyBTN = document.getElementById("july");
 const orangeBTN = document.getElementById("orange");
 const edinburghBTN = document.getElementById("edinburgh");
-
+const dylonBTN = document.getElementById("dylon");
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
@@ -58,6 +58,11 @@ edinburghBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "edinburgh.html";
 })
+dylonBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "dylon.html";
+})
+
 function rotate3D() {
     rotationDegreeX += 1; // Adjust the rotation angles as needed
     rotationDegreeY += 2;
