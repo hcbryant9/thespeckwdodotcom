@@ -60,7 +60,8 @@ edinburghBTN.addEventListener('click', function(){
 })
 dylonBTN.addEventListener('click', function(){
     console.log('button clicked');
-    window.location.href = "dylon.html";
+    //window.location.href = "dylon.html";
+    //temporary disabling dylon
 })
 
 function rotate3D() {
