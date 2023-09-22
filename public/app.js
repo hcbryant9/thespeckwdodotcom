@@ -12,6 +12,8 @@ const julyBTN = document.getElementById("july");
 const orangeBTN = document.getElementById("orange");
 const edinburghBTN = document.getElementById("edinburgh");
 const dylonBTN = document.getElementById("dylon");
+const jpgBTN = document.getElementById("jpgs");
+const projectsBTN = document.getElementById("projects");
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
@@ -38,31 +40,15 @@ videosBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "videos.html";
 });
-seoulBTN.addEventListener('click',function(){
+
+projectsBTN.addEventListener('click',function(){
     console.log('button clicked');
-    window.location.href = "sheets.html";
+    window.location.href = "projects.html";
 });
-orangeBTN.addEventListener('click',function(){
+jpgBTN.addEventListener('click',function(){
     console.log('button clicked');
-    window.location.href = "orange.html";
+    window.location.href = "jpgs.html";
 });
-julyBTN.addEventListener('click',function(){
-    console.log('button clicked');
-    window.location.href = "three.html";
-});
-flashedBTN.addEventListener('click',function(){
-    console.log('button clicked');
-    window.location.href = "flashed.html";
-});
-edinburghBTN.addEventListener('click', function(){
-    console.log('button clicked');
-    window.location.href = "edinburgh.html";
-})
-dylonBTN.addEventListener('click', function(){
-    console.log('button clicked');
-    //window.location.href = "dylon.html";
-    //temporary disabling dylon
-})
 
 function rotate3D() {
     rotationDegreeX += 1; // Adjust the rotation angles as needed
