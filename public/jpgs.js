@@ -10,6 +10,8 @@ const julyBTN = document.getElementById("july");
 const orangeBTN = document.getElementById("orange");
 const edinburghBTN = document.getElementById("edinburgh");
 const dylonBTN = document.getElementById("dylon");
+const septemberBTN = document.getElementById("september");
+const pbjBTN = document.getElementById("pbj");
 const jpgBTN = document.getElementById("jpgs");
 const projectsBTN = document.getElementById("projects");
 //adding event handler for the click event
@@ -36,6 +38,11 @@ edinburghBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "edinburgh.html";
 });
-
-
-
+septemberBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "september.html";
+});
+pbjBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "pbj.html";
+});
