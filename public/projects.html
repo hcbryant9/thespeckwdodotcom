@@ -8,7 +8,7 @@
     <style>
         
         #kinectgraph2 {
-            width:600px;
+            width:500px;
             height:400px;
         }
         #kinectgraph3 {
@@ -23,12 +23,9 @@
             width:400px;
             height:300px;
         }
-        p {
-            margin-top: 0;    
-            margin-bottom: 1em; 
-            margin-left: 20em;  
-            margin-right: 20em; 
-        }
+       code{
+        color: peru
+       }
     </style>
     
 </head>
@@ -64,16 +61,8 @@
     <br>
     <br>
     <small>code</small>
-    
-    <code>
-        <br>
-        rightHandPos[0] = body.Joints[Windows.Kinect.JointType.HandRight].Position.X;
-        <br>
-        rightHandPos[1] = body.Joints[Windows.Kinect.JointType.HandRight].Position.Y;
-        <br>
-        rightHandPos[2] = body.Joints[Windows.Kinect.JointType.HandRight].Position.Z;
-    </code>
-    
+    <br>
+    <script src="https://gist.github.com/hcbryant9/3e1a7ae39422bc2ec7bbf8488598420a.js"></script>
     <br>
     <br>
     <p>These are a little code samples... This snippit you can see the right hand's x,y,z position are getting stored into an array. The data can be taken from the kinect through the body class' joints
@@ -81,7 +70,7 @@
     </p>
     <br>
     <br>
-    <img id = "kinectgraph4" src = "assets/images/kinectss4.JPG" alt ="kin3"/>
+    <script src="https://gist.github.com/hcbryant9/dbd6cebe59c453d3ffbb9c15a408ebdf.js"></script>
     <br>
     <p>This snippit is the main functionality of the program. We can calculate the magnitude, or distance, of the hands
         by subtracting the x coordinate of the right from the x coordinate of the left and then taking the absolute value (I did the same thing for the y). The magnitude goes through some checks to see which
@@ -104,7 +93,15 @@
     <small>visuals</small>
     <br>
     <img id = "kinectgraph5" src = "assets/images/kinectss11.JPG" alt ="kin11"/>
+    <img id = "kinectgraph5" src = "assets/images/kinectss12.JPG" alt ="kin12"/>
 
+    <p>The visuals were made using my analog video distorter along with my hi8 camcorder
+    </p>
+    <br>
+    <br>
+    <small>here is an example of what it looked like</small>
+    <br>
+    <img id = "kinectgraph5" src = "assets/images/kinectss14.JPG" alt ="kin14"/>
     </center>
 
 </body>
