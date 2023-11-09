@@ -1,3 +1,5 @@
+
+
 :root{
     
     --white: #fefff1;
@@ -13,6 +15,7 @@ body{
     color: var(--fontColor);
     font-family: helvetica;
 }
+
 
 li {
     list-style: circle;
