@@ -8,8 +8,8 @@
     <style>
         
         #kinectgraph2 {
-            width:500px;
-            height:400px;
+            width:400px;
+            height:450px;
         }
         #kinectgraph3 {
             width:650px;
@@ -41,100 +41,72 @@ gtag('config', 'G-QQ6JMSNG3C');
 </script>
 <body>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.html">home</a>
+        <br>
+        <a href="kinect.html">other projects</a>
+        <br>
+        <br>
+        <br>
     </nav>
-    <center>
+    
     
     <p1>current featured project is...</p1>
     <br>
     <br>
-    <p1>kinect-pure-data-unity</p1>
+    <p1>virtual-soul-harmony</p1>
     <br>
     <br>
-    <img id = "kinectgraph" src = "assets/images/kinect-image.jpg" alt ="kin1"/>
+    <img id = kinectgraph2 src = "assets/images/laurengrass.JPG" alt ="laurengrass"/>
     <br>
     <a href="https://github.com/hcbryant9/KinectPD">Project GitHub</a>    
     <br>
 
     <br>
-    <small>This program uses the joint-tracking of the xbox kinect to play a pure data patch within Unity. The program follows the players hands in the X and Y axis. <br>
-        The distance between the players hands in the X axis control the frequency of the melody while the distance in the Y axis control the frequency of the bass. <br>
-        The project was inspired by the theremin and other instruments controlled by movement rather than hitting a note or plucking a string.<br> The goal was to create
-        sounds based on the space we occupy.
-    </small>
+    <p1>an extended reality exhibit displayed at getyours***outofmyhouse 12/08/2023
+    </p1>
    
     <br>
     <br>
-    <small>audio</small>
+    
     <br>
-    <img id = "kinectgraph2" src = "assets/images/pdPatch.JPG" alt ="pd1"/>
+    <img id = kinectgraph2 src = "assets/images/headsetgrass.JPG" alt ="headsetgrass"/>
+ 
     <br>
+    <p1>equipment : <br> 1 meta quest 2 <br> 1 2x4 <br> 2 rolls of sod from facebook marketplace
+    </p1>
     <br>
-    <small>Here is the pure data patch... it's a frankenstein of a bunch of tutorials since I didn't know how to use it before starting. <br> I intially went in thinking I would send midi values
-        to a DAW but that's not so easy in Unity. Luckily, pd is open-source and some lovely people created a library to send floats to a pure data patch!<br> The music was based off a
-        song called faucet by a band called nash to stoudemire. <br> Kind of just something to zone out and meditate to. The pure data patch changes the melody every 4 notes and the bass is changed every 8.
-    </small>
+  
+   
+    
     <br>
+    <img id = kinectgraph2 src = "assets/images/tygrass.JPG" alt ="grass2"/>
+    
     <br>
-    <small>code</small>
-    <br>
-    <script src="https://gist.github.com/hcbryant9/3e1a7ae39422bc2ec7bbf8488598420a.js"></script>
-    <br>
-    <br>
-    <small>These are a little code samples... This snippit you can see the right hand's x,y,z position are getting stored into an array.<br> The data can be taken from the kinect through the body class' joints
-        method that has the coordinates for each joint seen in the image at the top of the page. 
-    </small>
-    <br>
-    <br>
-    <script src="https://gist.github.com/hcbryant9/dbd6cebe59c453d3ffbb9c15a408ebdf.js"></script>
-    <br>
-    <small>This snippit is the main functionality of the program. We can calculate the magnitude, or distance, of the hands <br>
-        by subtracting the x coordinate of the right from the x coordinate of the left and then taking the absolute value (I did the same thing for the y). <br>The magnitude goes through some checks to see which
-        note should be sent. <br>In this case the magnitude is between 0 and .2 . </small>
-    <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss5.png" alt ="kin4"/>
-    <br>
-    <small>When the player holds their hands close together, the magnitude will be ~0.2f and at full stretch it can get up to 1.5f.<br> The same can be said for spreading your arms on the y axis.
-        That gave me about 7 even slots in the X and 7 in the Y where we can play notes.<br> That might sound funny, but maybe the next picture will make more sense.
-    </small>
-    <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss6.png" alt ="kin4"/>
-    <br>
-    <small>So for example if this player put both their hands in the yellow zone, they'd play an E with the frequency 329.6.<br> Note that if the player had their left hand in the red and right in the purple, it would
-        be the same as the plaer have both hands in the green!<br> Also note that the same thing is done in the y for the bass. The notes are stored in two different arrays and are converted to floats and sent <br> to the patch depending on the magnitude.
-         The notes are based off a C major scale!!
-    </small>
-    <br>
-    <br>
-    <small>visuals</small>
-    <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss11.JPG" alt ="kin11"/>
-    <img id = "kinectgraph5" src = "assets/images/kinectss12.JPG" alt ="kin12"/>
-    <br>
-    <small>The visuals were made using my analog video distorter along with my hi8 camcorder
-    </small>
-    <br>
-    <br>
-    <small>here is an example of what it looked like</small>
-    <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss14.JPG" alt ="kin14"/>
-    <br>
-    <br>
-    <small>additions</small>
-    <br>
-    <small>I had to stop working on this project since school projects are kicking my butt,<br> but I'd like to continue working on it 
-        and give the visualization a little more personality because the style of is nothing new/not very exciting.<br> Let me know if you enjoyed
-        or have any questions, maybe I'll set up a demo for people to play bc it is pretty mesmerizing
-    </small>
-    <br>
+    <p1>the experience is about trying to connect to the earth while living on the downtown expressway in richmond
+    </p1>
     <br>
    
+
     <br>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/sTX8tUjffws?si=hiRv-oET4h4L7LDc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+   
+    <img id = kinectgraph2 src = "assets/images/dylongrass.JPG" alt ="dylongrass"/>
+    <br>
+
+    <p1>additions</p1>
+    <br>
+    <p1>thanks to my friends who all showed up and put this robot on their heads you guys are the best
+    </p1>
+
     <br>
     
+    <br>
+    <br>
+    <small></small>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/IKtyWVeX-L4?si=cPKkuF7K_2RG9cPf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <br>
     
-</center>
+    <p1>Free Palestine, the US is funding ethnic cleansing and refusing cease fire.</p1>
+
 
 </body>
 </html>
