@@ -14,6 +14,9 @@ const septemberBTN = document.getElementById("september");
 const pbjBTN = document.getElementById("pbj");
 const jpgBTN = document.getElementById("jpgs");
 const projectsBTN = document.getElementById("projects");
+const laurenBTN = document.getElementById("lauren");
+const emmaBTN = document.getElementById("emma");
+
 //adding event handler for the click event
 
 
@@ -46,3 +49,12 @@ pbjBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "pbj.html";
 });
+laurenBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "lauren.html";
+});
+emmaBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "emma.html";
+});
+
