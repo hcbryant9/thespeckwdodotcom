@@ -16,6 +16,7 @@ const jpgBTN = document.getElementById("jpgs");
 const projectsBTN = document.getElementById("projects");
 const laurenBTN = document.getElementById("lauren");
 const emmaBTN = document.getElementById("emma");
+const zineBTN = document.getElementById("zine");
 
 //adding event handler for the click event
 
@@ -56,5 +57,9 @@ laurenBTN.addEventListener('click', function(){
 emmaBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "emma.html";
+});
+zineBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "2024.html";
 });
 
