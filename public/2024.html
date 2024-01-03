@@ -7,47 +7,79 @@
     <link rel="stylesheet" href="main.css">
     <title>2024 zine</title>
     <style>
-       body {
-            background-color: rgb(229, 229, 229);
-            color:white;
+        body {
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+        .page {
+            display: none; /* Initially hide all pages */
+        }
+        .page.active {
+            display: block; /* Show active page */
         }
     </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-QQ6JMSNG3C');
-</script>
-
-<nav>
-    <a href="index.html">Home</a>
-</nav>
-
-
-<br>
-<p1>
-    <i>here's to 2024</i>
-</p1>
-<br>
-<br>
-<p2>
-    <img src = "assets/images/zine/1.png" alt ="z1"> <br>
-    <img src = "assets/images/zine/2.png" alt ="z2"> <br>
-    <img src = "assets/images/zine/3.png" alt ="z3"> <br>
-    <img src = "assets/images/zine/4.png" alt ="z4"> <br>
-    <img src = "assets/images/zine/5.png" alt="z5"> <br>
-    <img src = "assets/images/zine/6.png" alt="z6"> <br>
-    <img src = "assets/images/zine/7.png" alt="z7"> <br>
-    <img src = "assets/images/zine/8.png" alt="z8"> <br>
-
-</p2>
-
 <body>
-    
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+    <br>
+    <p1>
+        <i>here's to 2024</i>
+    </p1>
+    <br>
+    <br>
+    <div class="pages">
+        <div class="page active">
+            <img src="assets/images/zine/1.png" alt="z1"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/2.png" alt="z2"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/3.png" alt="z3"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/4.png" alt="z4"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/5.png" alt="z5"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/6.png" alt="z6"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/7.png" alt="z7"> <br>
+        </div>
+        <div class="page">
+            <img src="assets/images/zine/8.png" alt="z8"> <br>
+        </div>
+    </div>
+    <br>
+    <small>
+        click to turn the page
+    </small>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const pages = document.querySelectorAll('.page');
+            let currentPage = 0;
+
+            function showPage(pageIndex) {
+                pages.forEach((page, index) => {
+                    if (index === pageIndex) {
+                        page.classList.add('active');
+                    } else {
+                        page.classList.remove('active');
+                    }
+                });
+            }
+
+            document.addEventListener('click', function() {
+                currentPage = (currentPage + 1) % pages.length;
+                showPage(currentPage);
+            });
+        });
+    </script>
 </body>
 </html>
