@@ -118,4 +118,15 @@ img {
   transform-style: preserve-3d; /* Enable 3D transformations */
 }
 
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust grid settings */
+  gap: 5px; /* Adjust the gap between tiles */
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+}
+
   
