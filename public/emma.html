@@ -8,7 +8,7 @@
     <title>merry christmas emma</title>
     <style>
         body {
-            background-color: rgb(243, 0, 0);
+            background-color: rgb(189, 166, 166);
             color:white;
         }
         p1 {
@@ -17,6 +17,12 @@
         }
         small {
             display: block; /* Ensure small elements start on a new line */
+        }
+        .page {
+            display: none; /* Initially hide all pages */
+        }
+        .page.active {
+            display: block; /* Show active page */
         }
     </style>
 </head>
@@ -56,6 +62,58 @@ gtag('config', 'G-QQ6JMSNG3C');
     Through making these videos and most past and on-going projects I've tried to understand my own place. I hope everyone has spent the holiday reflecting and been able to connect with family over what is going on in the world.
 
 </p1>
+<br><br><br>
+<div class="pages">
+    <div class="page active">
+        <img src="assets/images/emma-zine/FRONT.png" alt="front"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/INNERFRONT.png" alt="inner-front"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/1.png" alt="p1"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/2.png" alt="p2"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/3.png" alt="p3"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/4.png" alt="p4"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/5.png" alt="p5"> <br>
+    </div>
+    <div class="page">
+        <img src="assets/images/emma-zine/BACK.png" alt="p6"> <br>
+    </div>
+    
+</div>
+<br>
+<small>click to turn the page</small>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const pages = document.querySelectorAll('.page');
+        let currentPage = 0;
+
+        function showPage(pageIndex) {
+            pages.forEach((page, index) => {
+                if (index === pageIndex) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('click', function() {
+            currentPage = (currentPage + 1) % pages.length;
+            showPage(currentPage);
+        });
+    });
+</script>
 <body>
     
 </body>
