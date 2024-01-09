@@ -2,6 +2,10 @@ const GameBoard = () => {
     const numRows = 10;
     const numCols = 15;
 
+
+    const [selectedTile, setSelectedTile] = React.useState(null);
+
+
     const colColors = [
         
         // Define RGBA color arrays for each column
@@ -121,25 +125,44 @@ const GameBoard = () => {
     };
 
     const handleClick = (color) => {
-        // Handle user's click on a tile (make a guess, for example)
+        
+        setSelectedTile(color);
+    
     };
 
+    const handleSubmit = () => {
+        // Logic for handling the submission of the selected tile
+        console.log(`Submitted tile: ${selectedTile}`);
+    };
+
+    const hintText = "Try to guess this color!"; // Your hint text
+
     return (
-        <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 30px)`, gridGap: '4px' }}>
-            {Array.from({ length: numRows }, (_, rowIndex) => (
-                Array.from({ length: numCols }, (_, colIndex) => (
-                    <div
-                        key={generateTileKey(rowIndex, colIndex)}
-                        className="tile"
-                        style={{
-                            width: '30px',
-                            height: '30px',
-                            backgroundColor: colColors[colIndex][rowIndex],
-                        }}
-                        onClick={() => handleClick(colColors[colIndex][rowIndex])}
-                    />
-                ))
-            ))}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 30px)`, gridGap: '4px' }}>
+                {Array.from({ length: numRows }, (_, rowIndex) => (
+                    Array.from({ length: numCols }, (_, colIndex) => (
+                        <div
+                            key={generateTileKey(rowIndex, colIndex)}
+                            className="tile"
+                            style={{
+                                width: '30px',
+                                height: '30px',
+                                backgroundColor: colColors[colIndex][rowIndex],
+                                boxShadow: selectedTile === colColors[colIndex][rowIndex] ? '0 0 0 2px black' : 'none',
+                            }}
+                            onClick={() => handleClick(colColors[colIndex][rowIndex])}
+                        />
+                    ))
+                ))}
+            </div>
+            {hintText && <small style={{ marginTop: '4px' }}>{hintText}</small>}
+            {selectedTile && (
+                <div className="selected-tile" style={{ width: '60px', height: '60px', backgroundColor: selectedTile, margin: '8px auto', boxShadow: '0 0 0 2px white' }} />
+            )}
+            {selectedTile && (
+                <button onClick={handleSubmit} style={{ marginTop: '8px' }}>Submit</button>
+            )}
         </div>
     );
     
