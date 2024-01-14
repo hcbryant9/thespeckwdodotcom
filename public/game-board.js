@@ -1,9 +1,16 @@
 const GameBoard = () => {
-    const numRows = 10;
+    const numRows = 9;
     const numCols = 15;
 
 
     const [selectedTile, setSelectedTile] = React.useState(null);
+    const [hintText, setHintText] = React.useState("Try to guess this color!"); // Updated to use state for hint text
+    const [submissions, setSubmissions] = React.useState(0);
+    const [score, setScore] = React.useState(0); // Define score in the state
+    const [selectedColors, setSelectedColors] = React.useState([]); // State to store selected colors
+
+    const [firstHint, setFirstHint] = React.useState("First hint");
+    const [secondHint, setSecondHint] = React.useState("Second hint");
 
 
     const colColors = [
@@ -109,16 +116,11 @@ const GameBoard = () => {
             'rgba(47,68,157,255)', 'rgba(52,90,170,255)', 'rgba(58,112,184,255)', 'rgba(37,147,199,255)',
             'rgba(16,183,215,255)', 
         ],
-         /* 
-        //bottom row (testing)
-        ['rgba(124,165,63,255)', 'rgba(103,152,56,255)', 'rgba(82,139,49,255)', 'rgba(61,126,43,255)', 
-        'rgba(40,113,36,255)', 'rgba(20,100,30,255)', 'rgba(29,120,46,255)', 'rgba(39,141,62,255)', 
-        'rgba(48,161,78,255)', 'rgba(58,182,94,255)', 'rgba(49,182,118,255)', 'rgba(41,182,142,255)', 
-        'rgba(32,182,166,255)', 'rgba(24,182,190,255)', 'rgba(16,183,215,255)',
-        ]
-        */
+         
         
     ];
+
+    
 
     const generateTileKey = (row, col) => {
         return `${row}-${col}`;
@@ -126,16 +128,34 @@ const GameBoard = () => {
 
     const handleClick = (color) => {
         
-        setSelectedTile(color);
+        setSelectedTile(color); //changes the selected color at the bottom of the screen
+        
+    
     
     };
 
     const handleSubmit = () => {
-        // Logic for handling the submission of the selected tile
         console.log(`Submitted tile: ${selectedTile}`);
+        // submit current selected tile
+
+        // Add the selected color to the array
+        setSelectedColors((prevColors) => [...prevColors, selectedTile]);
+
+        if (hintText === "Try to guess this color!") {
+            // Change the hint text after the first submission
+            setHintText("Now, guess this color!");
+            setSubmissions(submissions + 1); // Increment the submissions count
+        } else if (hintText === "Now, guess this color!" && submissions === 1) {
+            // End the game and display the score after the second submission
+            const calculatedScore = calculateScore(); // You need to implement a function to calculate the score
+            setScore(calculatedScore);
+            setHintText(`Your Score: ${calculatedScore}`);
+        }
     };
 
-    const hintText = "Try to guess this color!"; // Your hint text
+    const calculateScore = () => {
+        return 5;
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -156,15 +176,28 @@ const GameBoard = () => {
                     ))
                 ))}
             </div>
+            
             {hintText && <small style={{ marginTop: '4px' }}>{hintText}</small>}
-            {selectedTile && (
-                <div className="selected-tile" style={{ width: '60px', height: '60px', backgroundColor: selectedTile, margin: '8px auto', boxShadow: '0 0 0 2px white' }} />
+
+            {hintText !== `Your Score: ${score}` && selectedTile && (
+                <div className="selected-tile" style={{ width: '60px', height: '60px', backgroundColor: selectedTile, margin: '8px auto' }} />
             )}
-            {selectedTile && (
+            {/* Conditionally render the submit button based on game state */}
+            {hintText !== `Your Score: ${score}` && selectedTile && (
                 <button onClick={handleSubmit} style={{ marginTop: '8px' }}>Submit</button>
+            )}
+            {/* Display selected colors after the game is over */}
+            {hintText === `Your Score: ${score}` && selectedColors.length > 0 && (
+                <div>
+                    <p>Selected Colors:</p>
+                    {selectedColors.map((color, index) => (
+                        <div key={index} style={{ width: '30px', height: '30px', backgroundColor: color, marginTop: '4px' }} />
+                    ))}
+                </div>
             )}
         </div>
     );
+    
     
 };
 
