@@ -7,7 +7,8 @@ const kinectBTN = document.getElementById("kinect");
 const harmonyBTN = document.getElementById("harmony");
 const huesBTN = document.getElementById("hues");
 const emotionalBTN = document.getElementById("emotional");
-
+const websiteBTN = document.getElementById("website");
+const aboutBTN = document.getElementById("about");
 //adding event handler for the click event
 
 
@@ -26,6 +27,14 @@ huesBTN.addEventListener('click',function(){
 });
 emotionalBTN.addEventListener('click',function(){
     console.log('button clicked');
-    window.location.href = "emotional.html";
+    window.location.href = "emotions.html";
+});
+websiteBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "index.html";
+});
+aboutBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "about.html";
 });
 
