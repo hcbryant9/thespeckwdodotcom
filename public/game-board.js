@@ -9,9 +9,7 @@ const GameBoard = () => {
     const [score, setScore] = React.useState(0); // Define score in the state
     const [selectedColors, setSelectedColors] = React.useState([]); // State to store selected colors
 
-    const [firstHint, setFirstHint] = React.useState("First hint");
-    const [secondHint, setSecondHint] = React.useState("Second hint");
-
+  
 
     const colColors = [
         

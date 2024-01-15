@@ -2,111 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    
+    <title>PROJECTS</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+
     <style>
-        
-        #kinectgraph2 {
-            width:400px;
-            height:450px;
+        body {
+            background-color: rgb(255, 255, 255);
+            color:white;
         }
-        #kinectgraph3 {
-            width:650px;
-            height:100px;
+
+        .project-container {
+            text-align: left;
         }
-        #kinectgraph4 {
-            width:550px;
-            height:100px;
+
+        .project-image {
+            width: 250px;
+            height: 300px;
         }
-        #kinectgraph5 {
-            width:400px;
-            height:300px;
+
+        .index-btn {
+            margin-top: 10px; /* Adjust the spacing between image and button */
+            display: block; /* Make anchor tags a block element */
+            text-align: center; /* Center text within the anchor tags */
+            text-decoration: none; /* Remove default underline */
+            padding: 10px; /* Add padding for better styling */
+            color: white; /* Set button text color */
+            background-color: #3498db; /* Set button background color */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Add border-radius for rounded corners */
         }
-       code{
-        color: peru
-       }
     </style>
-    
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-QQ6JMSNG3C');
-</script>
-<body>
+<body class="light-theme">
+    
     <nav>
-        <a href="index.html">home</a>
-        <br>
-        <a href="kinect.html">other projects</a>
-        <br>
-        <br>
-        <br>
+        <a href="index.html">Home</a>
     </nav>
     
-    
-    <p1>current featured project is...</p1>
-    <br>
-    <br>
-    <p1>virtual-soul-harmony</p1>
-    <br>
-    <br>
-    <img id = kinectgraph2 src = "assets/images/laurengrass.JPG" alt ="laurengrass"/>
-    <br>
-    <a href="https://github.com/hcbryant9/get-your-house-rva">Project GitHub</a>    
-    <br>
+    <div class="project-container">
+        <div>
+            <a href="#" id="kinect">
+                <img src="assets/images/projects/kinect.png" alt="kinect-project-image" class="project-image">
+                
+            </a>
+        </div>
 
-    <br>
-    <p1>an extended reality exhibit displayed at getyours***outofmyhouse 12/08/2023
-    </p1>
-   
-    <br>
-    <br>
-    
-    <br>
-    <img id = kinectgraph2 src = "assets/images/headsetgrass.JPG" alt ="headsetgrass"/>
- 
-    <br>
-    <p1>equipment : <br> 1 meta quest 2 <br> 1 2x4 <br> 2 rolls of sod from facebook marketplace
-    </p1>
-    <br>
+        <div>
+            <a href="#" id="harmony" >
+                <img src="assets/images/projects/harmony.png" alt="harmony-project-image" class="project-image">
+                
+            </a>
+        </div>
+
+        <div>
+            <a href="#" id="emotional">
+                <img src="assets/images/projects/emotion.png" alt="emotion-project-image" class="project-image">
+                
+            </a>
+        </div>
+    </div>
   
-   
-    
-    <br>
-    <img id = kinectgraph2 src = "assets/images/tygrass.JPG" alt ="grass2"/>
-    
-    <br>
-    <p1>the experience is about trying to connect to the earth while living on the downtown expressway in richmond
-    </p1>
-    <br>
-   
-
-    <br>
-   
-    <img id = kinectgraph2 src = "assets/images/dylongrass.JPG" alt ="dylongrass"/>
-    <br>
-
-    <p1>additions</p1>
-    <br>
-    <p1>thanks to my friends who all showed up and put this robot on their heads you guys are the best
-    </p1>
-
-    <br>
-    
-    <br>
-    <br>
-    <small></small>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/IKtyWVeX-L4?si=cPKkuF7K_2RG9cPf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <br>
-    
-    <p1>Free Palestine, the US is funding ethnic cleansing and refusing cease fire.</p1>
-
-
+    <script src="projects.js"></script>
+    <noscript>you need to enable JavaScript to view the full site </noscript>
 </body>
 </html>
