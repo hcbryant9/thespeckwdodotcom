@@ -10,9 +10,10 @@
     <style>
         body {
             background-color: rgb(255, 255, 255);
-            color:white;
         }
-
+        .project-buttons {
+            margin-bottom: 20px; /* Adjust as needed */
+        }
     </style>
 </head>
 
@@ -22,18 +23,27 @@
         <a href="index.html">Home</a>
     </nav>
     <br>
-    <img id = "swan" src = "assets/images/projects/goose.jpg" alt ="swan"/>
+    <img id="swan" src="assets/images/projects/goose.jpg" alt="swan" />
     <br>
     <br>
-    <button id = kinect class = "index-btn">kinect-pure-data-unity</button>
-    <button id = harmony class = "index-btn">virtual-soul-harmony</button>
-    <button id = emotional class = "index-btn">emotional-surveillance-ml</button>
-    <button id = hues class = "index-btn">guess-hue-game</button>
-    <button id = website class = "index-btn">personal-website</button>
-    <button id = pump class = "index-btn">pumphouse-virtual-tour</button>
-    <br><br>
-    <button id = about class = "index-btn">about-me</button>
-  
+
+    <!-- Project buttons container -->
+    <div class="project-buttons">
+        <button id="kinect" class="index-btn">kinect-pure-data-unity</button>
+        <button id="harmony" class="index-btn">virtual-soul-harmony</button>
+        <button id="emotional" class="index-btn">emotional-surveillance-ml</button>
+        <button id="hues" class="index-btn">guess-hue-game</button>
+        <button id="website" class="index-btn">personal-website</button>
+        <button id="pump" class="index-btn">pumphouse-virtual-tour</button>
+    </div>
+
+    <!-- Overview span -->
+    <p><span id="projectOverview"> If you are on a desktop, hover over the buttons to see a brief description!<br>Overview: <br> Tools: <br> Timeline: </span></p>
+
+    
+    <button id="about" class="index-btn about">about-me</button>
+
+
     <script src="projects.js"></script>
     <noscript>you need to enable JavaScript to view the full site </noscript>
 </body>
