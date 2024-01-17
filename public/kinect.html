@@ -67,7 +67,7 @@ gtag('config', 'G-QQ6JMSNG3C');
     <p1>kinect-pure-data-unity</p1>
     <br>
     <br>
-    <img id = "kinectgraph" src = "assets/images/kinect-image.jpg" alt ="kin1"/>
+    <img id = "kinectgraph" src = "assets/images/kinect/kinect-image.jpg" alt ="kin1"/>
     <br>
     <a href="https://github.com/hcbryant9/KinectPD">Project GitHub</a>    
     <br>
@@ -83,7 +83,7 @@ gtag('config', 'G-QQ6JMSNG3C');
     <br>
    
     <br>
-    <img id = "kinectgraph2" src = "assets/images/pdPatch.JPG" alt ="pd1"/>
+    <img id = "kinectgraph2" src = "assets/images/kinect/pdPatch.JPG" alt ="pd1"/>
     <br>
     <br>
     <p1>Here is the pure data patch... it's a frankenstein of a bunch of tutorials since I didn't know how to use it before starting. I intially went in thinking I would send midi values
@@ -116,13 +116,13 @@ if (magnitudeHandsX < 0.2f && magnitudeHandsX > 0f)
         by subtracting the x coordinate of the right from the x coordinate of the left and then taking the absolute value (I did the same thing for the y). The magnitude goes through some checks to see which
         note should be sent. In this case the magnitude is between 0 and .2 . </p1>
     <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss5.png" alt ="kin4"/>
+    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss5.png" alt ="kin4"/>
     <br>
     <p1>When the player holds their hands close together, the magnitude will be ~0.2f and at full stretch it can get up to 1.5f. The same can be said for spreading your arms on the y axis.
         That gave me about 7 even slots in the X and 7 in the Y where we can play notes. That might sound funny, but maybe the next picture will make more sense.
     </p1>
     <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss6.png" alt ="kin4"/>
+    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss6.png" alt ="kin4"/>
     <br>
     <p1>So for example if this player put both their hands in the yellow zone, they'd play an E with the frequency 329.6. Note that if the player had their left hand in the red and right in the purple, it would
         be the same as the plaer have both hands in the green! Also note that the same thing is done in the y for the bass. The notes are stored in two different arrays and are converted to floats and sent to the patch depending on the magnitude.
@@ -132,8 +132,8 @@ if (magnitudeHandsX < 0.2f && magnitudeHandsX > 0f)
     <br>
     
     <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss11.JPG" alt ="kin11"/>
-    <img id = "kinectgraph5" src = "assets/images/kinectss12.JPG" alt ="kin12"/>
+    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss11.JPG" alt ="kin11"/>
+    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss12.JPG" alt ="kin12"/>
     <br>
     <p1>The visuals were made using my analog video distorter along with my hi8 camcorder
     </p1>
@@ -141,7 +141,7 @@ if (magnitudeHandsX < 0.2f && magnitudeHandsX > 0f)
     <br>
     <p1>here is an example of what it looked like</p1>
     <br>
-    <img id = "kinectgraph5" src = "assets/images/kinectss14.JPG" alt ="kin14"/>
+    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss14.JPG" alt ="kin14"/>
     <br>
     <br>
     
