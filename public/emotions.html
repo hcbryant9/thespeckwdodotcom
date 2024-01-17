@@ -6,17 +6,23 @@
     <title>EmotionAnalysis</title>
     
     <style>
-        
         #image1 {
-            width:200px;
-            height:250px;
+            width: 350px;
+            height: 250px;
         }
-        #image2 {
-            width:650px;
-            height:100px;
+        
+        #quote {
+            width: 50%; /* Adjust the width as needed */
+            margin-left: 3%; /* Center the quote */
         }
-       
 
+        #image2 {
+            width: 650px;
+            height: 100px;
+        }
+        p{
+            width:60%
+        }
     </style>
     
 </head>
@@ -24,30 +30,35 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-gtag('config', 'G-QQ6JMSNG3C');
+    gtag('config', 'G-QQ6JMSNG3C');
 </script>
 <body>
     <nav>
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
     </nav>
-    
-    
- 
+
     <br>
     <br>
     <p1>emotional-surveillance-ml</p1>
+    <p><small>This page is dedicated to document my personal work on the larger project <i>Sentiment Voice Analysis</i>, a Virtual Reality experience that integrates user emotions into an adaptive environment, aimed to shed light on emotional data tracking for public awareness and engagement. The project is a collaborative effort among several engineers and artists.</small> </p>
+    
+    <img id="image1" src="assets/images/emotions/dynamicfacialexpressions3.png" alt="facialexpression"><br>
     <br>
+    <a href="https://github.com/hcbryant9/EmotionAnalysis">Project GitHub</a>
     <br>
-    <img id = "image1" src = "assets/images/projects/emotion.png" alt ="aboutmephoto"/>
+    <p>Working on this project has created an inner dialouge about the societal impact of software development. These thoughts have manifested themself into spreading awareness within my community and building an emotion predicting model.
+        Currently I am collecting facial tracking data from the Meta Quest Pro to create a machine learning model that will predict the emotion the user is making. The GitHub link above has the python code needed to generate the model. 
+        All that is needed is the data.
+    </p>
     <br>
-    <a href="https://github.com/hcbryant9/EmotionAnalysis">Project GitHub</a>    
-    <br>
-
-
+    <blockquote id="quote">
+        <i> "And while there is an enormous structural power asymmetry between the surveillers and surveilled, neither are those with the greatest power free from being haunted by a very particular kind of data anxiety: that no matter how much data they have, it is always incomplete, and the sheer volume can overwhelm the critical signals in a fog of possible correlations."</i>
+        <br><cite><a href="https://thenewinquiry.com/the-anxieties-of-big-data/">Kate Crawford</a></cite>
+    </blockquote>
 </body>
 </html>
