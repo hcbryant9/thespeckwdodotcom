@@ -4,7 +4,6 @@ const dogImage = document.getElementById('hairyball');
 let rotationDegreeX = 0;
 let rotationDegreeY = 0;
 const switcher = document.querySelector('.btn');
-const musicBTN = document.getElementById("music");
 const videosBTN = document.getElementById("mp4s");
 const seoulBTN = document.getElementById("seoul");
 const flashedBTN = document.getElementById("flashed");
@@ -14,6 +13,7 @@ const edinburghBTN = document.getElementById("edinburgh");
 const dylonBTN = document.getElementById("dylon");
 const jpgBTN = document.getElementById("jpgs");
 const projectsBTN = document.getElementById("projects");
+const technologyBTN = document.getElementById("technology");
 //adding event handler for the click event
 
 switcher.addEventListener('click', function(){
@@ -31,11 +31,11 @@ switcher.addEventListener('click', function(){
     console.log('current class name: ' + className);
     
 });
-
-musicBTN.addEventListener("click",function(){
+technologyBTN.addEventListener('click',function(){
     console.log('button clicked');
-    window.location.href = "music.html";
+    window.location.href = "technology.html";
 });
+
 videosBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "videos.html";

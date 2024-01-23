@@ -13,6 +13,9 @@ const emotionalBTN = document.getElementById("emotional");
 const websiteBTN = document.getElementById("website");
 const aboutBTN = document.getElementById("about-me");
 const pumpBTN = document.getElementById("pump");
+
+
+
 //adding event handler for the click event
 
 aboutBTN.addEventListener('click',function(){window.location.href = "about.html";});
@@ -69,6 +72,7 @@ const projects = {
         filename:"pump"
        
     }
+    
 };
 
 function updateOverview(project) {
