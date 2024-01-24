@@ -23,6 +23,10 @@
             width:400px;
             height:300px;
         }
+        #arm-photo {
+            width: 400px;
+            height: 200px;
+        }
         code{
             color: black;
         }
@@ -40,6 +44,30 @@
             border-radius: 5px;
             overflow: auto;
         }
+        
+        a{
+            color: #0000ee;
+            display:inline-block;
+            position: relative;
+            text-decoration: none;
+            &:before{
+                background-color: #0000ee;
+                content: '';
+                height: 1.2px;
+                position: absolute;
+                bottom: -0.5px;
+                left: 50%;
+                transform: translateX(-50%);
+                transition: width 0.3s ease-in-out;
+                width: 100%;
+
+            }
+            &:hover{
+                &:before {
+                    width: 0;
+                }
+            }
+        }
 
     </style>
     
@@ -56,8 +84,9 @@ gtag('config', 'G-QQ6JMSNG3C');
 </script>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
+        <a href="index.html">Home</a> <br>
+        <a href="projects.html">Projects</a> <br>
+        <a href="technology.html">Technology</a>
     </nav>
     
     
@@ -116,7 +145,7 @@ if (magnitudeHandsX < 0.2f && magnitudeHandsX > 0f)
         by subtracting the x coordinate of the right from the x coordinate of the left and then taking the absolute value (I did the same thing for the y). The magnitude goes through some checks to see which
         note should be sent. In this case the magnitude is between 0 and .2 . </p1>
     <br>
-    <img id = "kinectgraph5" src = "assets/images/kinect/kinectss5.png" alt ="kin4"/>
+    <img id = "arm-photo" src = "assets/images/kinect/kinect-arm-elipse-01.png" alt ="arm"/>
     <br>
     <p1>When the player holds their hands close together, the magnitude will be ~0.2f and at full stretch it can get up to 1.5f. The same can be said for spreading your arms on the y axis.
         That gave me about 7 even slots in the X and 7 in the Y where we can play notes. That might sound funny, but maybe the next picture will make more sense.
