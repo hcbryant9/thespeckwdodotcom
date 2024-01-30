@@ -57,7 +57,7 @@ const projects = {
         
     },
     website: {
-        title: "index",
+        title: "personal-website",
         description: "The website serves as an alternative platform to addictive media platforms. Hank1wdo.com is largely inspired by individual-blogs and various open-sourced communities.",
         tools: "JavaScript, HTML, CSS, Firebase, GitHub Actions",
         timeline: "Summer 2023 - Current",
@@ -77,9 +77,26 @@ const projects = {
 
 function updateOverview(project) {
     projectOverview.innerHTML = 
-    `Overview: ${project.description}<br>
-    Tools: ${project.tools}<br>
-    Timeline: ${project.timeline}<br><br> Double Click to Visit Page`;
+    `
+    Double Click to Visit Page <br>
+    <table> 
+        <tr> 
+            <td>Projects</td>
+            <td>Overview</td>
+            <td>Tools</td>
+            <td>Timeline</td>
+        </tr>
+        
+        <tr> 
+            <td><a href = ${project.filename}.html>${project.title}</a></td>
+            <td>${project.description}</td>
+            <td>${project.tools}</td>
+            <td>${project.timeline}</td>
+        </tr>
+    </table>`
+    //`Overview: ${project.description}<br>
+    //Tools: ${project.tools}<br>
+    //Timeline: ${project.timeline}<br><br> Double Click to Visit Page`;
 }
 
 function handleButtonClick(projectKey) {
