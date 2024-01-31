@@ -11,14 +11,28 @@ const harmonyBTN = document.getElementById("harmony");
 const huesBTN = document.getElementById("hues");
 const emotionalBTN = document.getElementById("emotional");
 const websiteBTN = document.getElementById("website");
-const aboutBTN = document.getElementById("about-me");
 const pumpBTN = document.getElementById("pump");
+
+const aboutBTN = document.getElementById("about-me");
+const technologyPhotoBTN = document.getElementById("technology-photo");
+const kinectPhotoBTN = document.getElementById("kinect-photo");
+const harmonyPhotoBTN = document.getElementById("harmony-photo");
+const emotionPhotoBTN = document.getElementById("emotion-photo");
+const pumpPhotoBTN = document.getElementById("pump-photo");
+const characPhotoBTN = document.getElementById("charac-photo");
+
 
 
 
 //adding event handler for the click event
 
 aboutBTN.addEventListener('click',function(){window.location.href = "about.html";});
+technologyPhotoBTN.addEventListener('click',function(){window.location.href = "technology.html";});
+kinectPhotoBTN.addEventListener('click',function(){window.location.href = "kinect.html";});
+harmonyPhotoBTN.addEventListener('click',function(){window.location.href = "harmony.html";});
+emotionPhotoBTN.addEventListener('click',function(){window.location.href = "emotions.html";});
+pumpPhotoBTN.addEventListener('click',function(){window.location.href = "pump.html";});
+characPhotoBTN.addEventListener('click',function(){window.location.href = "index.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -78,7 +92,7 @@ const projects = {
 function updateOverview(project) {
     projectOverview.innerHTML = 
     `
-    Double Click to Visit Page <br>
+    
     <table> 
         <tr> 
             <td>Projects</td>
@@ -93,7 +107,10 @@ function updateOverview(project) {
             <td>${project.tools}</td>
             <td>${project.timeline}</td>
         </tr>
-    </table>`
+      
+        
+    </table>
+    <br>photos - 1 click(s) <br> buttons - 2 click(s)`
     //`Overview: ${project.description}<br>
     //Tools: ${project.tools}<br>
     //Timeline: ${project.timeline}<br><br> Double Click to Visit Page`;
