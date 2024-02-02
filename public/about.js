@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const hand = document.getElementById('hand');
     const greeting = document.getElementById('greeting');
-  
+    const ouch = document.getElementById('ouch');
+
+    let shakerCount = 0;
     let rotateDeg = 0;
     let rotationDirection = 1; // 1 for clockwise, -1 for counterclockwise
-  
+    
     // Function to rotate the hand image
     function rotateHand() {
       rotateDeg += 2 * rotationDirection;
@@ -20,12 +22,28 @@ document.addEventListener('DOMContentLoaded', function () {
       // Update greeting text
       greeting.innerHTML = '<i>Nice to meet you</i>';
   
+      //inc counter
+      shakerCount++;
       // Reset rotation and direction
       rotateDeg = 0;
       rotationDirection = 1;
-  
+      if(shakerCount > 2 && shakerCount <4){
+        ouch.innerHTML = '<i>I could do this all day<i>'
+      }  else if(shakerCount>4 && shakerCount <6){
+        ouch.innerHTML = '<i>Yep, really nice to meet you<i>'
+      }  else if (shakerCount>6&& shakerCount <8){
+        ouch.innerHTML = '<i>Okay, my arm is about to fall off<i>'
+      } else if (shakerCount>8&& shakerCount <12){
+        ouch.innerHTML = '<i>Please, I am begging you<i>'
+      } else if (shakerCount>25){
+        ouch.innerHTML = '<i>Okay, you are cut off<i>'
+        greeting.innerHTML = '<i>Not nice to meet you</i>';
+      }
       // Call the rotateHand function every 20 milliseconds
+      
       const interval = setInterval(rotateHand, 20);
+      
+      
   
       // Stop rotation after 1000 milliseconds (1 second)
       setTimeout(() => {
