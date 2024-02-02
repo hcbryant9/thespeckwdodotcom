@@ -17,8 +17,12 @@
         }
 
         #image2 {
-            width: 650px;
-            height: 100px;
+            width: 300px;
+            height: 30px;
+        }
+        #image3{
+            width: 350px;
+            height: 200px;
         }
         p{
             width:60%
@@ -50,6 +54,19 @@
     <img id="image1" src="assets/images/emotions/dynamicfacialexpressions3.png" alt="facialexpression"><br>
     <br>
     <a href="https://github.com/hcbryant9/EmotionAnalysis">Project GitHub</a>
+    <br>
+    <p><i>02/01/2024 update</i><br><br>
+        Today I collected data for 4 emotions [happy,sad,mad,anxious]. Currently, the Unity project runs through each emotion 5 times for a total of 24 data points. I did this process twice on my face so I had 48 data points. I trained the model with 47 data points leaving out 1 data point for testing.
+        After training the model with these points here were the results after running emotionclassifier.py.
+        <br>
+        <img id = "image3" src="assets/images/emotions/emotions-photo-2.png" alt="emotion-photo-2">
+        <br>
+        Then taking the models and making a prediction on the data point I left out I recorded this after running prediction.py.
+        <br>
+        <img id = "image2" src="assets/images/emotions/emotions-photo-3.png" alt="emotion-photo-3">
+        <br>
+        Both random forest and decision tree models correctly predicted the 'anxious' expression.
+    </p>
     <br>
     <p>Working on this project has created an inner dialouge about the societal impact of software development. These thoughts have manifested themself into spreading awareness within my community and building an emotion predicting model.
         Currently, I am collecting facial tracking data from the Meta Quest Pro to create a machine learning model that will predict the emotionof the user. The GitHub link above has the python code needed to generate the model. 
