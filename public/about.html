@@ -19,7 +19,10 @@
             width:75px;
             height:75px;
         }
-    
+        #hand{
+            width:200px;
+            height:150px;
+        }
         p {
             margin: 0 0; /* Set margin to 0 on top/bottom and auto on left/right */
             max-width: 60%; /* Set maximum width to 50% of the parent container */
@@ -32,6 +35,16 @@
 
         table td{
         border:1px solid #000000;
+        }
+        .container {
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        
+        }
+
+        .hand-image {
+        cursor: pointer;
         }
     </style>
     
@@ -91,7 +104,11 @@ gtag('config', 'G-QQ6JMSNG3C');
         </tr>
     </table>
 
-
-
+    <br><br><br>
+    <div class="container">
+    <img id = "hand" class = "hand-image" src = "assets/images/kinect/kinect-arm-elipse-01.png" alt ="shake"/>
+    </div>
+    <br><small id="greeting"><i>Click to shake</i></small>
+<script src="about.js"></script>
 </body>
 </html>
