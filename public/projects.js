@@ -12,6 +12,7 @@ const huesBTN = document.getElementById("hues");
 const emotionalBTN = document.getElementById("emotional");
 const websiteBTN = document.getElementById("website");
 const pumpBTN = document.getElementById("pump");
+const lucidityBTN = document.getElementById("lucidity");
 
 const aboutBTN = document.getElementById("about-me");
 const technologyPhotoBTN = document.getElementById("technology-photo");
@@ -20,7 +21,7 @@ const harmonyPhotoBTN = document.getElementById("harmony-photo");
 const emotionPhotoBTN = document.getElementById("emotion-photo");
 const pumpPhotoBTN = document.getElementById("pump-photo");
 const characPhotoBTN = document.getElementById("charac-photo");
-
+const lucidPhotoBTN = document.getElementById("lucid-photo");
 
 
 
@@ -33,6 +34,7 @@ harmonyPhotoBTN.addEventListener('click',function(){window.location.href = "harm
 emotionPhotoBTN.addEventListener('click',function(){window.location.href = "emotions.html";});
 pumpPhotoBTN.addEventListener('click',function(){window.location.href = "pump.html";});
 characPhotoBTN.addEventListener('click',function(){window.location.href = "index.html";});
+lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -85,6 +87,13 @@ const projects = {
         timeline: "Fall 2023 - Current",
         filename:"pump"
        
+    },
+    lucidity:{
+        title:"lucidity-vr-performance",
+        description:"lucidity is a virtual reality immersive performance in collaboration with the school of kinetic imaging at vcu & korea national university of arts",
+        tools:"Unity, Normcore, Inverse Kinematics, Quest 3, Quest 3, Quest 3, Quest 2",
+        timeline:"Fall 2023 - Spring 2024",
+        filename:"lucidity"
     }
     
 };
