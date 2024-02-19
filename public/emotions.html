@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>EmotionAnalysis</title>
     
     <style>
@@ -78,5 +79,25 @@
         <i> "And while there is an enormous structural power asymmetry between the surveillers and surveilled, neither are those with the greatest power free from being haunted by a very particular kind of data anxiety: that no matter how much data they have, it is always incomplete, and the sheer volume can overwhelm the critical signals in a fog of possible correlations."</i>
         <br><cite><a href="https://thenewinquiry.com/the-anxieties-of-big-data/">Kate Crawford</a></cite>
     </blockquote>
+
+
+    <script>
+        // Function to redirect to the emotionzine.html page
+        function redirectToEmotionzinePage() {
+            window.location.href = 'emotionzine.html';
+        }
+    
+        // Creating a button element
+        var button = document.createElement('button');
+    
+        // Setting button text
+        button.innerHTML = 'Emotion Zine';
+    
+        // Adding a click event listener to the button
+        button.addEventListener('click', redirectToEmotionzinePage);
+    
+        // Appending the button to the body of the document
+        document.body.appendChild(button);
+    </script>
 </body>
 </html>
