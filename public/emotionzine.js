@@ -189,6 +189,7 @@ function setDepth(state, depth) {
 
 // Flip page left
 function flipLeft() {
+    console.log("flip left");
     if (current_state >= card_amount) return;
     replaceTransformPerPage(current_state, '0deg', '-180deg');
     setDepth(current_state - 1, 1);
@@ -200,6 +201,7 @@ function flipLeft() {
 
 // Flip page right
 function flipRight() {
+    console.log("flip right");
     if (current_state <= 0) return;
     replaceTransformPerPage(current_state - 1, '-180deg', '0deg');
     setDepth(current_state - 3, 1);
@@ -208,3 +210,9 @@ function flipRight() {
     setDepth(current_state, 1);
     --current_state;
 }
+
+function autoFlipLeft(){
+    flipLeft();
+    setTimeout(autoFlipLeft,2000);
+}
+setTimeout(autoFlipLeft,2000);
