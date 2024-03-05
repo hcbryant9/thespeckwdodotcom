@@ -139,20 +139,22 @@ const GameBoard = () => {
         // Add the selected color to the array
         setSelectedColors((prevColors) => [...prevColors, selectedTile]);
 
-        if (hintText === "Try to guess this color!") {
-            // Change the hint text after the first submission
-            setHintText("Now, guess this color!");
-            setSubmissions(submissions + 1); // Increment the submissions count
-        } else if (hintText === "Now, guess this color!" && submissions === 1) {
+        if (submissions === 0) {
+            setHintText("Now, guess this color!");// Change the hint text after the first submission
+            setSubmissions(1); // Increment the submissions count
+            setSelectedTile(null); // set selected tile blank
+            
+        } else if (submissions === 1) {
             // End the game and display the score after the second submission
-            const calculatedScore = calculateScore(); // You need to implement a function to calculate the score
+            const calculatedScore = calculateScore(); 
             setScore(calculatedScore);
             setHintText(`Your Score: ${calculatedScore}`);
+            setSubmissions(2);
         }
     };
 
     const calculateScore = () => {
-        return 5;
+        return 5; //to do
     }
 
     return (
