@@ -1,13 +1,39 @@
+const SplashScreen = ({ onStartGame }) => {
+    // Get current date
+    const currentDate = new Date();
+    // Format date as MM/DD/YYYY
+    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+    return (
+        <div className="splash-screen">
+            <h1>Guess-Hue</h1>
+            <img src = "images/colourboard.png"></img>
+            <p>get 2 clues to select a secret hue</p>
+            <button onClick={onStartGame}>Play</button>
+            <p>Date: {formattedDate}</p>
+            <p>Creators: Henry & Emma Bryant</p>
+        </div>
+    );
+};
+
+
+
+
+
 const GameBoard = () => {
     const numRows = 9;
     const numCols = 15;
 
-
+    const [showSplash, setShowSplash] = React.useState(true);
     const [selectedTile, setSelectedTile] = React.useState(null);
     const [hintText, setHintText] = React.useState("Try to guess this color!"); // Updated to use state for hint text
     const [submissions, setSubmissions] = React.useState(0);
     const [score, setScore] = React.useState(0); // Define score in the state
     const [selectedColors, setSelectedColors] = React.useState([]); // State to store selected colors
+
+    const handleStartGame = () => {
+        setShowSplash(false);
+    };
 
   
 
@@ -159,44 +185,52 @@ const GameBoard = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 30px)`, gridGap: '4px' }}>
-                {Array.from({ length: numRows }, (_, rowIndex) => (
-                    Array.from({ length: numCols }, (_, colIndex) => (
-                        <div
-                            key={generateTileKey(rowIndex, colIndex)}
-                            className="tile"
-                            style={{
-                                width: '30px',
-                                height: '30px',
-                                backgroundColor: colColors[colIndex][rowIndex],
-                                boxShadow: selectedTile === colColors[colIndex][rowIndex] ? '0 0 0 2px black' : 'none',
-                            }}
-                            onClick={() => handleClick(colColors[colIndex][rowIndex])}
-                        />
-                    ))
-                ))}
-            </div>
-            
-            {hintText && <small style={{ marginTop: '4px' }}>{hintText}</small>}
-
-            {hintText !== `Your Score: ${score}` && selectedTile && (
-                <div className="selected-tile" style={{ width: '60px', height: '60px', backgroundColor: selectedTile, margin: '8px auto' }} />
-            )}
-            {/* Conditionally render the submit button based on game state */}
-            {hintText !== `Your Score: ${score}` && selectedTile && (
-                <button onClick={handleSubmit} style={{ marginTop: '8px' }}>Submit</button>
-            )}
-            {/* Display selected colors after the game is over */}
-            {hintText === `Your Score: ${score}` && selectedColors.length > 0 && (
+            {showSplash ? (
+                <SplashScreen onStartGame={handleStartGame} />
+            ) : (
                 <div>
-                    <p>Selected Colors:</p>
-                    {selectedColors.map((color, index) => (
-                        <div key={index} style={{ width: '30px', height: '30px', backgroundColor: color, marginTop: '4px' }} />
-                    ))}
+                    <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 30px)`, gridGap: '4px' }}>
+                        {Array.from({ length: numRows }, (_, rowIndex) => (
+                            Array.from({ length: numCols }, (_, colIndex) => (
+                                <div
+                                    key={generateTileKey(rowIndex, colIndex)}
+                                    className="tile"
+                                    style={{
+                                        width: '30px',
+                                        height: '30px',
+                                        backgroundColor: colColors[colIndex][rowIndex],
+                                        boxShadow: selectedTile === colColors[colIndex][rowIndex] ? '0 0 0 2px black' : 'none',
+                                    }}
+                                    onClick={() => handleClick(colColors[colIndex][rowIndex])}
+                                />
+                            ))
+                        ))}
+                    </div>
+                    
+                    {hintText && <small style={{ marginTop: '4px' }}>{hintText}</small>}
+    
+                    {hintText !== `Your Score: ${score}` && selectedTile && (
+                        <div className="selected-tile" style={{ width: '60px', height: '60px', backgroundColor: selectedTile, margin: '8px auto' }} />
+                    )}
+                    {/* Conditionally render the submit button based on game state */}
+                    {hintText !== `Your Score: ${score}` && selectedTile && (
+                        <button className="index-btn" onClick={handleSubmit} style={{ marginTop: '8px' }}>Submit</button>
+                    )}
+                    {/* Display selected colors after the game is over */}
+                    {hintText === `Your Score: ${score}` && selectedColors.length > 0 && (
+                        <div>
+                            <p>Selected Colors:</p>
+                            {selectedColors.map((color, index) => (
+                                <div key={index} style={{ width: '30px', height: '30px', backgroundColor: color, marginTop: '4px' }} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
     );
+    
+    
     
     
 };
