@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta property="og:title" content="pitch-detection-pd" />
+    <meta name="description" content="python networking with pure data" />
+    <meta property="og:description" content="python networking with pure data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/pitch/deepfried_heart.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images/pitch/deepfried_heart.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>pitch-detection-pd</title>
+    <style>
+       body {
+            background-color: rgb(255, 255, 255);
+            color:rgb(0, 0, 0);
+        }
+        #image1 {
+            width: 155px;
+            height: 180px;
+        }
+        #image2 {
+            width: 150px;
+            height: 250px;
+        }
+        #image3{
+            width: 500;
+            height: 250;
+        }
+        p{
+            width: 50%;
+        }
+        #fig{
+            width: 40%;
+        }
+        figure {
+            display: flex;
+            justify-content: space-between;
+            width: 35%;
+            margin-bottom: 20px; 
+        }
+        
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-QQ6JMSNG3C');
+</script>
+
+<nav>
+    <a href="projects.html">projects</a><br><br>
+</nav>
+
+<p1>pitch-detection-pd</p1>
+<p><small>This page is for documenting my current work on a personal project about heartbeats, music, & intelligent instruments </small></p>
+<img id="image1" src="assets/images/pitch/deepfried_heart.png"><br>
+<a href="https://github.com/hcbryant9/note-detection-pd">project-github</a><br>
+
+<p><i>031824 update</i></p>
+<p>Note-detection-pd is a repository I created for realtime pitch detection of frequencies from 
+    the user and networking the values to a pure data patch using UDP. The goal of the project is to open up
+    different ways of creating sounds. The goal is to create a pure data patch that will play complementary with
+    live music created by the performer. 
+    <br><br>
+    Inside the repository you will find a python script for detecting pitch using pyaubio and sending it through a socket to pd.
+    As well as an example patch for receiving using netreceive.<br>
+</p>
+
+<figure>
+    <div id="fig">
+        <img id="image2" src="assets/images/pitch/note-detection-pd-demo.png">
+        <figcaption>python note detection</figcaption>
+    </div>
+    <div id = "fig">
+        <img id="image2" src="assets/images/pitch/note-detection-pd-demo2.png">
+        <figcaption>networking frequencies to pd</figcaption>
+    </div>
+</figure>
+
+<figure>
+    <div>
+        <img id="image3" src="assets/images/pitch/note-detection-pd-patch.png">
+        <figcaption>realtime visualization in pd</figcaption>
+    </div>
+</figure>
+<br><br>
+<p><i>future plans</i></p>
+<p>The future goal of this project is to introduce heart monitors for detecting bpm. Then sending this data into pure data 
+    to play a bang every time the heart beats. This could be used in tandem for live music performance.
+</p>
+</html>

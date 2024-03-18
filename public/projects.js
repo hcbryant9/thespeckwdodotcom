@@ -22,6 +22,7 @@ const emotionPhotoBTN = document.getElementById("emotion-photo");
 const pumpPhotoBTN = document.getElementById("pump-photo");
 const characPhotoBTN = document.getElementById("charac-photo");
 const lucidPhotoBTN = document.getElementById("lucid-photo");
+const pitchPhotoBTN = document.getElementById("pitch-photo");
 
 
 
@@ -35,6 +36,7 @@ emotionPhotoBTN.addEventListener('click',function(){window.location.href = "emot
 pumpPhotoBTN.addEventListener('click',function(){window.location.href = "pump.html";});
 characPhotoBTN.addEventListener('click',function(){window.location.href = "index.html";});
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
+pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -94,6 +96,13 @@ const projects = {
         tools:"Unity, Normcore, Inverse Kinematics, Quest 3, Quest 3, Quest 3, Quest 2",
         timeline:"Fall 2023 - Spring 2024",
         filename:"lucidity"
+    },
+    pitch:{
+        title:"pitch-detection-pd",
+        description:"Networking realtime pitch detections into Pure Data from Python using socket programming",
+        tools:"Python, Pure Data, Networking, UDP",
+        timeline:"Spring 2023 - Current",
+        filename:"pitch"
     }
     
 };
