@@ -39,7 +39,24 @@
             width: 70%;
             margin-bottom: 20px; 
         }
-        
+        table{
+        height: 100px; /* Set the desired height for your table */
+        border-collapse:collapse;
+        border:1px solid #000000;
+       
+        }
+
+        table td{
+        border:1px solid #000000;
+        padding: 10px;
+        }
+        .custom-line {
+        border-color: black;
+        border-width: 1px;
+        border-style: solid;
+        width: 60%;
+        margin-left: 0;
+        }
     </style>
 </head>
 
@@ -61,10 +78,11 @@ gtag('config', 'G-QQ6JMSNG3C');
 <p><small>This page is for documenting my current work on a personal project about pitch detection, heartbeats, music, & sub-intelligent instruments </small></p>
 <img id="image1" src="assets/images/pitch/deepfried_heart.png"><br>
 <a href="https://github.com/hcbryant9/note-detection-pd">project-github</a><br>
-
+<br>
+<hr class ="custom-line">
 <p><i>031824 update</i></p>
 <p>Note-detection-pd is a repository I created for realtime pitch detection of frequencies from 
-    the user and networking the values to a pure data patch using UDP. The goal of the project is to open up
+    the user and networking the values to a pure data patch using UDP. The idea of the project is to open up
     different ways of creating sounds. The goal is to create a pure data patch that will play complementary with
     live music created by the performer. 
     <br><br>
@@ -90,8 +108,60 @@ gtag('config', 'G-QQ6JMSNG3C');
     </div>
 </figure>
 <br><br>
+<hr class ="custom-line">
+<p><i>032624 update</i></p>
+<p>It's come to my attention that there is a plugin for PD that emulates similar functionality to my program. Check out <a href = "https://pd.iem.sh/objects/sigmund~/">sigmund~</a> for a more
+informative and practical implementation. Regardless, I've tested my program with an additive-synthesis patch and the results were ammusing so I thought I'd share. An issue with my current setup
+is a lack of headphones and a dedicated microphone, so the output and input channels overlap, naturally. This perpetuates a feedback loop of detecting frequencies and playing frequencies. This has
+created some very noisey/hypnotic and sub-enjoyable sounds.</p>
+<br>
+
+<table>
+
+    <caption>Adjusting Sleep Parameters</caption>
+    <caption><small>headphone warning!</small></caption>
+
+    <tr>
+        <td>
+            <small>no sleep</small>
+        </td>
+        <td>
+            <audio controls>
+                <source src="assets/audio/no sleep.WAV" type = "audio/wav">
+            Your device doesn't support audio files!
+            </audio>
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            <small>sleep(1)</small>
+        </td>
+        <td>
+            <audio controls>
+                <source src="assets/audio/sleep 1.WAV" type = "audio/wav">
+            Your device doesn't support audio files!
+            </audio>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <small>sleep(5)</small>
+        </td>
+        <td>
+            <audio controls>
+                <source src="assets/audio/sleep 5.WAV" type = "audio/wav">
+            Your device doesn't support audio files!
+            </audio>
+        </td>
+    </tr>
+</table><br><br>
+<hr class ="custom-line">
+
+
 <p><i>future plans</i></p>
 <p>The future goal of this project is to introduce heart monitors for detecting bpm. Then sending this data into pure data 
     to play a bang every time the heart beats. This could be used in tandem for live music performance.
 </p>
+<hr class ="custom-line">
 </html>
