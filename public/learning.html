@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- This file is dedicated to trying to learning new JS concepts-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="ORANGE" />
+
+    <meta name="description" content="orange photos" />
+    <meta property="og:description" content="orange photos" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/orange/lookatthat.jpg" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images/orange/lookatthat.jpg" type="image/png" />
+    
+    
+    <link rel="stylesheet" type = "text/css" href="main.css">
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+            color:rgb(0, 0, 0);
+        }
+    </style>
+    <title>orange</title>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-QQ6JMSNG3C');
+</script>
+
+<nav>
+    <a href="index.html">Home</a>
+</nav>
+<body>
+    <script>
+        let myMsg = "Welcome to my webpage about the color orange and all the related photos from a time ";
+        let i = 0;
+        function scrollMsg() {
+            document.getElementById("status-bar").innerText =
+                myMsg.substring(i, myMsg.length) + myMsg.substring(0, i);
+            i = (i + 1) % myMsg.length;
+            setTimeout(scrollMsg, 200);
+        }
+        function rollOver(newSrc){
+            document.getElementById("rollover").src = newSrc
+        }
+        window.onload = scrollMsg;
+    </script>
+    <script>
+        /*script for flipping through pages*/
+        images = new Array("assets/images/emotionzine/FRONT.png", "assets/images/emotionzine/INNERFRONT.png", "assets/images/emotionzine/1.png",
+        "assets/images/emotionzine/1.png", "assets/images/emotionzine/2.png", "assets/images/emotionzine/3.png", "assets/images/emotionzine/4.png",
+        "assets/images/emotionzine/5.png", "assets/images/emotionzine/BACK.png")
+        current = 0
+        length = images.length
+
+        function rotate(){
+            current++
+            if(current == length){
+                current = 0
+            }
+            document.getElementById("magazine").src = images[current]
+            setTimeout(rotate, 3 * 1000)
+        }
+        window.onload = function (){
+            setTimeout(rotate, 3 * 1000);
+        };
+    </script>
+    <div id="status-bar"></div>
+
+    <img id="rollover" src = "assets/images/emotionzine/FRONT.png"
+        onmouseover="rollOver('assets/images/emotionzine/BACK.png')"
+        onmouseout="rollOver('assets/images/emotionzine/FRONT.png')"
+    >
+    <br>
+    <a href="emotionzine.html"
+        onmouseover="rollOver('assets/images/emotionzine/BACK.png')"
+        onmouseout="rollOver('assets/images/emotionzine/FRONT.png')">
+        Check it out here.
+    </a>
+    <br>
+    <img id="magazine" src = "assets/images/emotionzine/FRONT.png">
+</body>
+</html>

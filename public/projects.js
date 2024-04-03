@@ -13,6 +13,7 @@ const emotionalBTN = document.getElementById("emotional");
 const websiteBTN = document.getElementById("website");
 const pumpBTN = document.getElementById("pump");
 const lucidityBTN = document.getElementById("lucidity");
+const guessBTN = document.getElementById("guess");
 
 const aboutBTN = document.getElementById("about-me");
 const technologyPhotoBTN = document.getElementById("technology-photo");
@@ -23,6 +24,7 @@ const pumpPhotoBTN = document.getElementById("pump-photo");
 const characPhotoBTN = document.getElementById("charac-photo");
 const lucidPhotoBTN = document.getElementById("lucid-photo");
 const pitchPhotoBTN = document.getElementById("pitch-photo");
+const guessPhotoBTN = document.getElementById("guess-photo");
 
 
 
@@ -37,6 +39,7 @@ pumpPhotoBTN.addEventListener('click',function(){window.location.href = "pump.ht
 characPhotoBTN.addEventListener('click',function(){window.location.href = "index.html";});
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
+guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -103,8 +106,14 @@ const projects = {
         tools:"Python, Pure Data, Networking, UDP",
         timeline:"Spring 2023 - Current",
         filename:"pitch"
+    },
+    guess:{
+        title:"guess-hue",
+        description: "A single-player, NYT-style, web implementation of the board game Hues and Cues",
+        tools: "JavaScript, React, Python, HTML, CSS",
+        timeline: "December 2023 - Current",
+        filename: "guesshue"
     }
-    
 };
 
 function updateOverview(project) {

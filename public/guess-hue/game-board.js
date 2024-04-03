@@ -6,12 +6,13 @@ const SplashScreen = ({ onStartGame }) => {
 
     return (
         <div className="splash-screen">
-            <h1>Guess-Hue</h1>
-            <img src = "images/colourboard.png"></img>
+            <center><h1>Guess-Hue</h1></center>
+            <img id = "splash-board"src = "images/colourboard.png" 
+            style = {{width: '800px', height: '400px' }}></img>
             <p>get 2 clues to select a secret hue</p>
-            <button onClick={onStartGame}>Play</button>
             <p>Date: {formattedDate}</p>
             <p>Creators: Henry & Emma Bryant</p>
+            <button onClick={onStartGame}>Play</button>
         </div>
     );
 };

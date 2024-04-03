@@ -211,8 +211,3 @@ function flipRight() {
     --current_state;
 }
 
-function autoFlipLeft(){
-    flipLeft();
-    setTimeout(autoFlipLeft,2000);
-}
-setTimeout(autoFlipLeft,2000);
