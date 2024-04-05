@@ -101,10 +101,10 @@ const projects = {
         filename:"lucidity"
     },
     pitch:{
-        title:"pitch-detection-pd",
+        title:"pytch-detection-pd",
         description:"Networking realtime pitch detections into Pure Data from Python using socket programming",
         tools:"Python, Pure Data, Networking, UDP",
-        timeline:"Spring 2023 - Current",
+        timeline:"Spring 2024 - Current",
         filename:"pitch"
     },
     guess:{
