@@ -64,49 +64,13 @@
     <a href="https://github.com/hcbryant9/EmotionAnalysis">project-github-python</a><br>
     <a href = "https://github.com/hcbryant9/Facial-Tracking-Test-World">project-github-unity</a>
     <br>
-    <p><i>02/01/2024 update</i><br><br>
-        Today I collected data for 4 emotions [happy,sad,mad,anxious]. Currently, the Unity project runs through each emotion 5 times for a total of 24 data points. I did this process twice on my face so I had 48 data points. I trained the model with 47 data points leaving out 1 data point for testing.
-        After training the model with these points here were the results after running emotionclassifier.py.
-        <br>
-        <img id = "image3" src="assets/images/emotions/emotions-photo-2.png" alt="emotion-photo-2">
-        <br>
-        Then taking the models and making a prediction on the data point I left out I recorded this after running prediction.py.
-        <br>
-        <img id = "image2" src="assets/images/emotions/emotions-photo-3.png" alt="emotion-photo-3">
-        <br>
-        Both random forest and decision tree models correctly predicted the 'anxious' expression.
-    </p>
-    <br>
-    <p>Working on this project has created an inner dialouge about the societal impact of software development. These thoughts have manifested themself into spreading awareness within my community and building an emotion predicting model.
-        Currently, I am collecting facial tracking data from the Meta Quest Pro to create a machine learning model that will predict the emotion of the user. The GitHub link above has the python code needed to generate the model. 
-        All that is needed is the data.
-    </p>
-    <br>
+    
     <blockquote id="quote">
         <i> "And while there is an enormous structural power asymmetry between the surveillers and surveilled, neither are those with the greatest power free from being haunted by a very particular kind of data anxiety: that no matter how much data they have, it is always incomplete, and the sheer volume can overwhelm the critical signals in a fog of possible correlations."</i>
         <br><cite><a href="https://thenewinquiry.com/the-anxieties-of-big-data/">Kate Crawford</a></cite>
     </blockquote>
 
 
-    <script>
-        // Function to redirect to the emotionzine.html page
-        function redirectToEmotionzinePage() {
-            window.location.href = 'emotionzine.html';
-        }
     
-        // Creating a button element
-        var button = document.createElement('button');
-        button.setAttribute('class', 'index-btn');
-
-    
-        // Setting button text
-        button.innerHTML = 'Emotion Zine';
-    
-        // Adding a click event listener to the button
-        button.addEventListener('click', redirectToEmotionzinePage);
-    
-        // Appending the button to the body of the document
-        document.body.appendChild(button);
-    </script>
 </body>
 </html>

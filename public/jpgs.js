@@ -20,6 +20,7 @@ const zineBTN = document.getElementById("zine");
 const nycBTN = document.getElementById("nyc");
 const bikeBTN = document.getElementById("bike")
 const chessBTN = document.getElementById("chess")
+const emotionBTN = document.getElementById("emotion");
 //adding event handler for the click event
 
 
@@ -75,4 +76,8 @@ bikeBTN.addEventListener('click', function(){
 chessBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "chess.html";
+});
+emotionBTN.addEventListener('click', function(){
+    console.log('button clicked');
+    window.location.href = "emotionzine.html";
 });
