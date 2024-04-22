@@ -2,25 +2,25 @@
 
 
 
-const musicBTN = document.getElementById("music");
-const videosBTN = document.getElementById("mp4s");
-const seoulBTN = document.getElementById("seoul");
-const flashedBTN = document.getElementById("flashed");
-const julyBTN = document.getElementById("july");
-const orangeBTN = document.getElementById("orange");
-const edinburghBTN = document.getElementById("edinburgh");
-const dylonBTN = document.getElementById("dylon");
-const septemberBTN = document.getElementById("september");
-const pbjBTN = document.getElementById("pbj");
-const jpgBTN = document.getElementById("jpgs");
-const projectsBTN = document.getElementById("projects");
-const laurenBTN = document.getElementById("lauren");
-const emmaBTN = document.getElementById("emma");
-const zineBTN = document.getElementById("zine");
-const nycBTN = document.getElementById("nyc");
-const bikeBTN = document.getElementById("bike")
-const chessBTN = document.getElementById("chess")
-const emotionBTN = document.getElementById("emotion");
+const musicBTN = document.getElementById("music-photo");
+const videosBTN = document.getElementById("mp4s-photo");
+const seoulBTN = document.getElementById("seoul-photo");
+const flashedBTN = document.getElementById("flashed-photo");
+const julyBTN = document.getElementById("july-photo");
+const orangeBTN = document.getElementById("orange-photo");
+const edinburghBTN = document.getElementById("edinburgh-photo");
+const dylonBTN = document.getElementById("dylon-photo");
+const septemberBTN = document.getElementById("september-photo");
+const pbjBTN = document.getElementById("pbj-photo");
+const jpgBTN = document.getElementById("jpgs-photo");
+const projectsBTN = document.getElementById("projects-photo");
+const laurenBTN = document.getElementById("lauren-photo");
+const emmaBTN = document.getElementById("emma-photo");
+const zineBTN = document.getElementById("zine-photo");
+const nycBTN = document.getElementById("nyc-photo");
+const bikeBTN = document.getElementById("bike-photo")
+const chessBTN = document.getElementById("chess-photo")
+const emotionBTN = document.getElementById("emotion-photo");
 //adding event handler for the click event
 
 
