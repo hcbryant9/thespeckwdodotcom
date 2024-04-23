@@ -21,6 +21,7 @@ const nycBTN = document.getElementById("nyc-photo");
 const bikeBTN = document.getElementById("bike-photo")
 const chessBTN = document.getElementById("chess-photo")
 const emotionBTN = document.getElementById("emotion-photo");
+const talBTN = document.getElementById("tal-photo");
 //adding event handler for the click event
 
 
@@ -81,3 +82,6 @@ emotionBTN.addEventListener('click', function(){
     console.log('button clicked');
     window.location.href = "emotionzine.html";
 });
+talBTN.addEventListener('click', function(){
+    window.location.href = "tal.html";
+})
