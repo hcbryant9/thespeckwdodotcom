@@ -80,7 +80,6 @@ async function processImage() {
         return;
     }
 
-
     const imgElement = document.createElement('img');
     const reader = new FileReader();
 
@@ -97,10 +96,21 @@ async function processImage() {
 
             const outputCanvas = document.getElementById('outputCanvas');
             const outputCtx = outputCanvas.getContext('2d');
-            outputCanvas.width = 421;
-            outputCanvas.height = 595;
+
+            // Calculate device pixel ratio
+            const devicePixelRatio = window.devicePixelRatio || 1;
+
+            // Scale canvas based on device pixel ratio
+            outputCanvas.width = 421 * devicePixelRatio;
+            outputCanvas.height = 595 * devicePixelRatio;
+            outputCanvas.style.width = '421px'; // Set CSS width
+            outputCanvas.style.height = '595px'; // Set CSS height
+            outputCtx.scale(devicePixelRatio, devicePixelRatio);
+
+            // Render the resized image data to the canvas
             outputCtx.putImageData(resizedImageData, 0, 0);
 
+            // Display the canvas
             outputCanvas.style.display = 'inline';
         };
     };
