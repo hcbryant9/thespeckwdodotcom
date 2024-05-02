@@ -64,10 +64,22 @@ function resizeImage(imageData, targetWidth, targetHeight) {
 }
 
 async function processImage() {
-    const fileInput = document.getElementById('uploadInput');
-    const file = fileInput.files[0];
+    const uploadInput = document.getElementById('uploadInput');
+    const cameraInput = document.getElementById('cameraInput');
 
-    if (!file) return;
+    // Check if cameraInput has a file
+    let file = null;
+    if (cameraInput.files.length > 0) {
+        file = cameraInput.files[0];
+    } else if (uploadInput.files.length > 0) {
+        file = uploadInput.files[0];
+    }
+
+    if (!file) {
+        alert('Please select an image or take a photo.');
+        return;
+    }
+
 
     const imgElement = document.createElement('img');
     const reader = new FileReader();
