@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="mono-pixel" />
+    <meta name="description" content="pixel art & monochrome" />
+    <meta property="og:description" content="pixel art & monochrome" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/projects/monopixel.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images/projects/monopixel.png" type="image/png" />
+    
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>mono-pixel</title>
+</head>
+
+
+<body>
+    <!-- Option to take a photograph using the device's camera -->
+    <input type="file" accept="image/*" capture="environment" id="cameraInput">
+    <button onclick="openCamera()">Take Photo</button>
+    <br>
+    <!-- Option to upload an image from camera roll -->
+    <input type="file" accept="image/*" id="uploadInput">
+    <br>
+    <br>
+    <label for="pixelSizeInput">Pixel Size:</label>
+    <input type="number" id="pixelSizeInput" value="16" min="1" max="100">
+    
+    <br>
+    <button onclick="processImage()">Process Image</button>
+    <br>
+    
+    <!-- Canvas to display processed image -->
+    <canvas id="outputCanvas" style="display:none;"></canvas>
+    <img id="processedImage" style="display:none;">
+    
+    <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
+    <script src="process.js"></script>
+
+    <script>
+        // Function to open camera input for taking photo
+        function openCamera() {
+            const cameraInput = document.getElementById('cameraInput');
+            cameraInput.click(); 
+        }
+    </script>
+</body>
+</html>
