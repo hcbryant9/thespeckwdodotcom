@@ -28,8 +28,23 @@ function pixelateImage(imgElement, pixelSize) {
     return imageData; // Return the pixelated image data
 }
 
+function openCamera() {
+    const cameraInput = document.getElementById('cameraInput');
+    cameraInput.click(); // Trigger the camera input click event
+}
+
+// Function to trigger image download from canvas
+function downloadImage() {
+    const outputCanvas = document.getElementById('outputCanvas');
+    const dataUrl = outputCanvas.toDataURL('image/png');
+
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'processed_image.png';
+    a.click();
+}
 // Function to convert image to monochrome (black and white)
-function convertToMonochrome(imageData) {
+function monochromeImage(imageData) {
     const data = imageData.data;
 
     // Convert each pixel to monochrome (black or white)
@@ -48,19 +63,6 @@ function convertToMonochrome(imageData) {
     }
 
     return imageData; // Return the monochrome image data
-}
-function resizeImage(imageData, targetWidth, targetHeight) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = targetWidth;
-    canvas.height = targetHeight;
-
-    ctx.putImageData(imageData, 0, 0);
-
-    const resizedImageData = ctx.getImageData(0, 0, targetWidth, targetHeight);
-
-    return resizedImageData;
 }
 
 async function processImage() {
@@ -87,33 +89,33 @@ async function processImage() {
         imgElement.src = e.target.result;
         imgElement.onload = async function () {
             const pixelSizeInput = document.getElementById('pixelSizeInput');
-            const pixelSize = parseInt(pixelSizeInput.value); // Get pixelSize from input
-
+            const pixelSize = parseInt(pixelSizeInput.value);
             const pixelatedImageData = pixelateImage(imgElement, pixelSize);
-            const monochromeImageData = convertToMonochrome(pixelatedImageData);
-
-            const resizedImageData = resizeImage(monochromeImageData, 421, 595);
-
+            const monochromeImageData = monochromeImage(pixelatedImageData);
             const outputCanvas = document.getElementById('outputCanvas');
             const outputCtx = outputCanvas.getContext('2d');
 
-            // Calculate device pixel ratio
-            const devicePixelRatio = window.devicePixelRatio || 1;
+            // Set canvas dimensions to match desired display size
+            outputCanvas.width = imgElement.width;
+            outputCanvas.height = imgElement.height;
 
-            // Scale canvas based on device pixel ratio
-            outputCanvas.width = 421 * devicePixelRatio;
-            outputCanvas.height = 595 * devicePixelRatio;
-            outputCanvas.style.width = '421px'; // Set CSS width
-            outputCanvas.style.height = '595px'; // Set CSS height
-            outputCtx.scale(devicePixelRatio, devicePixelRatio);
+            // Draw monochrome image data onto the canvas
+            outputCtx.putImageData(monochromeImageData, 0, 0);
 
-            // Render the resized image data to the canvas
-            outputCtx.putImageData(resizedImageData, 0, 0);
+            // Hide the <img> element
+            const processedImage = document.getElementById('processedImage');
+            processedImage.style.display = 'none'; // Hide the <img> element
 
-            // Display the canvas
-            outputCanvas.style.display = 'inline';
+            // Show the canvas element
+            outputCanvas.style.display = 'block'; // Show the canvas
+
+            // Alternatively, you can show the <img> element instead of the canvas
+            // processedImage.src = outputCanvas.toDataURL(); // Convert canvas to image
+            // processedImage.style.display = 'inline'; // Show the <img> element
+            // outputCanvas.style.display = 'none'; // Hide the canvas
         };
     };
 
     reader.readAsDataURL(file);
 }
+
