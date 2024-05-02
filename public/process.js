@@ -44,7 +44,7 @@ function downloadImage() {
     a.click();
 }
 // Function to convert image to monochrome (black and white)
-function monochromeImage(imageData) {
+function monochromeImage(imageData, monoThreshold) {
     const data = imageData.data;
 
     // Convert each pixel to monochrome (black or white)
@@ -53,7 +53,7 @@ function monochromeImage(imageData) {
         const grayscale = (data[i] + data[i + 1] + data[i + 2]) / 3;
 
         // Set pixel color based on grayscale value (threshold = 128)
-        const color = grayscale < 128 ? 0 : 255; // 0 = black, 255 = white
+        const color = grayscale < monoThreshold ? 0 : 255; // 0 = black, 255 = white
 
         // Set R, G, B components of the pixel to black or white
         data[i] = color;         // Red
@@ -88,10 +88,18 @@ async function processImage() {
     reader.onload = async function (e) {
         imgElement.src = e.target.result;
         imgElement.onload = async function () {
+
+            //getting user input
             const pixelSizeInput = document.getElementById('pixelSizeInput');
             const pixelSize = parseInt(pixelSizeInput.value);
+            const monoThresholdInput = document.getElementById('monoThresholdInput');
+            const monoThreshold = parseInt(monoThresholdInput.value);
+            console.log(monoThreshold);
+            
+            //image processing
             const pixelatedImageData = pixelateImage(imgElement, pixelSize);
-            const monochromeImageData = monochromeImage(pixelatedImageData);
+            const monochromeImageData = monochromeImage(pixelatedImageData, monoThreshold);
+
             const outputCanvas = document.getElementById('outputCanvas');
             const outputCtx = outputCanvas.getContext('2d');
 
