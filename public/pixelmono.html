@@ -18,10 +18,7 @@
 
 
 <body>
-    <!-- Option to take a photograph using the device's camera -->
-    <input type="file" accept="image/*" capture="environment" id="cameraInput">
-    <button onclick="openCamera()">Take Photo</button>
-    <br>
+    
     <!-- Option to upload an image from camera roll -->
     <input type="file" accept="image/*" id="uploadInput">
     <br>
@@ -34,18 +31,10 @@
     <br>
     
     <!-- Canvas to display processed image -->
-    <canvas id="outputCanvas" style="display:none;"></canvas>
-    <img id="processedImage" style="display:none;">
+    <canvas id="outputCanvas" width="421" height="595" style="display:none;"></canvas>
+    <img id="processedImage" width="421" height="595" style="display:none;">
     
     <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
     <script src="process.js"></script>
-
-    <script>
-        // Function to open camera input for taking photo
-        function openCamera() {
-            const cameraInput = document.getElementById('cameraInput');
-            cameraInput.click(); 
-        }
-    </script>
 </body>
 </html>

@@ -49,23 +49,25 @@ function convertToMonochrome(imageData) {
 
     return imageData; // Return the monochrome image data
 }
+function resizeImage(imageData, targetWidth, targetHeight) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
+    ctx.putImageData(imageData, 0, 0);
+
+    const resizedImageData = ctx.getImageData(0, 0, targetWidth, targetHeight);
+
+    return resizedImageData;
+}
 
 async function processImage() {
-    const uploadInput = document.getElementById('uploadInput');
-    const cameraInput = document.getElementById('cameraInput');
+    const fileInput = document.getElementById('uploadInput');
+    const file = fileInput.files[0];
 
-    // Check if cameraInput has a file
-    let file = null;
-    if (cameraInput.files.length > 0) {
-        file = cameraInput.files[0];
-    } else if (uploadInput.files.length > 0) {
-        file = uploadInput.files[0];
-    }
-
-    if (!file) {
-        alert('Please select an image or take a photo.');
-        return;
-    }
+    if (!file) return;
 
     const imgElement = document.createElement('img');
     const reader = new FileReader();
@@ -79,11 +81,13 @@ async function processImage() {
             const pixelatedImageData = pixelateImage(imgElement, pixelSize);
             const monochromeImageData = convertToMonochrome(pixelatedImageData);
 
+            const resizedImageData = resizeImage(monochromeImageData, 421, 595);
+
             const outputCanvas = document.getElementById('outputCanvas');
             const outputCtx = outputCanvas.getContext('2d');
-            outputCanvas.width = imgElement.width;
-            outputCanvas.height = imgElement.height;
-            outputCtx.putImageData(monochromeImageData, 0, 0);
+            outputCanvas.width = 421;
+            outputCanvas.height = 595;
+            outputCtx.putImageData(resizedImageData, 0, 0);
 
             outputCanvas.style.display = 'inline';
         };
