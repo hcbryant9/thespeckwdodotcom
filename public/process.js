@@ -5,7 +5,30 @@ function displayImageOnCanvas(imgElement, canvas) {
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
 }
 
+// Function to clear the canvas
+function clearCanvas() {
+    window.location.reload();
+}
 
+function handleImageUpload(event) {
+    const canvas = document.getElementById('outputCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
 // Function to pixelate an image
 function pixelateImage(imgElement, pixelSize) {
     // Create a new canvas element to draw the processed image
