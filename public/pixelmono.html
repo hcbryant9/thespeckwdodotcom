@@ -28,25 +28,42 @@
     #processedImage {
         display: none;
     }
+
+
+    /* Styling for the visible button */
+    
+      /* Styling for the hidden file input */
+    .hidden-input {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+
 </style>
 
 <body>
     
     <!-- Option to take a photograph using the device's camera -->
     <button class="index-btn" onclick="openCamera()">Take Photo</button>
-    <input type="file" accept="image/*" capture="environment" id="cameraInput">
-    
+
+    <label for ="cameraInput" class="hidden-input"></label>
+    <input class="hidden-input" type="file" accept="image/*" capture="environment" id="cameraInput">
+    <br>
     <br>
     <!-- Option to upload an image from camera roll -->
-    <input type="file" accept="image/*" id="uploadInput">
+    <label for ="uploadInput" class="input-btn">Upload Photo</label>
+    <input class="hidden-input" type="file" accept="image/*" id="uploadInput">
     <br>
     <br>
+
     <label for="pixelSizeInput">Pixel Size:</label>
     <input type="number" id="pixelSizeInput" value="16" min="1" max="100">
-    
+
     <label for="monoThresholdInput">Mono Threshold:</label>
     <input type="number" id="monoThresholdInput" value="128" min="1" max="256">
-    <br>
+
+    <br><br>
     <button class="index-btn" onclick="processImage()">Process Image</button>
     <br>
     

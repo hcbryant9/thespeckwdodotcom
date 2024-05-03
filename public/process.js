@@ -1,3 +1,11 @@
+function displayImageOnCanvas(imgElement, canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = imgElement.width;
+    canvas.height = imgElement.height;
+    ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+}
+
+
 // Function to pixelate an image
 function pixelateImage(imgElement, pixelSize) {
     // Create a new canvas element to draw the processed image
@@ -92,12 +100,15 @@ async function processImage() {
             //getting user input
             const pixelSizeInput = document.getElementById('pixelSizeInput');
             const pixelSize = parseInt(pixelSizeInput.value);
+
+            //getting mono threshold input
             const monoThresholdInput = document.getElementById('monoThresholdInput');
             const monoThreshold = parseInt(monoThresholdInput.value);
-            console.log(monoThreshold);
+            
             
             //image processing
             const pixelatedImageData = pixelateImage(imgElement, pixelSize);
+            console.log(monoThreshold);
             const monochromeImageData = monochromeImage(pixelatedImageData, monoThreshold);
 
             const outputCanvas = document.getElementById('outputCanvas');
@@ -117,10 +128,7 @@ async function processImage() {
             // Show the canvas element
             outputCanvas.style.display = 'block'; // Show the canvas
 
-            // Alternatively, you can show the <img> element instead of the canvas
-            // processedImage.src = outputCanvas.toDataURL(); // Convert canvas to image
-            // processedImage.style.display = 'inline'; // Show the <img> element
-            // outputCanvas.style.display = 'none'; // Hide the canvas
+            
         };
     };
 
