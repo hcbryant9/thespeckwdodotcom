@@ -8,7 +8,7 @@ const SplashScreen = ({ onStartGame }) => {
         <div className="splash-screen">
             <center><h1>Guess-Hue</h1></center>
             <img id = "splash-board"src = "images/colourboard.png" 
-            style = {{width: '800px', height: '400px' }}></img>
+            style = {{width: '800px', height: '450px' }}></img>
             <p>get 2 clues to select a secret hue</p>
             <p>Date: {formattedDate}</p>
             <p>Creators: Henry & Emma Bryant</p>
@@ -16,9 +16,6 @@ const SplashScreen = ({ onStartGame }) => {
         </div>
     );
 };
-
-
-
 
 
 const GameBoard = () => {
@@ -35,8 +32,6 @@ const GameBoard = () => {
     const handleStartGame = () => {
         setShowSplash(false);
     };
-
-  
 
     const colColors = [
         
@@ -145,18 +140,12 @@ const GameBoard = () => {
         
     ];
 
-    
-
     const generateTileKey = (row, col) => {
         return `${row}-${col}`;
     };
 
     const handleClick = (color) => {
-        
         setSelectedTile(color); //changes the selected color at the bottom of the screen
-        
-    
-    
     };
 
     const handleSubmit = () => {
@@ -190,15 +179,15 @@ const GameBoard = () => {
                 <SplashScreen onStartGame={handleStartGame} />
             ) : (
                 <div>
-                    <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 30px)`, gridGap: '4px' }}>
+                    <div className="board" style={{ display: 'grid', gridTemplateColumns: `repeat(${numCols}, 50px)`, gridGap: '7px' }}>
                         {Array.from({ length: numRows }, (_, rowIndex) => (
                             Array.from({ length: numCols }, (_, colIndex) => (
                                 <div
                                     key={generateTileKey(rowIndex, colIndex)}
                                     className="tile"
                                     style={{
-                                        width: '30px',
-                                        height: '30px',
+                                        width: '50px',
+                                        height: '50px',
                                         backgroundColor: colColors[colIndex][rowIndex],
                                         boxShadow: selectedTile === colColors[colIndex][rowIndex] ? '0 0 0 2px black' : 'none',
                                     }}
@@ -230,10 +219,6 @@ const GameBoard = () => {
             )}
         </div>
     );
-    
-    
-    
-    
 };
 
 ReactDOM.render(<GameBoard />, document.getElementById('root'));

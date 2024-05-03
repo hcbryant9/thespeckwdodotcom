@@ -25,6 +25,7 @@ const characPhotoBTN = document.getElementById("charac-photo");
 const lucidPhotoBTN = document.getElementById("lucid-photo");
 const pitchPhotoBTN = document.getElementById("pitch-photo");
 const guessPhotoBTN = document.getElementById("guess-photo");
+const monoPhotoBTN = document.getElementById("mono-photo");
 
 
 
@@ -40,6 +41,7 @@ characPhotoBTN.addEventListener('click',function(){window.location.href = "index
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
+monoPhotoBTN.addEventListener('click', function(){window.location.href = "pixelmono.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -113,6 +115,13 @@ const projects = {
         tools: "JavaScript, React, Python, HTML, CSS",
         timeline: "December 2023 - Current",
         filename: "guesshue"
+    },
+    mono:{
+        title:"mono-chrome-pixelation",
+        description: "Image processing using pixelation & monochrome affects inspired by alienmelon",
+        tools: "OpenCV, JavaScript, HTML",
+        timeline: "Spring 2024",
+        filename: "pixelmono"
     }
 };
 

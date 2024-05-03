@@ -38,10 +38,17 @@
         top: -9999px;
         left: -9999px;
     }
+    footer {
+    
+    padding: 20px;
+    text-align: left;
+    }
 
+    nav {
+        text-align: left;
+    }
 
 </style>
-
 <body>
     
     <!-- Option to take a photograph using the device's camera -->
@@ -73,7 +80,12 @@
     <img id="processedImage" width="421" height="595">
     <!-- Download button for saving the processed image -->
     <button class="index-btn" onclick="downloadImage()">Download Image</button>
-    
+    <footer>
+        <nav>
+            <a href="index.html">home</a> <br>
+            <a href="projects.html">projects</a>
+        </nav>
+    </footer>
     <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
     <script src="process.js"></script>
 
