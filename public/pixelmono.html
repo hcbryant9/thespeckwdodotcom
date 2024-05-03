@@ -48,12 +48,12 @@
     <button class="index-btn" onclick="openCamera()">Take Photo</button>
 
     <label for ="cameraInput" class="hidden-input"></label>
-    <input class="hidden-input" type="file" accept="image/*" capture="environment" id="cameraInput">
+    <input class="hidden-input" type="file" accept="image/*" capture="environment" id="cameraInput" onchange="handleImageUpload(event)">
     <br>
     <br>
     <!-- Option to upload an image from camera roll -->
-    <label for ="uploadInput" class="input-btn">Upload Photo</label>
-    <input class="hidden-input" type="file" accept="image/*" id="uploadInput">
+    <label for ="uploadInput" class="index-btn">Upload Photo</label>
+    <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)">
     <br>
     <br>
 
@@ -76,6 +76,27 @@
     <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
     <script src="process.js"></script>
 
+    <script>
+        function handleImageUpload(event) {
+            const canvas = document.getElementById('outputCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 
 </body>
 </html>
