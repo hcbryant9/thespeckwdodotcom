@@ -66,14 +66,12 @@ function openCamera() {
 
 // Function to trigger image download from canvas
 function downloadImage() {
-    const outputCanvas = document.getElementById('outputCanvas');
-    const dataUrl = outputCanvas.toDataURL('image/png');
-
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = 'processed_image.png';
-    a.click();
+    var link = document.createElement('a');
+    link.download = 'filename.png';
+    link.href = document.getElementById('outputCanvas').toDataURL('image/png');
+    link.click();
 }
+
 // Function to convert image to monochrome (black and white)
 function monochromeImage(imageData, monoThreshold) {
     const data = imageData.data;
