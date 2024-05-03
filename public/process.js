@@ -5,10 +5,14 @@ function displayImageOnCanvas(imgElement, canvas) {
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
 }
 
-// Function to clear the canvas
 function clearCanvas() {
-    window.location.reload();
+    const outputCanvas = document.getElementById('outputCanvas');
+    const ctx = outputCanvas.getContext('2d');
+
+    // Clear the canvas by resetting its width
+    outputCanvas.width = outputCanvas.width;
 }
+
 
 function handleImageUpload(event) {
     const canvas = document.getElementById('outputCanvas');
