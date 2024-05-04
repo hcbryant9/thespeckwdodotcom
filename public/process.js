@@ -7,6 +7,11 @@ function saveCanvasState(canvas) {
     canvasStateStack.push(canvas.toDataURL());
 }
 
+function openCamera() {
+    const cameraInput = document.getElementById('cameraInput');
+    cameraInput.click(); // Trigger the camera input click event
+}
+
 function undo() {
     console.log("current state" + currentStateIndex);
     if (currentStateIndex > 0) {
