@@ -1,162 +1,107 @@
+let canvasStateStack = []; 
+let currentStateIndex = 0; 
+
+function saveCanvasState(canvas) {
+    currentStateIndex++;
+    canvasStateStack = canvasStateStack.slice(0, currentStateIndex);
+    canvasStateStack.push(canvas.toDataURL());
+}
+
+function undo() {
+    console.log("current state" + currentStateIndex);
+    if (currentStateIndex > 0) {
+        currentStateIndex--; 
+        const canvas = document.getElementById('outputCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.onload = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            ctx.drawImage(img, 0, 0); 
+        };
+        img.src = canvasStateStack[currentStateIndex];
+    }
+}
 function displayImageOnCanvas(imgElement, canvas) {
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     canvas.width = imgElement.width;
     canvas.height = imgElement.height;
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
 }
 
 function clearCanvas() {
-    const outputCanvas = document.getElementById('outputCanvas');
-    const ctx = outputCanvas.getContext('2d');
-
-    // Clear the canvas by resetting its width
-    outputCanvas.width = outputCanvas.width;
+    const canvas = document.getElementById('outputCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Reset undo stack
+    canvasStateStack = [];
+    currentStateIndex = -1;
 }
 
 
 function handleImageUpload(event) {
-    const canvas = document.getElementById('outputCanvas');
-    const ctx = canvas.getContext('2d');
-
     const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-// Function to pixelate an image
-function pixelateImage(imgElement, pixelSize) {
-    // Create a new canvas element to draw the processed image
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas dimensions to match the image
-    canvas.width = imgElement.width;
-    canvas.height = imgElement.height;
-
-    // Draw the image on the canvas
-    ctx.drawImage(imgElement, 0, 0);
-
-    // Calculate the number of blocks in both dimensions
-    const numBlocksX = Math.ceil(canvas.width / pixelSize);
-    const numBlocksY = Math.ceil(canvas.height / pixelSize);
-
-    // Resize image to "pixelated" size
-    ctx.imageSmoothingEnabled = false; // Disable smoothing for pixelation
-    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, numBlocksX, numBlocksY);
-
-    // Upscale the pixelated image back to the original size
-    ctx.drawImage(canvas, 0, 0, numBlocksX, numBlocksY, 0, 0, canvas.width, canvas.height);
-
-    // Get the processed image data from the canvas
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-    return imageData; // Return the pixelated image data
-}
-
-function openCamera() {
-    const cameraInput = document.getElementById('cameraInput');
-    cameraInput.click(); // Trigger the camera input click event
-}
-
-// Function to trigger image download from canvas
-function downloadImage() {
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = document.getElementById('outputCanvas').toDataURL('image/png');
-    link.click();
-}
-
-// Function to convert image to monochrome (black and white)
-function monochromeImage(imageData, monoThreshold) {
-    const data = imageData.data;
-
-    // Convert each pixel to monochrome (black or white)
-    for (let i = 0; i < data.length; i += 4) {
-        // Calculate grayscale value (average of R, G, B components)
-        const grayscale = (data[i] + data[i + 1] + data[i + 2]) / 3;
-
-        // Set pixel color based on grayscale value (threshold = 128)
-        const color = grayscale < monoThreshold ? 0 : 255; // 0 = black, 255 = white
-
-        // Set R, G, B components of the pixel to black or white
-        data[i] = color;         // Red
-        data[i + 1] = color;     // Green
-        data[i + 2] = color;     // Blue
-        // Alpha (data[i + 3]) remains unchanged (transparency)
-    }
-
-    return imageData; // Return the monochrome image data
-}
-
-async function processImage() {
-    const uploadInput = document.getElementById('uploadInput');
-    const cameraInput = document.getElementById('cameraInput');
-
-    // Check if cameraInput has a file
-    let file = null;
-    if (cameraInput.files.length > 0) {
-        file = cameraInput.files[0];
-    } else if (uploadInput.files.length > 0) {
-        file = uploadInput.files[0];
-    }
-
     if (!file) {
-        alert('Please select an image or take a photo.');
+        alert('Please select an image.');
         return;
     }
 
-    const imgElement = document.createElement('img');
     const reader = new FileReader();
-
-    reader.onload = async function (e) {
-        imgElement.src = e.target.result;
-        imgElement.onload = async function () {
-
-            //getting user input
-            const pixelSizeInput = document.getElementById('pixelSizeInput');
-            const pixelSize = parseInt(pixelSizeInput.value);
-
-            //getting mono threshold input
-            const monoThresholdInput = document.getElementById('monoThresholdInput');
-            const monoThreshold = parseInt(monoThresholdInput.value);
-            
-            
-            //image processing
-            const pixelatedImageData = pixelateImage(imgElement, pixelSize);
-            console.log(monoThreshold);
-            const monochromeImageData = monochromeImage(pixelatedImageData, monoThreshold);
-
-            const outputCanvas = document.getElementById('outputCanvas');
-            const outputCtx = outputCanvas.getContext('2d');
-
-            // Set canvas dimensions to match desired display size
-            outputCanvas.width = imgElement.width;
-            outputCanvas.height = imgElement.height;
-
-            // Draw monochrome image data onto the canvas
-            outputCtx.putImageData(monochromeImageData, 0, 0);
-
-            // Hide the <img> element
-            const processedImage = document.getElementById('processedImage');
-            processedImage.style.display = 'none'; // Hide the <img> element
-
-            // Show the canvas element
-            outputCanvas.style.display = 'block'; // Show the canvas
-
-            
+    reader.onload = function(e) {
+        const imgElement = new Image();
+        imgElement.onload = function() {
+            displayImageOnCanvas(imgElement, document.getElementById('outputCanvas'));
         };
+        imgElement.src = e.target.result;
     };
-
     reader.readAsDataURL(file);
 }
 
+function pixelateImage(canvas, pixelSize) {
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    
+    const numBlocksX = Math.ceil(canvas.width / pixelSize);
+    const numBlocksY = Math.ceil(canvas.height / pixelSize);
+
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, numBlocksX, numBlocksY);
+    ctx.drawImage(canvas, 0, 0, numBlocksX, numBlocksY, 0, 0, canvas.width, canvas.height);
+
+    //ctx.canvas.getContext('2d').commit();
+    return ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function monochromeImage(imageData, monoThreshold) {
+    const data = imageData.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+        const grayscale = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        const color = grayscale < monoThreshold ? 0 : 255;
+
+        data[i] = color;
+        data[i + 1] = color;
+        data[i + 2] = color;
+    }
+
+    return imageData;
+}
+
+function applyPixelation() {
+    const pixelSizeInput = document.getElementById('pixelSizeInput');
+    const pixelSize = parseInt(pixelSizeInput.value);
+
+    const canvas = document.getElementById('outputCanvas');
+    saveCanvasState(canvas);
+    const pixelatedImageData = pixelateImage(canvas, pixelSize);
+    canvas.getContext('2d').putImageData(pixelatedImageData, 0, 0);
+}
+
+function applyMonochrome() {
+    const monoThresholdInput = document.getElementById('monoThresholdInput');
+    const monoThreshold = parseInt(monoThresholdInput.value);
+
+    const canvas = document.getElementById('outputCanvas');
+    const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+
+    const monochromeImageData = monochromeImage(imageData, monoThreshold);
+    canvas.getContext('2d').putImageData(monochromeImageData, 0, 0);
+}
