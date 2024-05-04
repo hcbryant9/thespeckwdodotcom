@@ -2,7 +2,9 @@ let canvasStateStack = [];
 let currentStateIndex = 0; 
 
 function saveCanvasState(canvas) {
+    
     currentStateIndex++;
+    console.log("saved state: " + currentStateIndex);
     canvasStateStack = canvasStateStack.slice(0, currentStateIndex);
     canvasStateStack.push(canvas.toDataURL());
 }
@@ -13,9 +15,10 @@ function openCamera() {
 }
 
 function undo() {
-    console.log("current state" + currentStateIndex);
+    
     if (currentStateIndex > 0) {
         currentStateIndex--; 
+        console.log("current state after hitting undo button" + currentStateIndex);
         const canvas = document.getElementById('outputCanvas');
         const ctx = canvas.getContext('2d');
         const img = new Image();
@@ -105,6 +108,7 @@ function applyMonochrome() {
     const monoThreshold = parseInt(monoThresholdInput.value);
 
     const canvas = document.getElementById('outputCanvas');
+    saveCanvasState(canvas);
     const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
 
     const monochromeImageData = monochromeImage(imageData, monoThreshold);
