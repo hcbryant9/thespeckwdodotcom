@@ -26,15 +26,9 @@ function monochromeImage(imageData, monoThreshold) {
     return imageData;
 }
 
-
-function applyBayer() {
-    const canvas = document.getElementById('outputCanvas');
-    const ctx = canvas.getContext('2d');
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+function bayerImage(imageData){
     const { data, width, height } = imageData;
-
-    // Define a 4x4 Bayer pattern for dithering
+    
     const bayerPattern = [
         [ 15, 195, 60, 240 ],
         [ 135, 75, 180, 120 ],
@@ -42,31 +36,41 @@ function applyBayer() {
         [ 165, 105, 150, 90 ]
     ];
 
-    // Apply Bayer dithering to each color channel
+   
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
             const index = (y * width + x) * 4;
             const grayscale = (data[index] + data[index + 1] + data[index + 2]) / 3;
             const bayerValue = bayerPattern[y % 4][x % 4];
 
-            // Threshold comparison
             if (grayscale < bayerValue) {
-                // Adjust color channels
-                data[index] = 0; // Red
-                data[index + 1] = 0; // Green
-                data[index + 2] = 0; // Blue
+                
+                data[index] = 0; // R
+                data[index + 1] = 0; // G
+                data[index + 2] = 0; // B
             } else {
-                data[index] = 255; // Red
-                data[index + 1] = 255; // Green
-                data[index + 2] = 255; // Blue
+                data[index] = 255; // R
+                data[index + 1] = 255; // G
+                data[index + 2] = 255; // B
             }
         }
     }
 
-    ctx.putImageData(imageData, 0, 0);
+    return imageData;
 
-    // Save the state
+}
+
+function applyBayer() {
+    const canvas = document.getElementById('outputCanvas');
+    
+
     saveCanvasState(canvas, 'bayer', {});
+
+    const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+    const bayerImageData = bayerImage(imageData);
+
+    canvas.getContext('2d').putImageData(bayerImageData, 0,0);
+
 }
 
 

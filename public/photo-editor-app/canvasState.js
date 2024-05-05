@@ -43,12 +43,9 @@ function undo() {
                 const pixelatedImageData = pixelateImage(canvas, pixelSize);
                 ctx.putImageData(pixelatedImageData, 0, 0);
             } else if (state.effectType === 'bayer') {
-                // Restore canvas state with Bayer effect
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
-
-                // Reapply Bayer effect
-                applyBayerEffect();
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const bayerImageData = bayerImage(imageData);
+                ctx.putImageData(bayerImageData,0,0);
             }
         };
         img.src = state.imageData;
