@@ -36,26 +36,30 @@ function handleImageLayer(event) {
     reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-            // Draw the new image onto a hidden canvas to get its ImageData
             const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+
+            // Set the canvas size to match the image dimensions
             tempCanvas.width = img.width;
             tempCanvas.height = img.height;
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+
+            // Draw the image onto the canvas
+            tempCtx.drawImage(img, 0, 0);
+
+            // Get the ImageData from the canvas
             const newImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 
-            
+            // Apply multiply effect
             applyMultiply(newImageData);
+
             // Clean up: remove the temporary canvas
-            tempCanvas.width = 0;
-            tempCanvas.height = 0;
-            tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-            tempCanvas.remove(); // Remove the temporary canvas from the DOM
+            tempCanvas.remove();
         };
         img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
+
 
 
 function openCamera() {

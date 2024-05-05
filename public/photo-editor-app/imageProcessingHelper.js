@@ -63,6 +63,18 @@ function bayerImage(imageData){
 function multiplyImage(oldImageData, newImageData) {
     const width = oldImageData.width;
     const height = oldImageData.height;
+
+    // Resize newImageData to match the dimensions of oldImageData if necessary
+    if (newImageData.width !== width || newImageData.height !== height) {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(newImageData, 0, 0, width, height);
+        newImageData = tempCtx.getImageData(0, 0, width, height);
+        tempCanvas.remove(); // Clean up temporary canvas
+    }
+
     const blendedData = new Uint8ClampedArray(width * height * 4);
 
     for (let i = 0; i < width * height * 4; i += 4) {
@@ -88,3 +100,4 @@ function multiplyImage(oldImageData, newImageData) {
 
     return new ImageData(blendedData, width, height);
 }
+
