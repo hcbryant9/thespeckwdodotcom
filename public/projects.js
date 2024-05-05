@@ -41,7 +41,7 @@ characPhotoBTN.addEventListener('click',function(){window.location.href = "index
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
-monoPhotoBTN.addEventListener('click', function(){window.location.href = "pixelmono.html";});
+monoPhotoBTN.addEventListener('click', function(){window.location.href = "./photo-editor-app/pixelmono.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;

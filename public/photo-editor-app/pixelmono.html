@@ -10,10 +10,10 @@
     <meta property="og:description" content="pixel art & monochrome" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/images/projects/monopixel.png" type="image/png" />
-    <link rel="apple-touch-icon" href="assets/images/projects/monopixel.png" type="image/png" />
+    <link rel="icon" href="../assets/images/projects/monopixel.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/images/projects/monopixel.png" type="image/png" />
     
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <title>mono-pixel</title>
 </head>
 
@@ -53,6 +53,10 @@
     <br>
     <label for="uploadInput" class="index-btn">Upload Photo</label>
     <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)">
+
+    <label for="newInput" class="index-btn">Layer Photo</label>
+    <input class="hidden-input" type="file" accept="image/*" id="newInput" onchange="handleImageLayer(event)">
+
     <br><br>
     <label for="pixelSizeInput">Pixel Size:</label>
     <input type="number" id="pixelSizeInput" value="36" min="1" max="100">
@@ -63,6 +67,8 @@
     <button class="index-btn" onclick="applyMonochrome()">Monochrome</button>
     <button class="index-btn" onclick="applyBayer()">Bayer</button>
     <br><br>
+    <img id="processedImage" width="421" height="595">
+
     <button class="index-btn" onclick="clearCanvas()">Clear</button>
     <button class="index-btn" onclick="undo()">Undo</button>
     <canvas id="outputCanvas" width="421" height="595"></canvas>
@@ -75,6 +81,10 @@
         </nav>
     </footer>
     <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
-    <script src="process.js"></script>
+    <script src="./canvasState.js"></script>
+    <script src="./imageProcessing.js"></script>
+    <script src="./uiInteractions.js"></script>
+    
+    
 </body>
 </html>
