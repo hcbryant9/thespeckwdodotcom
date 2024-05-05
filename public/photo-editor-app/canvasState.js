@@ -46,6 +46,10 @@ function undo() {
                 const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                 const bayerImageData = bayerImage(imageData);
                 ctx.putImageData(bayerImageData,0,0);
+            } else if(state.effectData === 'multiply'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const multImg = state.effectData.multImg;
+                const multiplyImageData = multiplyImage(imageData, multImg);
             }
         };
         img.src = state.imageData;

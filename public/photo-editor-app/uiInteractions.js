@@ -32,37 +32,31 @@ function handleImageLayer(event) {
         return;
     }
 
-    const canvas = document.getElementById('outputCanvas');
-    const ctx = canvas.getContext('2d');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            // Draw the new image onto a hidden canvas to get its ImageData
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = img.width;
+            tempCanvas.height = img.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+            const newImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 
-    const img = new Image();
-    img.onload = function() {
-        // Create a temporary canvas to hold the original processed image
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = canvas.width;
-        tempCanvas.height = canvas.height;
-        const tempCtx = tempCanvas.getContext('2d');
-
-        // Draw the original processed image onto the temporary canvas
-        const originalImage = document.getElementById('processedImage');
-        tempCtx.drawImage(originalImage, 0, 0, tempCanvas.width, tempCanvas.height);
-
-        // Clear the main canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw the original processed image back onto the main canvas
-        ctx.drawImage(tempCanvas, 0, 0);
-
-        // Draw the newly uploaded image in the bottom right corner
-        const bottomRightX = canvas.width - img.width - 10; // 10px padding from right
-        const bottomRightY = canvas.height - img.height - 10; // 10px padding from bottom
-        ctx.drawImage(img, bottomRightX, bottomRightY);
-
-        // Save the current state with the new layered image
-        saveCanvasState(canvas);
+            
+            applyMultiply(newImageData);
+            // Clean up: remove the temporary canvas
+            tempCanvas.width = 0;
+            tempCanvas.height = 0;
+            tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tempCanvas.remove(); // Remove the temporary canvas from the DOM
+        };
+        img.src = e.target.result;
     };
-    img.src = URL.createObjectURL(file);
+    reader.readAsDataURL(file);
 }
+
 
 function openCamera() {
     const cameraInput = document.getElementById('cameraInput');
