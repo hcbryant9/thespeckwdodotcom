@@ -69,33 +69,34 @@ function multiplyImages(oldImageData, newImageData) {
     const newWidth = newImageData.width;
     const newHeight = newImageData.height;
     
-    // Determine which image is larger
-    const maxWidth = Math.max(oldWidth, newWidth);
-    const maxHeight = Math.max(oldHeight, newHeight);
-    
-    // Create new canvases to accommodate the resized images
+    // Create canvases to accommodate the images at original dimensions
     const oldCanvas = document.createElement('canvas');
-    oldCanvas.width = maxWidth;
-    oldCanvas.height = maxHeight;
+    oldCanvas.width = oldWidth;
+    oldCanvas.height = oldHeight;
     const oldCtx = oldCanvas.getContext('2d');
     oldCtx.putImageData(oldImageData, 0, 0);
 
     const newCanvas = document.createElement('canvas');
-    newCanvas.width = maxWidth;
-    newCanvas.height = maxHeight;
+    newCanvas.width = oldWidth; // Set to old image width
+    newCanvas.height = oldHeight; // Set to old image height
     const newCtx = newCanvas.getContext('2d');
-    newCtx.putImageData(newImageData, 0, 0);
+    
+    // Calculate the position to draw the new image on the canvas for centering
+    const offsetX = Math.floor((oldWidth - newWidth) / 2);
+    const offsetY = Math.floor((oldHeight - newHeight) / 2);
 
-    // Get the ImageData of the padded images
-    const paddedOldImageData = oldCtx.getImageData(0, 0, maxWidth, maxHeight);
-    const paddedNewImageData = newCtx.getImageData(0, 0, maxWidth, maxHeight);
+    // Draw the new image onto the canvas at the calculated position
+    newCtx.putImageData(newImageData, offsetX, offsetY);
+
+    // Get the ImageData of the padded new image
+    const paddedNewImageData = newCtx.getImageData(0, 0, oldWidth, oldHeight);
 
     // Create a new ImageData object to store the result
-    const resultImageData = new ImageData(maxWidth, maxHeight);
+    const resultImageData = new ImageData(oldWidth, oldHeight);
 
     // Perform pixel-wise multiplication
     const resultData = resultImageData.data;
-    const oldData = paddedOldImageData.data;
+    const oldData = oldImageData.data;
     const newData = paddedNewImageData.data;
 
     for (let i = 0; i < resultData.length; i += 4) {
