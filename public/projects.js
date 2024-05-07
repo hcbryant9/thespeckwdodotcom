@@ -41,7 +41,7 @@ characPhotoBTN.addEventListener('click',function(){window.location.href = "index
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
-monoPhotoBTN.addEventListener('click', function(){window.location.href = "./photo-editor-app/pixelmono.html";});
+monoPhotoBTN.addEventListener('click', function(){window.location.href = "./editor/pixelmono.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -117,11 +117,11 @@ const projects = {
         filename: "guesshue"
     },
     mono:{
-        title:"mono-chrome-pixelation",
-        description: "Image processing using pixelation & monochrome affects inspired by alienmelon",
+        title:"untitled-photo-editor",
+        description: "Image processing web-app effects inspired by alienmelon",
         tools: "OpenCV, JavaScript, HTML",
         timeline: "Spring 2024",
-        filename: "pixelmono"
+        filename: "./editor/pixelmono"
     }
 };
 
