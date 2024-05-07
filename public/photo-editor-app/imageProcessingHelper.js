@@ -60,8 +60,10 @@ function bayerImage(imageData){
 
 }
 
+
+
 //current bug -> images that are smaller first then images that are larger second works but not vice versa
-function multiplyImages(oldImageData, newImageData) {
+function blendImages(oldImageData, newImageData, blendMode = 'multiply') {
     // Check if oldImageData is null or undefined
     if (!oldImageData) {
         return newImageData; // Return newImageData if oldImageData is null
@@ -105,31 +107,92 @@ function multiplyImages(oldImageData, newImageData) {
     // Get the ImageData of the scaled new image
     const scaledNewImageData = scaledCtx.getImageData(0, 0, oldWidth, oldHeight);
 
-    // Clean up temporary canvases
-    tempCanvas.width = 0;
-    tempCanvas.height = 0;
+    // Clean up the scaled canvas
     scaledCanvas.width = 0;
     scaledCanvas.height = 0;
-    
+
     // Create a new ImageData object to store the result
     const resultImageData = new ImageData(oldWidth, oldHeight);
 
-    // Perform pixel-wise multiplication
-    const resultData = resultImageData.data;
-    const oldData = oldImageData.data;
-    const newData = scaledNewImageData.data;
-
-    for (let i = 0; i < resultData.length; i += 4) {
-        // Multiply RGB values for each pixel
-        resultData[i] = (oldData[i] * newData[i]) / 255;       // Red
-        resultData[i + 1] = (oldData[i + 1] * newData[i + 1]) / 255; // Green
-        resultData[i + 2] = (oldData[i + 2] * newData[i + 2]) / 255; // Blue
-        resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
-    }
+    // Perform pixel-wise blending based on the specified blend mode
+    const blendFunction = getBlendFunction(blendMode);
+    blendFunction(oldImageData.data, scaledNewImageData.data, resultImageData.data);
 
     // Return the resulting ImageData
     return resultImageData;
 }
+
+// Helper function to get the appropriate blend function based on the blend mode
+function getBlendFunction(blendMode) {
+    switch (blendMode) {
+        case 'multiply':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = (oldData[i] * newData[i]) / 255;       // Red
+                    resultData[i + 1] = (oldData[i + 1] * newData[i + 1]) / 255; // Green
+                    resultData[i + 2] = (oldData[i + 2] * newData[i + 2]) / 255; // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        case 'add':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = Math.min(oldData[i] + newData[i], 255);       // Red
+                    resultData[i + 1] = Math.min(oldData[i + 1] + newData[i + 1], 255); // Green
+                    resultData[i + 2] = Math.min(oldData[i + 2] + newData[i + 2], 255); // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3] + newData[i + 3], 255); // Alpha
+                }
+            };
+        case 'screen':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = 255 - (255 - oldData[i]) * (255 - newData[i]) / 255;       // Red
+                    resultData[i + 1] = 255 - (255 - oldData[i + 1]) * (255 - newData[i + 1]) / 255; // Green
+                    resultData[i + 2] = 255 - (255 - oldData[i + 2]) * (255 - newData[i + 2]) / 255; // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        case 'subtract':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = Math.max(oldData[i] - newData[i], 0);       // Red
+                    resultData[i + 1] = Math.max(oldData[i + 1] - newData[i + 1], 0); // Green
+                    resultData[i + 2] = Math.max(oldData[i + 2] - newData[i + 2], 0); // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        case 'overlay':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = (newData[i] < 128) ? (2 * oldData[i] * newData[i] / 255) : (255 - 2 * (255 - oldData[i]) * (255 - newData[i]) / 255); // Red
+                    resultData[i + 1] = (newData[i + 1] < 128) ? (2 * oldData[i + 1] * newData[i + 1] / 255) : (255 - 2 * (255 - oldData[i + 1]) * (255 - newData[i + 1]) / 255); // Green
+                    resultData[i + 2] = (newData[i + 2] < 128) ? (2 * oldData[i + 2] * newData[i + 2] / 255) : (255 - 2 * (255 - oldData[i + 2]) * (255 - newData[i + 2]) / 255); // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        case 'lighten':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = Math.max(oldData[i], newData[i]);       // Red
+                    resultData[i + 1] = Math.max(oldData[i + 1], newData[i + 1]); // Green
+                    resultData[i + 2] = Math.max(oldData[i + 2], newData[i + 2]); // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        case 'darken':
+            return (oldData, newData, resultData) => {
+                for (let i = 0; i < resultData.length; i += 4) {
+                    resultData[i] = Math.min(oldData[i], newData[i]);       // Red
+                    resultData[i + 1] = Math.min(oldData[i + 1], newData[i + 1]); // Green
+                    resultData[i + 2] = Math.min(oldData[i + 2], newData[i + 2]); // Blue
+                    resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
+                }
+            };
+        default:
+            throw new Error(`Unsupported blend mode: ${blendMode}`);
+    }
+}
+
 
 
 

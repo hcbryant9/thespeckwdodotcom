@@ -62,14 +62,24 @@
     <label for="uploadInput" class="index-btn">Upload Photo</label>
     <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)">
 
-    <label for="newInput" class="index-btn">Layer Photo</label>
+    <label for="newInput" class="index-btn">Blend Photo</label>
     <input class="hidden-input" type="file" accept="image/*" id="newInput" onchange="handleImageLayer(event)">
-
     <br><br>
+    
+    <button class="index-btn" onclick="applyAdd()">Add</button>
+    <button class="index-btn" onclick="applyMultiply()">Multiply</button>
+    <button class="index-btn" onclick="applyScreen()">Screen</button>
+    <button class="index-btn" onclick="applySubtract()">Subtract</button>
+    <button class="index-btn" onclick="applyOverlay()">Overlay</button>
+    <button class="index-btn" onclick="applyLighten()">Lighten</button>
+    <button class="index-btn" onclick="applyDarken()">Darken</button>
+    <br><br>
+    
     <label for="pixelSizeInput">Pixel Size:</label>
     <input type="number" id="pixelSizeInput" value="36" min="1" max="100">
     <label for="monoThresholdInput">Mono Threshold:</label>
     <input type="number" id="monoThresholdInput" value="128" min="1" max="256">
+
     <br><br>
     <button class="index-btn" onclick="applyPixelation()">Pixelate</button>
     <button class="index-btn" onclick="applyMonochrome()">Monochrome</button>
@@ -84,12 +94,17 @@
     <img id="processedImage" width="421" height="595">
     <button class="index-btn" onclick="downloadImage()">Download Image</button>
     <footer>
-        <nav>
-            <a href="index.html">home</a> <br>
-            <a href="projects.html">projects</a>
-        </nav>
+        
         <br>
-        <center>v0.1.2</center>
+        <center>v0.1.3<br>
+            <nav>
+                <center>
+                <a href="index.html">home</a> <br>
+                <a href="projects.html">projects</a>
+                </center>
+                
+            </nav>
+        </center>
     </footer>
     <script src="https://docs.opencv.org/4.5.3/opencv.js"></script>
     <script src="./canvasState.js"></script>

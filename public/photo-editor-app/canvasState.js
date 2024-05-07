@@ -1,7 +1,7 @@
 let canvasStateStack = [];
 let currentStateIndex = -1;
 
-function saveCanvasState(canvas, effectType, effectData) {
+function saveCanvasState(canvas, effectType, previousData , effectData) {
     currentStateIndex++;
     console.log("saved state: " + currentStateIndex);
 
@@ -12,6 +12,7 @@ function saveCanvasState(canvas, effectType, effectData) {
     const state = {
         imageData: canvas.toDataURL(),
         effectType: effectType,
+        previousData: previousData,
         effectData: effectData
     };
     canvasStateStack.push(state);
@@ -49,7 +50,38 @@ function undo() {
             } else if(state.effectData === 'multiply'){
                 const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                 const multImg = state.effectData.multImg;
-                const multiplyImageData = multiplyImage(imageData, multImg);
+                const multiplyImageData = blendImages(imageData, multImg, 'multiply');
+                ctx.putImageData(multiplyImageData,0,0);
+            } else if(state.effectData === 'add'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'add');
+                ctx.putImageData(addImageData,0,0);
+            }else if(state.effectData === 'screen'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'screen');
+                ctx.putImageData(addImageData,0,0);
+            }else if(state.effectData === 'subtract'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'subtract');
+                ctx.putImageData(addImageData,0,0);
+            }else if(state.effectData === 'overlay'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'overlay');
+                ctx.putImageData(addImageData,0,0);
+            }else if(state.effectData === 'lighten'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'lighten');
+                ctx.putImageData(addImageData,0,0);
+            }else if(state.effectData === 'darken'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const addImg = state.effectData.multImg;
+                const addImageData = blendImages(imageData, addImg, 'darken');
+                ctx.putImageData(addImageData,0,0);
             }
         };
         img.src = state.imageData;
@@ -59,7 +91,12 @@ function undo() {
 function clearCanvas() {
     const canvas = document.getElementById('outputCanvas');
     const ctx = canvas.getContext('2d');
+
+    const layerCanvas = document.getElementById('layerCanvas');
+    const ctxL = canvas.getContext('2d');
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctxL.clearRect(0,0, canvas.width, canvas.height);
     
     // Reset undo stack
     canvasStateStack = [];

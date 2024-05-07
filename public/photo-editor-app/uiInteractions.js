@@ -39,7 +39,7 @@ function handleImageLayer(event) {
         const imgElement = new Image();
         imgElement.onload = function() {
             displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'));
-            applyMultiply();
+            //applyMultiply();
         };
         imgElement.src = e.target.result;
     };

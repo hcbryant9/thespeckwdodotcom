@@ -37,13 +37,92 @@ function applyMonochrome() {
 function applyMultiply(){
     const outCanvas = document.getElementById('outputCanvas'); //get current canvas
     const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
-    saveCanvasState(outCanvas, 'multiply'); //save state
+    
 
     const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
     const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
 
-    const multiplyImageData = multiplyImages(outImageData, layImageData);
+    saveCanvasState(outCanvas, 'multiply', outImageData, layImageData); //save state
+
+    const multiplyImageData = blendImages(outImageData, layImageData, 'multiply');
     outCanvas.getContext('2d').putImageData(multiplyImageData, 0,0);
+}
 
+function applyAdd(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
 
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'add', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'add');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
+}
+function applyScreen(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
+
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'screen', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'screen');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
+}
+function applySubtract(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
+
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'subtract', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'subtract');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
+}
+function applyOverlay(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
+
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'overlay', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'overlay');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
+}
+function applyLighten(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
+
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'lighten', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'lighten');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
+}
+function applyDarken(){
+    const outCanvas = document.getElementById('outputCanvas'); //get current canvas
+    const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
+   
+
+    const outImageData = outCanvas.getContext('2d').getImageData(0, 0, outCanvas.width, outCanvas.height);
+    const layImageData = layCanvas.getContext('2d').getImageData(0, 0, layCanvas.width, layCanvas.height);
+
+    saveCanvasState(outCanvas, 'darken', outImageData, layImageData); //save state
+
+    const addImageData = blendImages(outImageData, layImageData, 'darken');
+    outCanvas.getContext('2d').putImageData(addImageData, 0,0);
 }
