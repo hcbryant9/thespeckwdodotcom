@@ -105,6 +105,12 @@ function multiplyImages(oldImageData, newImageData) {
     // Get the ImageData of the scaled new image
     const scaledNewImageData = scaledCtx.getImageData(0, 0, oldWidth, oldHeight);
 
+    // Clean up temporary canvases
+    tempCanvas.width = 0;
+    tempCanvas.height = 0;
+    scaledCanvas.width = 0;
+    scaledCanvas.height = 0;
+    
     // Create a new ImageData object to store the result
     const resultImageData = new ImageData(oldWidth, oldHeight);
 
