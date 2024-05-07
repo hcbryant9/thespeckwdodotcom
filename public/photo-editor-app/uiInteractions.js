@@ -43,7 +43,7 @@ function handleImageLayer(event) {
     reader.onload = function(e) {
         const imgElement = new Image();
         imgElement.onload = function() {
-            displayImageOnCanvas(imgElement, document.getElementById('sampleCanvas'), true);
+            displayImageOnCanvas(imgElement, document.getElementById('sampleCanvas'), false);
             document.getElementById('blendOptions').style.display = "block";
             document.getElementById('sampleCanvas').style.display = "block";
             displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'), false);
