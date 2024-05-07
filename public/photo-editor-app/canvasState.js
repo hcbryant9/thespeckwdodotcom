@@ -51,7 +51,15 @@ function undo() {
                 const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                 const bayerImageData = bayerImage(imageData);
                 ctx.putImageData(bayerImageData,0,0);
-            } else if(state.effectData === 'multiply'){
+            } else if(state.effectType === 'blur'){
+                const blurSize = state.effectData.radius;
+                const blurImageData = blurImage(canvas, blurSize);
+                ctx.putImageData(blurImageData, 0, 0);
+            } else if(state.effectType === 'halftone'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const halftoneImageData = halftoneImage(imageData);
+                ctx.putImageData(halftoneImageData,0,0);
+            }else if(state.effectData === 'multiply'){
                 const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                 const multImg = state.effectData.multImg;
                 const multiplyImageData = blendImages(imageData, multImg, 'multiply');

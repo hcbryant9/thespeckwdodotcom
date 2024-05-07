@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" href="../assets/images/projects/monopixel.png" type="image/png" />
     
     <link rel="stylesheet" type="text/css" href="../main.css">
-    <title>mono-pixel</title>
+    <title></title>
 </head>
 
 <style>
@@ -89,6 +89,9 @@
     #pixelInputDiv {
         display: none;
     }
+    #blurInputDiv {
+        display: none;
+    }
 </style>
 <body>
     <br>
@@ -117,10 +120,14 @@
     
     <div id = "effectOptions">
     <br><br>
-    <small>Choose a processing effect (or many)! </small><br>
+    <small>Choose a processing effect(s) or add a blend photo! </small><br>
     <button class="index-btn" onclick="applyPixelation()">Pixelate</button>
     <button class="index-btn" onclick="applyMonochrome()">Monochrome</button>
-    <button class="index-btn" onclick="applyBayer()">Bayer</button><br><br>
+    <button class="index-btn" onclick="applyBayer()">Bayer</button>
+    <button class="index-btn" onclick="applyHalftone()">Halftone</button>
+    <!-- <button class="index-btn" onclick="applyBlur()">Blur</button> -->
+    <br><br>
+    
     
     <div id = "pixelInputDiv">
     <label for="pixelSizeInput">Pixel Size:</label>
@@ -129,6 +136,10 @@
     <div id = "monoInputDiv">
     <label for="monoThresholdInput">Mono Threshold:</label>
     <input type="number" id="monoThresholdInput" value="128" min="1" max="256">
+
+    <!-- <div id = "blurInputDiv">
+    <label for="blurInput">Blur Amount:</label>
+    <input type="number" id="blurInput" value="128" min="1" max="256"> -->
     </div>
     <br><br>
     </div>

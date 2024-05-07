@@ -44,6 +44,29 @@ function applyMonochrome() {
     canvas.getContext('2d').putImageData(monochromeImageData, 0, 0);
 }
 
+function applyHalftone(){
+    
+    const canvas = document.getElementById('outputCanvas');
+    saveCanvasState(canvas, 'halftone');
+
+    const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width, canvas.height);
+    const halftoneImageData = halftoneImage(imageData);
+    canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
+}
+
+function applyBlur() {
+    document.getElementById('blurInputDiv').style.display = "block";
+    const canvas = document.getElementById('outputCanvas');
+    const radiusInput = document.getElementById('blurInput');
+    const radius = parseInt(radiusInput.value);
+    saveCanvasState(canvas, 'blur', {radiusValue: radius });
+
+    const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height);
+    const blurImageData = blurImage(imageData, radius);
+    canvas.getContext('2d').putImageData(blurImageData,0,0);
+
+}
+
 function applyMultiply(){
     const outCanvas = document.getElementById('outputCanvas'); //get current canvas
     const layCanvas = document.getElementById('layerCanvas'); //get layer canvas
