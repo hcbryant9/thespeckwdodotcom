@@ -60,7 +60,18 @@ function bayerImage(imageData){
 
 }
 
+//current bug -> images that are smaller first then images that are larger second works but not vice versa
 function multiplyImages(oldImageData, newImageData) {
+    // Check if oldImageData is null or undefined
+    if (!oldImageData) {
+        return newImageData; // Return newImageData if oldImageData is null
+    }
+
+    // Check if newImageData is null or undefined
+    if (!newImageData) {
+        return null; // Return null if newImageData is null
+    }
+
     // Extract dimensions of the old image
     const oldWidth = oldImageData.width;
     const oldHeight = oldImageData.height;
@@ -68,28 +79,31 @@ function multiplyImages(oldImageData, newImageData) {
     // Extract dimensions of the new image
     const newWidth = newImageData.width;
     const newHeight = newImageData.height;
-    
-    // Create canvases to accommodate the images at original dimensions
-    const oldCanvas = document.createElement('canvas');
-    oldCanvas.width = oldWidth;
-    oldCanvas.height = oldHeight;
-    const oldCtx = oldCanvas.getContext('2d');
-    oldCtx.putImageData(oldImageData, 0, 0);
 
-    const newCanvas = document.createElement('canvas');
-    newCanvas.width = oldWidth; // Set to old image width
-    newCanvas.height = oldHeight; // Set to old image height
-    const newCtx = newCanvas.getContext('2d');
-    
-    // Calculate the position to draw the new image on the canvas for centering
-    const offsetX = Math.floor((oldWidth - newWidth) / 2);
-    const offsetY = Math.floor((oldHeight - newHeight) / 2);
+    // Create a temporary canvas for drawing the newImageData
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = newWidth;
+    tempCanvas.height = newHeight;
+    const tempCtx = tempCanvas.getContext('2d');
 
-    // Draw the new image onto the canvas at the calculated position
-    newCtx.putImageData(newImageData, offsetX, offsetY);
+    // Put the newImageData onto the temporary canvas
+    tempCtx.putImageData(newImageData, 0, 0);
 
-    // Get the ImageData of the padded new image
-    const paddedNewImageData = newCtx.getImageData(0, 0, oldWidth, oldHeight);
+    // Create a canvas for scaling the new image to match old image dimensions
+    const scaledCanvas = document.createElement('canvas');
+    scaledCanvas.width = oldWidth;
+    scaledCanvas.height = oldHeight;
+    const scaledCtx = scaledCanvas.getContext('2d');
+
+    // Scale and draw the new image onto the scaled canvas
+    scaledCtx.drawImage(
+        tempCanvas, // Use the temporary canvas as the source
+        0, 0, newWidth, newHeight, // Source rectangle (entire new image)
+        0, 0, oldWidth, oldHeight // Destination rectangle (scaled to match old image)
+    );
+
+    // Get the ImageData of the scaled new image
+    const scaledNewImageData = scaledCtx.getImageData(0, 0, oldWidth, oldHeight);
 
     // Create a new ImageData object to store the result
     const resultImageData = new ImageData(oldWidth, oldHeight);
@@ -97,7 +111,7 @@ function multiplyImages(oldImageData, newImageData) {
     // Perform pixel-wise multiplication
     const resultData = resultImageData.data;
     const oldData = oldImageData.data;
-    const newData = paddedNewImageData.data;
+    const newData = scaledNewImageData.data;
 
     for (let i = 0; i < resultData.length; i += 4) {
         // Multiply RGB values for each pixel
@@ -110,5 +124,6 @@ function multiplyImages(oldImageData, newImageData) {
     // Return the resulting ImageData
     return resultImageData;
 }
+
 
 
