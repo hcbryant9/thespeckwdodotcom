@@ -60,44 +60,54 @@ function bayerImage(imageData){
 
 }
 
-function multiplyImage(oldImageData, newImageData) {
-    const width = oldImageData.width;
-    const height = oldImageData.height;
+function multiplyImages(oldImageData, newImageData) {
+    // Extract dimensions of the old image
+    const oldWidth = oldImageData.width;
+    const oldHeight = oldImageData.height;
+    
+    // Extract dimensions of the new image
+    const newWidth = newImageData.width;
+    const newHeight = newImageData.height;
+    
+    // Determine which image is larger
+    const maxWidth = Math.max(oldWidth, newWidth);
+    const maxHeight = Math.max(oldHeight, newHeight);
+    
+    // Create new canvases to accommodate the resized images
+    const oldCanvas = document.createElement('canvas');
+    oldCanvas.width = maxWidth;
+    oldCanvas.height = maxHeight;
+    const oldCtx = oldCanvas.getContext('2d');
+    oldCtx.putImageData(oldImageData, 0, 0);
 
-    // Resize newImageData to match the dimensions of oldImageData if necessary
-    if (newImageData.width !== width || newImageData.height !== height) {
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = width;
-        tempCanvas.height = height;
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.drawImage(newImageData, 0, 0, width, height);
-        newImageData = tempCtx.getImageData(0, 0, width, height);
-        tempCanvas.remove(); // Clean up temporary canvas
+    const newCanvas = document.createElement('canvas');
+    newCanvas.width = maxWidth;
+    newCanvas.height = maxHeight;
+    const newCtx = newCanvas.getContext('2d');
+    newCtx.putImageData(newImageData, 0, 0);
+
+    // Get the ImageData of the padded images
+    const paddedOldImageData = oldCtx.getImageData(0, 0, maxWidth, maxHeight);
+    const paddedNewImageData = newCtx.getImageData(0, 0, maxWidth, maxHeight);
+
+    // Create a new ImageData object to store the result
+    const resultImageData = new ImageData(maxWidth, maxHeight);
+
+    // Perform pixel-wise multiplication
+    const resultData = resultImageData.data;
+    const oldData = paddedOldImageData.data;
+    const newData = paddedNewImageData.data;
+
+    for (let i = 0; i < resultData.length; i += 4) {
+        // Multiply RGB values for each pixel
+        resultData[i] = (oldData[i] * newData[i]) / 255;       // Red
+        resultData[i + 1] = (oldData[i + 1] * newData[i + 1]) / 255; // Green
+        resultData[i + 2] = (oldData[i + 2] * newData[i + 2]) / 255; // Blue
+        resultData[i + 3] = Math.min(oldData[i + 3], newData[i + 3]); // Alpha
     }
 
-    const blendedData = new Uint8ClampedArray(width * height * 4);
-
-    for (let i = 0; i < width * height * 4; i += 4) {
-        const red1 = oldImageData.data[i];
-        const green1 = oldImageData.data[i + 1];
-        const blue1 = oldImageData.data[i + 2];
-
-        const red2 = newImageData.data[i];
-        const green2 = newImageData.data[i + 1];
-        const blue2 = newImageData.data[i + 2];
-
-        // Multiply each color channel
-        const blendedRed = (red1 * red2) / 255;
-        const blendedGreen = (green1 * green2) / 255;
-        const blendedBlue = (blue1 * blue2) / 255;
-
-        // Set the blended pixel values
-        blendedData[i] = blendedRed;
-        blendedData[i + 1] = blendedGreen;
-        blendedData[i + 2] = blendedBlue;
-        blendedData[i + 3] = 255; // Alpha value (fully opaque)
-    }
-
-    return new ImageData(blendedData, width, height);
+    // Return the resulting ImageData
+    return resultImageData;
 }
+
 

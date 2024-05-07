@@ -3,7 +3,9 @@ function displayImageOnCanvas(imgElement, canvas) {
     canvas.width = imgElement.width;
     canvas.height = imgElement.height;
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-
+    // console.log("image width: " + imgElement.width + " image height: " + imgElement.height
+    //     + " canvas width: " + canvas.width + " canvas height + " + canvas.height
+    // );
     saveCanvasState(canvas); // Save the initial state
 }
 
@@ -34,28 +36,12 @@ function handleImageLayer(event) {
 
     const reader = new FileReader();
     reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-            const tempCanvas = document.createElement('canvas');
-            const tempCtx = tempCanvas.getContext('2d');
-
-            // Set the canvas size to match the image dimensions
-            tempCanvas.width = img.width;
-            tempCanvas.height = img.height;
-
-            // Draw the image onto the canvas
-            tempCtx.drawImage(img, 0, 0);
-
-            // Get the ImageData from the canvas
-            const newImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-
-            // Apply multiply effect
-            applyMultiply(newImageData);
-
-            // Clean up: remove the temporary canvas
-            tempCanvas.remove();
+        const imgElement = new Image();
+        imgElement.onload = function() {
+            displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'));
+            applyMultiply();
         };
-        img.src = e.target.result;
+        imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
