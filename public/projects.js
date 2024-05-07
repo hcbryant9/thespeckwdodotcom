@@ -41,7 +41,7 @@ characPhotoBTN.addEventListener('click',function(){window.location.href = "index
 lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidity.html";});
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
-monoPhotoBTN.addEventListener('click', function(){window.location.href = "./editor/pixelmono.html";});
+monoPhotoBTN.addEventListener('click', function(){window.location.href = "upelanding.html";});
 
 const clickCounts = {};
 let currentProjectKey = null;
@@ -121,7 +121,7 @@ const projects = {
         description: "Image processing web-app effects inspired by alienmelon",
         tools: "OpenCV, JavaScript, HTML",
         timeline: "Spring 2024",
-        filename: "./editor/pixelmono"
+        filename: "upelanding"
     }
 };
 
