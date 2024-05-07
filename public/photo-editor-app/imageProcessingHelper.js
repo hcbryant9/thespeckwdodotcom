@@ -1,3 +1,6 @@
+/*
+* Abstracted functionality for different effects
+*/
 function pixelateImage(canvas, pixelSize) {
     const ctx = canvas.getContext('2d');
     
@@ -60,9 +63,6 @@ function bayerImage(imageData){
 
 }
 
-
-
-//current bug -> images that are smaller first then images that are larger second works but not vice versa
 function blendImages(oldImageData, newImageData, blendMode = 'multiply') {
     // Check if oldImageData is null or undefined
     if (!oldImageData) {
@@ -122,7 +122,7 @@ function blendImages(oldImageData, newImageData, blendMode = 'multiply') {
     return resultImageData;
 }
 
-// Helper function to get the appropriate blend function based on the blend mode
+//helper function for blendImages( ) based on blendMode
 function getBlendFunction(blendMode) {
     switch (blendMode) {
         case 'multiply':

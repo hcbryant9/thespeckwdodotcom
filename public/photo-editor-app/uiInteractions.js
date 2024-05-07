@@ -1,12 +1,16 @@
-function displayImageOnCanvas(imgElement, canvas) {
+/**
+ * Class for handing UI inputs : displaying , cameras , download, upload
+ */
+
+function displayImageOnCanvas(imgElement, canvas, save) {
     const ctx = canvas.getContext('2d');
     canvas.width = imgElement.width;
     canvas.height = imgElement.height;
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-    // console.log("image width: " + imgElement.width + " image height: " + imgElement.height
-    //     + " canvas width: " + canvas.width + " canvas height + " + canvas.height
-    // );
-    saveCanvasState(canvas); // Save the initial state
+    if(save){
+        saveCanvasState(canvas); // Save the initial state
+    }
+    
 }
 
 function handleImageUpload(event) {
@@ -20,7 +24,8 @@ function handleImageUpload(event) {
     reader.onload = function(e) {
         const imgElement = new Image();
         imgElement.onload = function() {
-            displayImageOnCanvas(imgElement, document.getElementById('outputCanvas'));
+            document.getElementById('effectOptions').style.display = "block";
+            displayImageOnCanvas(imgElement, document.getElementById('outputCanvas'), true);
         };
         imgElement.src = e.target.result;
     };
@@ -38,15 +43,16 @@ function handleImageLayer(event) {
     reader.onload = function(e) {
         const imgElement = new Image();
         imgElement.onload = function() {
-            displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'));
-            //applyMultiply();
+            displayImageOnCanvas(imgElement, document.getElementById('sampleCanvas'), true);
+            document.getElementById('blendOptions').style.display = "block";
+            document.getElementById('sampleCanvas').style.display = "block";
+            displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'), false);
+            
         };
         imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
-
-
 
 function openCamera() {
     const cameraInput = document.getElementById('cameraInput');

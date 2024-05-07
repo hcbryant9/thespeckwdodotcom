@@ -1,3 +1,7 @@
+/*
+* Class for canvas controlling: saving, undo, and clearing
+*/
+
 let canvasStateStack = [];
 let currentStateIndex = -1;
 
@@ -89,16 +93,22 @@ function undo() {
 }
 
 function clearCanvas() {
+    //grab canvases
     const canvas = document.getElementById('outputCanvas');
     const ctx = canvas.getContext('2d');
 
     const layerCanvas = document.getElementById('layerCanvas');
-    const ctxL = canvas.getContext('2d');
+    const ctxL = layerCanvas.getContext('2d');
 
+    //clearing canvases
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctxL.clearRect(0,0, canvas.width, canvas.height);
     
     // Reset undo stack
     canvasStateStack = [];
     currentStateIndex = -1;
+
+    //grab UI and hide them
+    document.getElementById('blendOptions').style.display = "none";
+    document.getElementById('effectOptions').style.display = "none";
 }

@@ -1,3 +1,8 @@
+/* 
+* Functions that apply filters by calling abstracted functions in imageProcessingHelper.js
+*/
+
+
 function applyBayer() {
     const canvas = document.getElementById('outputCanvas');
     
@@ -12,10 +17,12 @@ function applyBayer() {
 }
 
 function applyPixelation() {
+    //grab and display UI
+    document.getElementById('pixelInputDiv').style.display = "block";
     const canvas = document.getElementById('outputCanvas');
     const pixelSizeInput = document.getElementById('pixelSizeInput');
     const pixelSize = parseInt(pixelSizeInput.value);
-
+    
     saveCanvasState(canvas, 'pixelate', { pixelSize: pixelSize });
 
     const pixelatedImageData = pixelateImage(canvas, pixelSize);
@@ -23,9 +30,12 @@ function applyPixelation() {
 }
 
 function applyMonochrome() {
+    //grab and display UI
+    document.getElementById('monoInputDiv').style.display = "block";
     const canvas = document.getElementById('outputCanvas');
     const monoThresholdInput = document.getElementById('monoThresholdInput');
     const monoThreshold = parseInt(monoThresholdInput.value);
+    
 
     saveCanvasState(canvas, 'monochrome', { threshold: monoThreshold });
 
