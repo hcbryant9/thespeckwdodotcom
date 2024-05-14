@@ -102,6 +102,8 @@ function initializeMagazine() {
 
     const LOADING_OVERLAY = document.querySelector('#loading');
     const IMAGE_TABLE = document.querySelector('#imageTable');
+    const INIT_MAG = document.querySelector('#initializeMag');
+    
     document.getElementById('loading').style.display = "block";
     const textures = getTextures(card_amount * 2); 
 
@@ -119,6 +121,7 @@ function initializeMagazine() {
     ).then(canvases => {
         LOADING_OVERLAY.remove();
         IMAGE_TABLE.remove();
+        INIT_MAG.remove();
         const list = document.createElement('ul');
         list.ariaHidden = true;
         pages = canvases.map((canvas, idx) => {

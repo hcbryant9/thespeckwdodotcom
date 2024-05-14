@@ -94,6 +94,10 @@ function undo() {
                 const addImg = state.effectData.multImg;
                 const addImageData = blendImages(imageData, addImg, 'darken');
                 ctx.putImageData(addImageData,0,0);
+            } else if(state.effectData === 'bloom'){
+                const imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                const bloomImageData = bloomImage(imageData,0.1,25,0.8);
+                ctx.putImageData(bloomImageData,0,0);
             }
         };
         img.src = state.imageData;

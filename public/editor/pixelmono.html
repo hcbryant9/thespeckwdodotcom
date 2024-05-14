@@ -89,7 +89,7 @@
     #pixelInputDiv {
         display: none;
     }
-    #blurInputDiv {
+    #bloomInputDiv{
         display: none;
     }
 </style>
@@ -125,6 +125,7 @@
     <button class="index-btn" onclick="applyMonochrome()">Monochrome</button>
     <button class="index-btn" onclick="applyBayer()">Bayer</button>
     <button class="index-btn" onclick="applyHalftone()">Halftone</button>
+    <button class="index-btn" onclick="applyBloom()">Bloom</button>
     <!-- <button class="index-btn" onclick="applyBlur()">Blur</button> -->
     <br><br>
     
@@ -136,11 +137,16 @@
     <div id = "monoInputDiv">
     <label for="monoThresholdInput">Mono Threshold:</label>
     <input type="number" id="monoThresholdInput" value="128" min="1" max="256">
-
-    <!-- <div id = "blurInputDiv">
-    <label for="blurInput">Blur Amount:</label>
-    <input type="number" id="blurInput" value="128" min="1" max="256"> -->
     </div>
+    
+    <div id = "bloomInputDiv">
+    <label for="blurInput">Blur Amount: </label>
+    <input type="number" id="blurInput" value="25" min="1" max="100">
+    <label for="bloomIntensityInput">Bloom Intesity: </label>
+    <input type="number" id="bloomIntensityInput" value="0.8" min="0.1" max="1.0">
+    </div>
+
+    
     <br><br>
     </div>
     <img id="processedImage" width="421" height="595">
@@ -154,7 +160,7 @@
     <footer>
         
         <br>
-        <center>v1.0.0<br>
+        <center>v1.1.0<br>
             <nav>
                 <center>
                 <a href="../index.html">home</a> <br>

@@ -1,52 +1,10 @@
-/*
 
-    HTML5 Reader for Electric Zine Maker, made by Jeremy Oduber & contributors 2019-2021    
-    v21.5
-    Me:
-        https://twitter.com/JeremyOduber
-    This:
-        https://jeremyoduber.itch.io/js-zine
-    Electric Zine Maker: 
-        https://alienmelon.itch.io/electric-zine-maker
-    GitHub:
-        https://github.com/jeremyoduber/EZM-Reader
-    Licensed under the MIT License:
-        https://github.com/jeremyoduber/EZM-Reader/blob/main/LICENSE
-    
-*/
-
-//---- USER OPTIONS ----//
 const TEMPLATE = 1; // Change this value to set the template
-/*  
-    Available templates:
-    
-    1: 8 pages (default)
-        8 Page Folded Zine
-        8 Page Z-Fold
-        Quarter Size
-    2: 12 pages
-        Fancy T-Cut Zine
-    3: 14 pages
-        Easy Long Cut
-    4: 16 pages
-        16 Page Micro-Mini
-        Mini-Booklet
-        Fancy Flapbook
-    5: 24 pages
-        Tetraflexagon
-    6: 26 pages
-        Square Accordion
-        Normal Accordion
-    7: 32 pages
-        Mini-Mini-Booklet
-    8: 64 pages
-        Micro
-*/
+
 const BGCOLOR = '#f5f5f5'; // Change this hex value to set the background color. Remember to keep the quotes!
 const ALT = 'Reader for Electric Zine Maker'; // Change this to a plaintext copy or description of your content to make it visible to screen-readers
 const SMOOTH = true; // Set to false if you want crispy pixels. Leave true if you like the blur.
 
-//---- END USER OPTIONS ----//
 
 // Setup constants and variables
 const FOV = 45;

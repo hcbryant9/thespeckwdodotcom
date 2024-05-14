@@ -96,6 +96,63 @@ function halftoneImage(imageData) {
     return new ImageData(outputData, width, height);
 }
 
+
+function bloomImage(imageData, threshold, blurAmount, intensity) {
+    const brightImageData = thresholdBrightness(imageData, threshold);
+    const blurredImageData = applyGaussianBlur(brightImageData, blurAmount);
+
+    // Combine blurred image with original image
+    const finalImageData = combineImages(imageData, blurredImageData, intensity);
+
+    return finalImageData;
+}
+
+function thresholdBrightness(imageData, threshold) {
+    const { data } = imageData;
+
+    for (let i = 0; i < data.length; i += 4) {
+        const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3 / 255; // Normalize to [0, 1]
+        
+        if (brightness <= threshold) {
+            data[i] = 0;
+            data[i + 1] = 0;
+            data[i + 2] = 0;
+        }
+    }
+
+    return imageData;
+}
+
+function applyGaussianBlur(imageData, blurAmount) {
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+    tempCanvas.width = imageData.width;
+    tempCanvas.height = imageData.height;
+
+    tempCtx.putImageData(imageData, 0, 0);
+
+    // Apply blur using CSS filter (approximation of Gaussian blur)
+    tempCtx.filter = `blur(${blurAmount}px)`;
+    tempCtx.drawImage(tempCanvas, 0, 0);
+
+    return tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+}
+
+function combineImages(originalImageData, bloomImageData, intensity) {
+    const { data } = originalImageData;
+    const bloomData = bloomImageData.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] += bloomData[i] * intensity;
+        data[i + 1] += bloomData[i + 1] * intensity;
+        data[i + 2] += bloomData[i + 2] * intensity;
+    }
+
+    return originalImageData;
+}
+
+
 function drawFilledCircle(outputData, width, height, cx, cy, radius, r, g, b) {
     const intRadius = Math.floor(radius);
     const squaredRadius = intRadius * intRadius;

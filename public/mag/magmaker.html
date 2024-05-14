@@ -24,8 +24,8 @@
         #outputCanvas6,
         #outputCanvas7,
         #outputCanvas8 {
-        width: 421px;
-        height: 595px;
+        width: 210px;
+        height: 248px;
         max-width: 100%;
         display: block;
         margin: 0 auto;
@@ -49,6 +49,15 @@
         justify-content: left;
         align-items: left;
         
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+            text-align: center;
         }
 
         .hidden-input {
@@ -154,10 +163,7 @@ gtag('js', new Date());
 gtag('config', 'G-QQ6JMSNG3C');
 </script>
 <body>
-    <nav>
-        <a href="index.html">Home</a><br>
-        <a href="projects.html">Projects</a>
-    </nav>
+    
     
     
  
@@ -185,8 +191,6 @@ gtag('config', 'G-QQ6JMSNG3C');
                 <input class="hidden-input" type="file" accept="image/*" id="newInput2" onchange="handleImageUpload(event, 'outputCanvas2')">
                
             </td>
-        </tr>
-        <tr>
             <td>
                 <label for="newInput3" class="index-btn">Upload</label>
                 <canvas id="outputCanvas3" width="421" height="595"></canvas>
@@ -199,6 +203,7 @@ gtag('config', 'G-QQ6JMSNG3C');
                 <input class="hidden-input" type="file" accept="image/*" id="newInput4" onchange="handleImageUpload(event, 'outputCanvas4')">
             </td>
         </tr>
+        
         <tr>
             <td>
                 <label for="newInput5" class="index-btn">Upload</label>
@@ -210,8 +215,6 @@ gtag('config', 'G-QQ6JMSNG3C');
                 <canvas id="outputCanvas6" width="421" height="595"></canvas>
                 <input class="hidden-input" type="file" accept="image/*" id="newInput6" onchange="handleImageUpload(event, 'outputCanvas6')">
             </td>
-        </tr>
-        <tr>
             <td>
                 <label for="newInput7" class="index-btn">Upload</label>
                 <canvas id="outputCanvas7" width="421" height="595"></canvas>
@@ -223,11 +226,15 @@ gtag('config', 'G-QQ6JMSNG3C');
                 <input class="hidden-input" type="file" accept="image/*" id="newInput8" onchange="handleImageUpload(event, 'outputCanvas8')">
             </td>
         </tr>
+       
     </table>
 
     <br><br><br>
-    <button class = "index-btn" onclick="initializeMagazine()">View Magazine</button>
-
+    <button id= "initializeMag" class = "index-btn" onclick="initializeMagazine()">View Magazine</button>
+    <nav>
+        <a href="index.html">Home</a><br>
+        <a href="projects.html">Projects</a>
+    </nav>
 <script src="magazine.js"></script>
 <script src="flipper.js"></script>
 </body>

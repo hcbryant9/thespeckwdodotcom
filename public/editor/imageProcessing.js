@@ -54,18 +54,26 @@ function applyHalftone(){
     canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
 }
 
-function applyBlur() {
-    document.getElementById('blurInputDiv').style.display = "block";
+
+
+function applyBloom() {
+    document.getElementById('bloomInputDiv').style.display = "block";
     const canvas = document.getElementById('outputCanvas');
-    const radiusInput = document.getElementById('blurInput');
-    const radius = parseInt(radiusInput.value);
-    saveCanvasState(canvas, 'blur', {radiusValue: radius });
+    saveCanvasState(canvas, 'bloom'); 
+    const threshold = .1; 
 
+    const blurInput = document.getElementById('blurInput');
+    const intensityInput = document.getElementById('bloomIntensityInput');
+
+    const blurAmount = parseInt(blurInput.value);
+    const intensity = parseFloat(intensityInput.value);
+    
     const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height);
-    const blurImageData = blurImage(imageData, radius);
-    canvas.getContext('2d').putImageData(blurImageData,0,0);
-
+    const bloomImageData = bloomImage(imageData, threshold, blurAmount, intensity)
+    canvas.getContext('2d').putImageData(bloomImageData,0,0);
 }
+
+
 
 function applyMultiply(){
     const outCanvas = document.getElementById('outputCanvas'); //get current canvas
