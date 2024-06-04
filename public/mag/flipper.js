@@ -1,19 +1,3 @@
-/*
-
-    HTML5 Reader for Electric Zine Maker, made by Jeremy Oduber & contributors 2019-2021    
-    v21.5
-    Me:
-        https://twitter.com/JeremyOduber
-    This:
-        https://jeremyoduber.itch.io/js-zine
-    Electric Zine Maker: 
-        https://alienmelon.itch.io/electric-zine-maker
-    GitHub:
-        https://github.com/jeremyoduber/EZM-Reader
-    Licensed under the MIT License:
-        https://github.com/jeremyoduber/EZM-Reader/blob/main/LICENSE
-    
-*/
 
 //---- USER OPTIONS ----//
 const TEMPLATE = 1; // Change this value to set the template

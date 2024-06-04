@@ -2,240 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>2024</title>
-    <meta property="og:title" content="ABOUTME" />
-
-    <meta name="description" content="about-me" />
-    <meta property="og:description" content="about-me" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../assets/images/about/battery.jpg" type="image/png" />
-    <link rel="apple-touch-icon" href="../assets/images/about/battery.jpg" type="image/png" />
-    <link rel="stylesheet" href="../main.css">
     <title>Magazine Creator</title>
-    
-    <style>
-        
-        #outputCanvas1,
-        #outputCanvas2,
-        #outputCanvas3,
-        #outputCanvas4,
-        #outputCanvas5,
-        #outputCanvas6,
-        #outputCanvas7,
-        #outputCanvas8 {
-        width: 210px;
-        height: 248px;
-        max-width: 100%;
-        display: block;
-        margin: 0 auto;
-        }
-        
-        p {
-            margin: 0 0; /* Set margin to 0 on top/bottom and auto on left/right */
-            max-width: 60%; /* Set maximum width to 50% of the parent container */
-            text-align: left; /* Align text to the left */
-        }
-        table{
-        border-collapse:collapse;
-        border:1px solid #000000;
-        }
-
-        table td{
-        border:1px solid #000000;
-        }
-        .container {
-        display: flex;
-        justify-content: left;
-        align-items: left;
-        
-        }
-
-        html,
-        body {
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-            font-family: sans-serif;
-            text-align: center;
-        }
-
-        .hidden-input {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-        }
-        #loading {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            background-color: #f5f5f5;
-        }
-        ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            user-select: none;
-            perspective-origin: center;
-            perspective: 1000px;
-        }
-
-        li {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        width: 50%; /* Each item takes up 50% of the viewport width */
-        height: 100%;
-        backface-visibility: hidden;
-        transform-style: preserve-3d;
-        transform-origin: center left;
-        transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-    }
-
-        img {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        width: 100%; /* Adjusted to fill the entire container */
-        height: 100%; /* Adjusted to fill the entire container */
-        object-fit: cover; /* Fill the container while preserving aspect ratio */
-        object-position: center; /* Center the image */
-        transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-    }
-        li:nth-child(even) img {
-            object-position: center right;
-        }
-
-        li.depth-0 img {
-            transform: translateZ(0) scaleX(1);
-        }
-        li:nth-child(even) img {
-            transform: translateZ(0) scaleX(-1);
-        }
-        li.depth-1 img {
-            transform: translateZ(-2px) scaleX(1);
-        }
-        li.depth-1:nth-child(even) img {
-            transform: translateZ(-2px) scaleX(-1);
-        }
-        li.depth-2 img {
-            transform: translateZ(-4px) scaleX(1);
-        }
-        li.depth-2:nth-child(even) img {
-            transform: translateZ(-4px) scaleX(-1);
-        }
-        #bottom-text {
-            position: fixed;
-            bottom: 10px; /* Adjust as per your requirement */
-            width: 100%;
-            color: #971e1e; /* Text color */
-            font-size: 12px; /* Adjust font size as needed */
-        }
-    </style>
-    
-    
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<div id="loading">Loading...</div>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-QQ6JMSNG3C');
-</script>
 <body>
-    
-    
-    
- 
-    <br>
-    <br>
-    
-    <br>
-    
-    
-    <table id = "imageTable">
+    <table id="imageTable">
         <tr>
             <small><caption>Click a Square and Upload a Photo</caption></small>
-            
         </tr>
         <tr>
-            <td>
-                <label for="newInput1" class="index-btn">Upload</label>
-                <canvas id="outputCanvas1" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput1" onchange="handleImageUpload(event,'outputCanvas1')">
-                
-            </td>
-            <td>
-                <label for="newInput2" class="index-btn">Upload</label>
-                <canvas id="outputCanvas2" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput2" onchange="handleImageUpload(event, 'outputCanvas2')">
-               
-            </td>
-            <td>
-                <label for="newInput3" class="index-btn">Upload</label>
-                <canvas id="outputCanvas3" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput3" onchange="handleImageUpload(event, 'outputCanvas3')">
-                
-            </td>
-            <td>
-                <label for="newInput4" class="index-btn">Upload</label>
-                <canvas id="outputCanvas4" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput4" onchange="handleImageUpload(event, 'outputCanvas4')">
-            </td>
+            <td><label for="newInput1">Upload</label><canvas id="outputCanvas1"></canvas><input type="file" accept="image/*" id="newInput1" onchange="handleImageUpload(event, 'outputCanvas1')"></td>
+            <td><label for="newInput2">Upload</label><canvas id="outputCanvas2"></canvas><input type="file" accept="image/*" id="newInput2" onchange="handleImageUpload(event, 'outputCanvas2')"></td>
+            <td><label for="newInput3">Upload</label><canvas id="outputCanvas3"></canvas><input type="file" accept="image/*" id="newInput3" onchange="handleImageUpload(event, 'outputCanvas3')"></td>
+            <td><label for="newInput4">Upload</label><canvas id="outputCanvas4"></canvas><input type="file" accept="image/*" id="newInput4" onchange="handleImageUpload(event, 'outputCanvas4')"></td>
         </tr>
-        
         <tr>
-            <td>
-                <label for="newInput5" class="index-btn">Upload</label>
-                <canvas id="outputCanvas5" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput5" onchange="handleImageUpload(event, 'outputCanvas5')">
-            </td>
-            <td>
-                <label for="newInput6" class="index-btn">Upload</label>
-                <canvas id="outputCanvas6" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput6" onchange="handleImageUpload(event, 'outputCanvas6')">
-            </td>
-            <td>
-                <label for="newInput7" class="index-btn">Upload</label>
-                <canvas id="outputCanvas7" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput7" onchange="handleImageUpload(event, 'outputCanvas7')">
-            </td>
-            <td>
-                <label for="newInput8" class="index-btn">Upload</label>
-                <canvas id="outputCanvas8" width="421" height="595"></canvas>
-                <input class="hidden-input" type="file" accept="image/*" id="newInput8" onchange="handleImageUpload(event, 'outputCanvas8')">
-            </td>
+            <td><label for="newInput5">Upload</label><canvas id="outputCanvas5"></canvas><input type="file" accept="image/*" id="newInput5" onchange="handleImageUpload(event, 'outputCanvas5')"></td>
+            <td><label for="newInput6">Upload</label><canvas id="outputCanvas6"></canvas><input type="file" accept="image/*" id="newInput6" onchange="handleImageUpload(event, 'outputCanvas6')"></td>
+            <td><label for="newInput7">Upload</label><canvas id="outputCanvas7"></canvas><input type="file" accept="image/*" id="newInput7" onchange="handleImageUpload(event, 'outputCanvas7')"></td>
+            <td><label for="newInput8">Upload</label><canvas id="outputCanvas8"></canvas><input type="file" accept="image/*" id="newInput8" onchange="handleImageUpload(event, 'outputCanvas8')"></td>
         </tr>
-       
     </table>
 
-    <br><br><br>
-    <button id= "initializeMag" class = "index-btn" onclick="initializeMagazine()">View Magazine</button>
-    <nav>
-        <a href="index.html">Home</a><br>
-        <a href="projects.html">Projects</a>
-    </nav>
-<script src="magazine.js"></script>
-<script src="flipper.js"></script>
+    <button id="initializeMag" onclick="initializeMagazine()">View Magazine</button>
+
+    <div id="magazineContainer">
+        <ul id="magazinePages"></ul>
+    </div>
+
+    <script src="magazine.js"></script>
 </body>
 </html>
