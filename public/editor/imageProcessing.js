@@ -167,3 +167,27 @@ function applyDarken(){
     const addImageData = blendImages(outImageData, layImageData, 'darken');
     outCanvas.getContext('2d').putImageData(addImageData, 0,0);
 }
+
+function addTextToImage(){
+    document.getElementById('fontOptions').style.display = "block";
+    const canvas = document.getElementById('outputCanvas');
+    const ctx = canvas.getContext('2d');
+    const text = document.getElementById('textInput').value;
+
+
+    const fontSize = document.getElementById('fontSizeInput').value
+    const fontColor = document.querySelector('input[name="fontColor"]:checked').value;
+
+    if(!text){
+        return;
+    }
+
+    saveCanvasState(canvas, 'addText', null, { text, fontSize, fontColor });
+
+    ctx.font = `${fontSize}px Arial`;  // Use the selected font size
+    ctx.fillStyle = fontColor;  // Use the selected color  
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';  
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2); 
+
+}

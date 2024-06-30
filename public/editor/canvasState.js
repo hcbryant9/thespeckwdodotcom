@@ -123,4 +123,6 @@ function clearCanvas() {
     //grab UI and hide them
     document.getElementById('blendOptions').style.display = "none";
     document.getElementById('effectOptions').style.display = "none";
+    document.getElementById('textOptions').style.display = "none";
+    document.getElementById('fontOptions').style.display = "none";
 }

@@ -25,6 +25,7 @@ function handleImageUpload(event) {
         const imgElement = new Image();
         imgElement.onload = function() {
             document.getElementById('effectOptions').style.display = "block";
+            document.getElementById('textOptions').style.display = "block";
             displayImageOnCanvas(imgElement, document.getElementById('outputCanvas'), true);
         };
         imgElement.src = e.target.result;
@@ -46,6 +47,7 @@ function handleImageLayer(event) {
             displayImageOnCanvas(imgElement, document.getElementById('sampleCanvas'), false);
             document.getElementById('blendOptions').style.display = "block";
             document.getElementById('sampleCanvas').style.display = "block";
+            
             displayImageOnCanvas(imgElement, document.getElementById('layerCanvas'), false);
             
         };
