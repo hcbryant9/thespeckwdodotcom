@@ -14,74 +14,56 @@
     <link rel="apple-touch-icon" href="assets/images/covers/hairy.jpg" type="image/png" />
     
     <title>HANK1WDO.COM</title>
-    <link rel="stylesheet" type = "text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<!--style ssheet for buttons-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ6JMSNG3C"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
 
-gtag('config', 'G-QQ6JMSNG3C');
-</script>
-
-<body class = "light-theme">
+<style>
     
+    table {
+        border-collapse: collapse;
+        border: 1px solid #000000;
+    }
+    table td {
+        border: 1px solid #000000;
+        padding: 10px 0 0 0; /* Add padding to the top */
+        margin: 0; /* Remove margin */
+        text-align: center; /* Center content horizontally */
+    }
+    #jpg-photo,
+    #project-photo,
+    #video-photo {
+        width: 260px;
+        height: 190px;
+        display: block;
+        margin: 0 auto; /* Center images horizontally */
+    }
+</style>
+
+<body class="light-theme">
     <center>
-    
+        <br><br>
+        <table>
+            <tr>
+                <td>
+                    <img id="video-photo" src="./assets/images/videos/hes-behind-me-isnt-he.png">
+                    <center>videos</center>
+                </td>
+                <td>
+                    <img id="jpg-photo" src="./assets/images/sep/sep2.jpg">
+                    <center>photos</center>
+                </td>
+                <td>
+                    <img id="project-photo" src="./assets/images/projects/handsoncomputer.PNG">
+                    <center>projects</center>
+                </td>
+            </tr>
+        </table>
         <br>
-        <i>There is an idea of <a href = about.html>self</a>. Some kind of abstraction. But there is no real me. Only an entity. Something illusory.</i>
-        <br>
-       
-    </p>
-    <p>
-        
-        <button id = technology class = "index-btn">  🔧 technology  </button>
-        <button id = mp4s class = "index-btn">  📻 videos  </button>
-        <button id = jpgs class = "index-btn">  📷 photos  </button>
-        <button id = projects class = "index-btn">  💻 projects </button>
-        
-    </p>
-    
-    <img id = "hairyball" src = "assets/images/covers/hairy.jpg" alt ="ball"/>
-    
-    
-    
-    
-  
-
     </center>
     <div>
-         <button class = "btn">dark</button>
+        <button class="btn">dark</button>
     </div>
     <script src="app.js"></script>
-    <noscript>you need to enable JavaScript to view the full site </noscript>
-
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyBrygODfBwq8oyFmj1hqukxt7ARPWfciq0",
-          authDomain: "speck-a7322.firebaseapp.com",
-          projectId: "speck-a7322",
-          storageBucket: "speck-a7322.appspot.com",
-          messagingSenderId: "158459325623",
-          appId: "1:158459325623:web:701c2e5449f1ebff713132",
-          measurementId: "G-1YB30M693P"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-      </script>
+    <noscript>you need to enable JavaScript to view the full site</noscript>
 </body>
 </html>
