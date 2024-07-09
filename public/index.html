@@ -18,7 +18,42 @@
 </head>
 
 <style>
+    footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #fefff1;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Style for the audio player */
+        audio {
+            width: 40%;
+            margin-top: 10px; /* Adjust as needed */
+        }
+    .scrolling-banner {
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px 0;
+        background-color: #fefff1;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+    }
     
+    .scrolling-banner span {
+        display: inline-block;
+        padding-left: 15%;
+        animation: scrollText 15s linear infinite;
+    }
+    
+    @keyframes scrollText {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
     table {
         border-collapse: collapse;
         border: 1px solid #000000;
@@ -40,8 +75,11 @@
 </style>
 
 <body class="light-theme">
+    <div class="scrolling-banner">
+        <span>welcome to the internet ... <a href="about.html">i</a> hope you stay a while.</span>
+    </div>
     <center>
-        <br><br>
+        <br>
         <table>
             <tr>
                 <td>
@@ -53,16 +91,20 @@
                     <center>photos</center>
                 </td>
                 <td>
-                    <img id="project-photo" src="./assets/images/projects/handsoncomputer.PNG">
+                    <img id="project-photo" src="./assets/images/covers/healthy-hand.png">
                     <center>projects</center>
                 </td>
             </tr>
         </table>
         <br>
     </center>
-    <div>
-        <button class="btn">dark</button>
-    </div>
+    <footer>
+        <audio controls>
+            <source src="./assets/audio/Userband - Looking For A Band - 02 Le Regard de la Vie.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </footer>
+    
     <script src="app.js"></script>
     <noscript>you need to enable JavaScript to view the full site</noscript>
 </body>
