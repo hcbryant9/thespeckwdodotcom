@@ -58,12 +58,18 @@
         border-collapse: collapse;
         border: 1px solid #000000;
     }
-    table td {
+    #table1 td {
         border: 1px solid #000000;
         padding: 10px 0 0 0; /* Add padding to the top */
         margin: 0; /* Remove margin */
         text-align: center; /* Center content horizontally */
     }
+    #table2 td{
+        border: 1px solid #000000;
+        margin: 0; /* Remove margin */
+        text-align: center; /* Center content horizontally */
+    }
+   
     #jpg-photo,
     #project-photo,
     #video-photo {
@@ -71,6 +77,18 @@
         height: 190px;
         display: block;
         margin: 0 auto; /* Center images horizontally */
+    }
+    #outputCanvas {
+        width: 520px;
+        height: 350px;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    .hidden-input {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
     }
 </style>
 
@@ -80,7 +98,7 @@
     </div>
     <center>
         <br>
-        <table>
+        <table id="table1">
             <tr>
                 <td>
                     <img id="video-photo" src="./assets/images/videos/hes-behind-me-isnt-he.png">
@@ -98,11 +116,21 @@
         </table>
         <br>
         <br>
-        <br>
-        <img id="brain" src="./assets/images/covers/senses.gif">
+        
+        <table id="table2">
+            <tr>
+                <td>
+                    <canvas id="outputCanvas" width="520" height="350"></canvas>
+                </td>
+            </tr>
+        </table><br>
+        <label for="uploadInput" class="index-btn">infiltrate page</label> 
+        <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)">
+        
     </center>
     
     <script src="app.js"></script>
+    
     <noscript>you need to enable JavaScript to view the full site</noscript>
 </body>
 </html>
