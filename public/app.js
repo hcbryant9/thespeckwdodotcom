@@ -46,5 +46,5 @@ function displayImageOnCanvas(imgElement, canvas, save) {
     canvas.width = imgElement.width;
     canvas.height = imgElement.height;
     ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-    
+    canvas.className = 'rotate'; // Apply the CSS animation class
 }
