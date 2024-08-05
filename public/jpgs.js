@@ -22,6 +22,7 @@ const bikeBTN = document.getElementById("bike-photo")
 const chessBTN = document.getElementById("chess-photo")
 const emotionBTN = document.getElementById("emotion-photo");
 const talBTN = document.getElementById("tal-photo");
+const july24BTN = document.getElementById("july24-photo");
 //adding event handler for the click event
 
 
@@ -84,4 +85,7 @@ emotionBTN.addEventListener('click', function(){
 });
 talBTN.addEventListener('click', function(){
     window.location.href = "tal.html";
-})
+});
+july24BTN.addEventListener('click', function(){
+    window.location.href = "july24.html";
+});
