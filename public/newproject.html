@@ -20,7 +20,7 @@
         .scene {
             width: 200px;
             height: 200px;
-            border: 1px solid #CCC;
+            
             perspective: 400px;
             margin-top: 50px;
         }
@@ -102,7 +102,7 @@
         .radio-group label {
             display: flex;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 5px;
             font-family: 'Tahoma', sans-serif;
             font-size: 14px;
             color: #000;
@@ -247,27 +247,27 @@
         
     </div>
     <br>
-    <div class="project-name" id="project-name">Sentiment Voice & Emotion Analysis</div>
+    <div class="project-name" id="project-name">sentiment-voice</div>
     <center>
     <div class="radio-group-container">
     <p class="radio-group">
         <label>
-            <input type="radio" name="rotate-cube-side" value="front" checked /> front
+            <input type="radio" name="rotate-cube-side" value="front" checked /> sentiment-voice
         </label>
         <label>
-            <input type="radio" name="rotate-cube-side" value="right" /> right
+            <input type="radio" name="rotate-cube-side" value="right" /> virtual-soul
         </label>
         <label>
-            <input type="radio" name="rotate-cube-side" value="back" /> back
+            <input type="radio" name="rotate-cube-side" value="back" /> kinect-pd-unity
         </label>
         <label>
-            <input type="radio" name="rotate-cube-side" value="left" /> left
+            <input type="radio" name="rotate-cube-side" value="left" /> pytch-pd
         </label>
         <label>
-            <input type="radio" name="rotate-cube-side" value="top" /> top
+            <input type="radio" name="rotate-cube-side" value="top" /> guess-hue
         </label>
         <label>
-            <input type="radio" name="rotate-cube-side" value="bottom" /> bottom
+            <input type="radio" name="rotate-cube-side" value="bottom" /> untitled-editor
         </label>
     </p>
 </div>
@@ -292,12 +292,12 @@
         let currentClass = '';
 
         const projects = {
-            front: 'Sentiment Voice & Emotional Analysis',
-            right: 'Virtual Sole Harmony',
-            back: 'Kinect Pure Data',
-            left: 'Pytch Detection',
-            top: 'GuessHue',
-            bottom: 'Unnammed Photo Editor'
+            front: 'sentiment-voice',
+            right: 'virtual-sole',
+            back: 'kinect-pd-unity',
+            left: 'pytch-pd',
+            top: 'guess-hue',
+            bottom: 'untitled-editor'
         };
 
         const descriptions = {
@@ -322,14 +322,27 @@
 
             const selectedProject = checkedRadio.value;
 
+            // Update project name and description
             if (projectName) {
                 projectName.textContent = projects[selectedProject];
             }
 
             if (projectText) {
-                projectText.textContent = descriptions[selectedProject];
+                setTimeout(() => {
+                    projectText.textContent = descriptions[selectedProject];
+                }, 500);
+                
             }
+
+            // Add a class to hide the current description with a transition
+            projectDescription.classList.remove('visible');
             
+            // Use a timeout to allow the transition to complete before showing the new description
+            setTimeout(() => {
+                // Update project description and make it visible
+                projectDescription.classList.add('visible');
+                projectDescription.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
         }
 
         changeSide();
