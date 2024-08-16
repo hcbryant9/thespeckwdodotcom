@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotating Cube</title>
+    <style>
+       * { box-sizing: border-box; }
+
+       body { 
+            font-family: sans-serif; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #008080; /* Teal background for Netscape feel */
+        }
+
+        .scene {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #CCC;
+            perspective: 400px;
+            margin-top: 50px;
+        }
+
+        .cube {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateZ(-100px);
+            transition: transform 1s;
+        }
+
+        .frame {
+            
+            padding: 10px;
+            border: 2px solid #000;
+            background-color: #C0C0C0; 
+            box-shadow: inset -2px -2px 0 0 #fff, inset 2px 2px 0 0 #808080;
+        }
+        
+        
+
+        .cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
+        .cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
+        .cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
+        .cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
+        .cube.show-top    { transform: translateZ(-100px) rotateX( -90deg); }
+        .cube.show-bottom { transform: translateZ(-100px) rotateX(  90deg); }
+
+        .cube__face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+
+        .cube__face--front  { background: hsla(  0, 100%, 50%, 0.7); }
+        .cube__face--right  { background: hsla( 60, 100%, 50%, 0.7); }
+        .cube__face--back   { background: hsla(120, 100%, 50%, 0.7); }
+        .cube__face--left   { background: hsla(180, 100%, 50%, 0.7); }
+        .cube__face--top    { background: hsla(240, 100%, 50%, 0.7); }
+        .cube__face--bottom { background: hsla(300, 100%, 50%, 0.7); }
+
+        .cube__face--front  { transform: rotateY(  0deg) translateZ(100px); }
+        .cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+        .cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+
+        .radio-group-container {
+            background-color: #e0e0e0;
+            color: #000;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 2px solid #b0b0b0;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
+            cursor: pointer;
+            margin-top: 20px;
+            text-shadow: 1px 1px #fff;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .radio-group input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            background-color: #e0e0e0; /* Match the button background */
+            border: 2px solid #b0b0b0;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            border-radius: 0;
+            width: 20px; /* Increase width */
+            height: 20px; /* Increase height */
+            margin-right: 5px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
+        }
+
+        .radio-group input[type="radio"]:checked::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px; /* Adjust width */
+            height: 10px; /* Adjust height */
+            background-color: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%); /* Center the dot */
+        }
+
+        .radio-group input[type="radio"]:hover {
+            background-color: #e0e0e0; /* Match the button background */
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
+
+
+
+
+        #about-me,
+        #technology-photo,
+        #kinect-photo,
+        #harmony-photo,
+        #emotion-photo,
+        #pump-photo,
+        #charac-photo,
+        #lucid-photo,
+        #pitch-photo,
+        #guess-photo,
+        #mono-photo {
+            
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            line-height: 200px;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            
+        }
+
+        .name {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000080;
+            display: block;
+        }
+        
+
+        .description {
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .description.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .show-description-btn {
+            background-color: #e0e0e0;
+            color: #000;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 2px solid #b0b0b0;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
+            cursor: pointer;
+            margin-top: 20px;
+            text-shadow: 1px 1px #fff;
+            z-index: 1000; 
+            pointer-events: auto;
+        }
+
+        .show-description-btn:hover {
+            background-color: #d5d5d5;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    
+    <div class="scene">
+        
+        <div class="cube">
+            <div class="cube__face cube__face--front">
+                <img id="emotion-photo" src="assets/images/emotions/dynamicfacialexpressions.jpg" alt="emotion-photo" /> 
+            </div>
+            <div class="cube__face cube__face--back">
+                <img id="kinect-photo" src="assets/images/projects/kinect.png" alt="kinect-me" />
+            </div>
+            <div class="cube__face cube__face--right">
+                <img id="harmony-photo" src="assets/images/harmony/headsetgrass.JPG" alt="harmony-photo" />
+            </div>
+            <div class="cube__face cube__face--left">
+                <img id="pitch-photo" src="assets/images/pitch/deepfried_heart.png" alt = "pitch photo" />
+            </div>
+            <div class="cube__face cube__face--top">
+                <img id="guess-photo" src="assets/images/projects/guesshueicon.png" alt = "guess photo" />
+            </div>
+            <div class="cube__face cube__face--bottom">
+                <img id="mono-photo" src="assets/images/projects/handsoncomputer.PNG" alt = "mono photo"/>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+    <div class="project-name" id="project-name">Sentiment Voice & Emotion Analysis</div>
+    <center>
+    <div class="radio-group-container">
+    <p class="radio-group">
+        <label>
+            <input type="radio" name="rotate-cube-side" value="front" checked /> front
+        </label>
+        <label>
+            <input type="radio" name="rotate-cube-side" value="right" /> right
+        </label>
+        <label>
+            <input type="radio" name="rotate-cube-side" value="back" /> back
+        </label>
+        <label>
+            <input type="radio" name="rotate-cube-side" value="left" /> left
+        </label>
+        <label>
+            <input type="radio" name="rotate-cube-side" value="top" /> top
+        </label>
+        <label>
+            <input type="radio" name="rotate-cube-side" value="bottom" /> bottom
+        </label>
+    </p>
+</div>
+
+    
+    <button class="show-description-btn" id="show-description-btn">Show Project Description</button>
+    </center>
+    <br>
+    
+    <div class="description" id="project-description">
+        <p>This is the description of the Emotions project. It deals with dynamic facial expressions and emotion detection.</p>
+    </div>
+
+    <script>
+        const cube = document.querySelector('.cube');
+        const radioGroupContainer = document.querySelector('.radio-group-container');
+        const projectName = document.getElementById('project-name');
+        const projectDescription = document.getElementById('project-description');
+        const showDescriptionBtn = document.getElementById('show-description-btn');
+        const helpBtn = document.getElementById('help-button');
+        const projectText = projectDescription.querySelector('p');
+        let currentClass = '';
+
+        const projects = {
+            front: 'Sentiment Voice & Emotional Analysis',
+            right: 'Virtual Sole Harmony',
+            back: 'Kinect Pure Data',
+            left: 'Pytch Detection',
+            top: 'GuessHue',
+            bottom: 'Unnammed Photo Editor'
+        };
+
+        const descriptions = {
+            front: "This is the description of the Emotions project. It deals with dynamic facial expressions and emotion detection.",
+            right: "Harmony project description. This project involves XYZ technology.",
+            back: "Kinect project description. This project uses Kinect for ABC purposes.",
+            left: "Pitch project description. This project is focused on a pitch detection algorithm.",
+            top: "GuessHue project description. This project is a color guessing game.",
+            bottom: "Mono project description. This project integrates mono handling in various tasks."
+        };
+
+        function changeSide() {
+            const checkedRadio = radioGroupContainer.querySelector('input[type="radio"]:checked');
+            const showClass = 'show-' + checkedRadio.value;
+
+            if (currentClass) {
+                cube.classList.remove(currentClass);
+            }
+
+            cube.classList.add(showClass);
+            currentClass = showClass;
+
+            const selectedProject = checkedRadio.value;
+
+            if (projectName) {
+                projectName.textContent = projects[selectedProject];
+            }
+
+            if (projectText) {
+                projectText.textContent = descriptions[selectedProject];
+            }
+            
+        }
+
+        changeSide();
+
+        radioGroupContainer.addEventListener('change', changeSide);
+
+        showDescriptionBtn.addEventListener('click', function() {
+            projectDescription.classList.add('visible');
+            projectDescription.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        
+
+    </script>
+</body>
+</html>
