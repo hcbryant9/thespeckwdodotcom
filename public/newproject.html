@@ -92,6 +92,17 @@
             cursor: pointer;
             margin-top: 20px;
             text-shadow: 1px 1px #fff;
+            width: 100%; /* Ensure the container takes the full width of its parent */
+            box-sizing: border-box; /* Include padding and borders in the element's width and height */
+        }
+
+        @media (max-width: 600px) { /* Adjust based on your phone's screen size */
+            .radio-group-container {
+                margin-left: 25px;
+                margin-right: 25px;
+                padding: 8px; /* Adjust padding for smaller screens */
+                font-size: 12px; /* Adjust font size for readability */
+            }
         }
 
         .radio-group {
@@ -145,7 +156,7 @@
         }
 
 
-
+        
 
         #about-me,
         #technology-photo,
@@ -157,7 +168,8 @@
         #lucid-photo,
         #pitch-photo,
         #guess-photo,
-        #mono-photo {
+        #mono-photo,
+        #description-photo {
             
             width: 200px;
             height: 200px;
@@ -180,17 +192,19 @@
 
         .description {
             opacity: 0;
-            transform: translateY(-100%);
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            margin-top: 50px;
+            transform: translateY(-50%);
+            transition: transform 0.25s ease-in-out, opacity 0.4s ease-in-out;
             text-align: center;
+            position: absolute; 
         }
 
         .description.visible {
             opacity: 1;
             transform: translateY(0);
+            position: relative; /* Restore relative position when visible */
         }
 
+        
         .show-description-btn {
             background-color: #e0e0e0;
             color: #000;
@@ -204,24 +218,55 @@
             border-bottom-color: #404040;
             box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
             cursor: pointer;
-            margin-top: 20px;
             text-shadow: 1px 1px #fff;
-            z-index: 1000; 
+            z-index: 1000;
             pointer-events: auto;
+            position: absolute; /* Keep button in place */
+            bottom: 25%; /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
         }
-
+        @media (max-width: 600px) { /* Adjust based on your phone's screen size */
+            .show-description-btn {
+                bottom:35%;
+                padding: 8px; /* Adjust padding for smaller screens */
+                font-size: 12px; /* Adjust font size for readability */
+            }
+        }
         .show-description-btn:hover {
             background-color: #d5d5d5;
             border-right-color: #404040;
             border-bottom-color: #404040;
         }
 
-
+        .scrolling-banner {
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px 0;
+        
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        }
+        
+        .scrolling-banner span {
+            display: inline-block;
+            padding-left: 15%;
+            animation: scrollText 15s linear infinite;
+        }
+        
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
         
     </style>
 </head>
 <body>
-    
+    <div class="scrolling-banner">
+        <span>welcome to the project page of hank bryant! roll the dice, check out some projects i've made recently.</span>
+    </div>
     <div class="scene">
         
         <div class="cube">
@@ -271,24 +316,24 @@
         </label>
     </p>
 </div>
-
-    
-    <button class="show-description-btn" id="show-description-btn">Show Project Description</button>
     </center>
-    <br>
     
     <div class="description" id="project-description">
+        <!-- <img id = "description-photo" src="assets/images/emotions/dynamicfacialexpressions3.png" alt="facialexpression"><br> -->
         <p>This is the description of the Emotions project. It deals with dynamic facial expressions and emotion detection.</p>
     </div>
+
+    <button id = "description-btn" class = "show-description-btn">Go To Page</button>
 
     <script>
         const cube = document.querySelector('.cube');
         const radioGroupContainer = document.querySelector('.radio-group-container');
         const projectName = document.getElementById('project-name');
         const projectDescription = document.getElementById('project-description');
-        const showDescriptionBtn = document.getElementById('show-description-btn');
+        const showDescriptionBtn = document.getElementById('description-btn');
         const helpBtn = document.getElementById('help-button');
         const projectText = projectDescription.querySelector('p');
+        // const projectPhoto = document.getElementById('description-photo');
         let currentClass = '';
 
         const projects = {
@@ -301,12 +346,30 @@
         };
 
         const descriptions = {
-            front: "This is the description of the Emotions project. It deals with dynamic facial expressions and emotion detection.",
-            right: "Harmony project description. This project involves XYZ technology.",
-            back: "Kinect project description. This project uses Kinect for ABC purposes.",
-            left: "Pitch project description. This project is focused on a pitch detection algorithm.",
-            top: "GuessHue project description. This project is a color guessing game.",
-            bottom: "Mono project description. This project integrates mono handling in various tasks."
+            front: "emotional-survaillence-ml is a machine learning project to raise awareness about the harm of ML and AI on the individual.",
+            right: "virtual-soul-harmony is a mixed media exhibit presented 12/08/23. In the virtual world, users are in a forest while, in the physical world, they are standing on a roll of grass.",
+            back: "kinect-pure-data-unity is a body synthesizer created to auralize the space we occupy",
+            left: "Networking realtime pitch detections into Pure Data from Python using socket programming",
+            top: "guess-hue is a web game inspired by the board game Hues and Cues as well as NYT games such as Wordle and the Mini Cross.",
+            bottom: "Image processing web-app effects inspired by alienmelon"
+        };
+        /*
+        const images = {
+            front: "assets/images/emotions/dynamicfacialexpressions3.png",
+            right: "assets/images/harmony/laurengrass.JPG",
+            back: "assets/images/kinect/kinect-img.jpg",
+            left: "assets/images/pitch/note-detection-pd-patch.png",
+            top: "guess-hue/images/colourboard.png",
+            bottom: "assets/images/upe/porch.jpg"
+        };
+        */
+        const files = {
+            front: "emotions",
+            right: "harmony",
+            back: "kinect",
+            left: "pitch",
+            top: "guesshue",
+            bottom: "upelanding"
         };
 
         function changeSide() {
@@ -330,30 +393,35 @@
             if (projectText) {
                 setTimeout(() => {
                     projectText.textContent = descriptions[selectedProject];
+                    
                 }, 500);
                 
             }
 
-            // Add a class to hide the current description with a transition
             projectDescription.classList.remove('visible');
             
-            // Use a timeout to allow the transition to complete before showing the new description
+            
             setTimeout(() => {
-                // Update project description and make it visible
+                
                 projectDescription.classList.add('visible');
                 projectDescription.scrollIntoView({ behavior: 'smooth' });
             }, 500);
+        }
+        function goToPage() {
+            const checkedRadio = radioGroupContainer.querySelector('input[type="radio"]:checked');
+            const selectedSide = checkedRadio.value;
+            const fileName = files[selectedSide];
+            if (fileName) {
+                window.location.href = `${fileName}.html`;
+            }
+         
         }
 
         changeSide();
 
         radioGroupContainer.addEventListener('change', changeSide);
-
-        showDescriptionBtn.addEventListener('click', function() {
-            projectDescription.classList.add('visible');
-            projectDescription.scrollIntoView({ behavior: 'smooth' });
-        });
-
+        showDescriptionBtn.addEventListener('click', goToPage);
+        
         
 
     </script>

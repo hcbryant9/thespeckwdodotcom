@@ -16,7 +16,7 @@ videosBTN.addEventListener('click',function(){
 
 projectsBTN.addEventListener('click',function(){
     console.log('button clicked');
-    window.location.href = "projects.html";
+    window.location.href = "newproject.html";
 });
 jpgBTN.addEventListener('click',function(){
     console.log('button clicked');
