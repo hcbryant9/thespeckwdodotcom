@@ -107,9 +107,8 @@
             box-sizing: border-box;
             width: 100%;
             max-width: 96%;
-            align-items: center;
+            align-items: flex-start; /* Align items to the start (left) */
             white-space: nowrap; /* Prevents the content from wrapping to the next line */
-            
         }
 
         .radio-group {
@@ -131,6 +130,7 @@
             color: #000;
             transition: transform 0.3s ease-in-out; /* Smooth scaling effect */
         }
+
         .radio-group label:hover {
             transform: scale(1.1);
         }
