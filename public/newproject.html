@@ -210,13 +210,32 @@
             transform: translateY(-100%);
             transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
             text-align: center;
-            max-width: 80%;
+            max-width: 45%;
+            margin-top: 5px;
+            padding: 5px;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 1rem;
+            color: #000;
         }
 
         .description.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .description p::first-letter {
+            font-size: 1.5rem;
+            color: #000000;
+            display: inline-block;
+            transition: transform 0.6s ease-in-out;
+            transform-origin: bottom;
+            perspective: 1000px; /* Add perspective to give the 3D effect more depth */
+        }
+
+        .description:hover p::first-letter {
+            transform: rotateX(360deg); /* Change to rotateY for a horizontal flip */
+        }
+
 
         .show-description-btn {
             background-color: #e0e0e0;
@@ -231,7 +250,7 @@
             border-bottom-color: #404040;
             box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 0px;
             text-shadow: 1px 1px #fff;
             z-index: 1000; 
             pointer-events: auto;
@@ -370,12 +389,12 @@
         };
 
         const descriptions = {
-            front: "emotional-survaillence-ml is a machine learning project to raise awareness about the harm of ML and AI on the individual.",
+            front: "sentiment-voice is a project that uses AI & ML to help voice the stories of migrants into the USA.",
             right: "virtual-soul-harmony is a mixed media exhibit presented 12/08/23. In the virtual world, users are in a forest while, in the physical world, they are standing on a roll of grass.",
-            back: "kinect-pure-data-unity is a body synthesizer created to auralize the space we occupy",
-            left: "Networking realtime pitch detections into Pure Data from Python using socket programming",
+            back: "kinect-pure-data-unity is a body synthesizer created to auralize the space we occupy using motion capture & pure data inside the unity game engine.",
+            left: "pytch-pd is a networking realtime pitch detection project that brings data into Pure Data from Python using socket programming.",
             top: "guess-hue is a web game inspired by the board game Hues and Cues as well as NYT games such as Wordle and the Mini Cross.",
-            bottom: "Image processing web-app effects inspired by alienmelon"
+            bottom: "untitled-photo-editor is an image processing web-app with experimental effects inspired by alienmelon."
         };
        
         const files = {
