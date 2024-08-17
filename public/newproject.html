@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta property="og:title" content="hank's die" />
+
+    <meta name="description" content="projects" />
+    <meta property="og:description" content="projects" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/zine/12.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images/zine/12.png" type="image/png" />
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Rotating Cube</title>
+    <title>hank's die</title>
     <style>
        * { box-sizing: border-box; }
 
@@ -21,11 +30,12 @@
             width: 200px;
             height: 200px;
             perspective: 400px;
-            margin-top: 50px;
+            margin-top: 0%;
             
         }
 
         .cube {
+            
             width: 200px;
             height: 200px;
             position: relative;
@@ -60,7 +70,9 @@
             font-weight: bold;
             color: white;
             text-align: center;
+            
         }
+        
 
         .cube__face--front  { background: hsla(  0, 100%, 50%, 0.7); }
         .cube__face--right  { background: hsla( 60, 100%, 50%, 0.7); }
@@ -90,7 +102,7 @@
             border-bottom-color: #404040;
             box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 5px;
             text-shadow: 1px 1px #fff;
             box-sizing: border-box;
             width: 100%;
@@ -117,6 +129,10 @@
             font-family: 'Tahoma', sans-serif;
             font-size: 1rem;
             color: #000;
+            transition: transform 0.3s ease-in-out; /* Smooth scaling effect */
+        }
+        .radio-group label:hover {
+            transform: scale(1.1);
         }
 
         .radio-group input[type="radio"] {
@@ -248,6 +264,24 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        .project-name {
+            color: #000;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 1.25rem;
+            padding: 0.5em 1em;
+            margin: 20px 0;
+            text-align: center;
+            text-shadow: 1px 1px #fff;
+            width: 60%;
+            margin-top: 10px;
+            transition: transform 0.3s ease-in-out; /* Smooth scaling effect */
+        }
+
+        .project-name:hover {
+            transform: scale(1.1); /* Slightly enlarges the text on hover */
+        }
+
+
         
     </style>
 </head>
@@ -255,6 +289,7 @@
     <div class="scrolling-banner">
         <span>welcome to the project page of hank bryant! roll the dice, check out some projects i've made recently.</span>
     </div>
+    <div class="project-name" id="project-name">sentiment-voice</div>
     <div class="scene">
         
         <div class="cube">
@@ -280,7 +315,7 @@
         
     </div>
     <br>
-    <div class="project-name" id="project-name">sentiment-voice</div>
+    
     <center>
     <div class="radio-group-container">
     <p class="radio-group">
@@ -308,7 +343,7 @@
     </center>
     
     <div class="description" id="project-description">
-        <!-- <img id = "description-photo" src="assets/images/emotions/dynamicfacialexpressions3.png" alt="facialexpression"><br> -->
+        
         <p>This is the description of the Emotions project. It deals with dynamic facial expressions and emotion detection.</p>
     </div>
 
@@ -322,7 +357,7 @@
         const showDescriptionBtn = document.getElementById('description-btn');
         const helpBtn = document.getElementById('help-button');
         const projectText = projectDescription.querySelector('p');
-        // const projectPhoto = document.getElementById('description-photo');
+        
         let currentClass = '';
 
         const projects = {
@@ -342,16 +377,7 @@
             top: "guess-hue is a web game inspired by the board game Hues and Cues as well as NYT games such as Wordle and the Mini Cross.",
             bottom: "Image processing web-app effects inspired by alienmelon"
         };
-        /*
-        const images = {
-            front: "assets/images/emotions/dynamicfacialexpressions3.png",
-            right: "assets/images/harmony/laurengrass.JPG",
-            back: "assets/images/kinect/kinect-img.jpg",
-            left: "assets/images/pitch/note-detection-pd-patch.png",
-            top: "guess-hue/images/colourboard.png",
-            bottom: "assets/images/upe/porch.jpg"
-        };
-        */
+       
         const files = {
             front: "emotions",
             right: "harmony",
