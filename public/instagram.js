@@ -32,7 +32,34 @@ function displayImageOnCanvas(imgElement, canvas) {
 function downloadImage() {
     const canvas = document.getElementById('outputCanvas');
     const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/jpeg', 0.8); // Set image quality to 100%
-    link.download = 'stretched-image.jpg'; // Set the name for the downloaded image
-    link.click();
+
+    // Use a lower quality setting (e.g., 0.8) for image compression
+    link.href = canvas.toDataURL('image/jpeg', 0.8); // Adjust quality for compression
+    link.download = 'stretched-image.jpg';
+
+    // Check for iOS devices
+    if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+        const blob = dataURLToBlob(link.href);
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Open the image in a new tab
+        const newWindow = window.open(blobUrl, '_blank');
+
+        // Inform users to save the image manually
+        alert('Press and hold the image in the new tab to save it to your camera roll.');
+    } else {
+        link.click(); // Trigger download for other devices
+    }
+}
+
+// Helper function to convert data URL to Blob
+function dataURLToBlob(dataURL) {
+    const byteString = atob(dataURL.split(',')[1]);
+    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
 }
