@@ -37,9 +37,9 @@ function downloadImage() {
     if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
         const blob = dataURLToBlob(link.href);
         const newWindow = window.open(URL.createObjectURL(blob), '_blank');
-        newWindow.onload = function() {
-            setTimeout(() => newWindow.close(), 1000); // Auto-close after a second
-        };
+        // newWindow.onload = function() {
+        //     setTimeout(() => newWindow.close(), 1000); // Auto-close after a second
+        // };
     } else {
         link.click(); // Trigger download
     }
