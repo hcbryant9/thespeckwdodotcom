@@ -216,7 +216,11 @@
             font-family: 'Tahoma', sans-serif;
             font-size: 1rem;
             color: #000;
+            overscroll-behavior: contain;
+            will-change: transform, opacity;
         }
+
+
 
         .description.visible {
             opacity: 1;
@@ -254,6 +258,7 @@
             text-shadow: 1px 1px #fff;
             z-index: 1000; 
             pointer-events: auto;
+            margin-bottom: 3px;
         }
 
         .show-description-btn:hover {
@@ -313,7 +318,7 @@
         
         <div class="cube">
             <div class="cube__face cube__face--front">
-                <img id="emotion-photo" src="assets/images/emotions/dynamicfacialexpressions.jpg" alt="emotion-photo" /> 
+                <img id="emotion-photo" src="assets/images/emotions/dynamicfacialexpressions3.png" alt="emotion-photo" /> 
             </div>
             <div class="cube__face cube__face--back">
                 <img id="kinect-photo" src="assets/images/projects/kinect.png" alt="kinect-me" />
@@ -322,7 +327,7 @@
                 <img id="harmony-photo" src="assets/images/harmony/headsetgrass.JPG" alt="harmony-photo" />
             </div>
             <div class="cube__face cube__face--left">
-                <img id="pitch-photo" src="assets/images/pitch/deepfried_heart.png" alt = "pitch photo" />
+                <img id="pitch-photo" src="assets/images/projects/heartwords2.png" alt = "pitch photo" />
             </div>
             <div class="cube__face cube__face--top">
                 <img id="guess-photo" src="assets/images/projects/guesshueicon.png" alt = "guess photo" />

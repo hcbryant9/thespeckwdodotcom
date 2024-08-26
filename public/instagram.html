@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="HANK1WDO" />
+    <meta name="description" content="HANK1WDO" />
+    <meta property="og:description" content="HANK1WDO" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/covers/hairy.jpg" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images/covers/hairy.jpg" type="image/png" />
+    <title>HANK1WDO.COM</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<style>
+    .scrolling-banner {
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px 0;
+        background-color: #ffffff;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+    }
+    
+    .scrolling-banner span {
+        display: inline-block;
+        padding-left: 15%;
+        animation: scrollText 15s linear infinite;
+    }
+    
+    @keyframes scrollText {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 1px solid #000000;
+    }
+
+    #table1 td, #table2 td {
+        border: 1px solid #000000;
+        padding: 10px 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    #outputCanvas {
+        width: 1080px;
+        height: 1080px;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    #outputCanvas2 {
+        width: 1080px;
+        height: 566px;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    .hidden-input {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .index-btn {
+        cursor: pointer;
+    }
+</style>
+
+<body class="light-theme">
+    <div class="scrolling-banner">
+        <span>conform to the aspect ratio of instagram</span>
+    </div>
+    <center>
+        <br>
+        <table id="table2">
+            <tr>
+                <small>square</small>
+                <td>
+                    <canvas id="outputCanvas" width="1080" height="1080"></canvas>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <label for="uploadInput" class="index-btn">upload image</label> 
+        <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event, 1080, 1080, 'outputCanvas')">
+        <br>
+        <button class="index-btn" onclick="downloadImage()">download image</button>
+        <br><br>
+    </center>
+    
+    <script src="instagram.js"></script>
+    
+    <noscript>you need to enable JavaScript to view the full site</noscript>
+</body>
+</html>
