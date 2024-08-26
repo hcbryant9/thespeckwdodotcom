@@ -31,35 +31,32 @@ function displayImageOnCanvas(imgElement, canvas) {
 
 function downloadImage() {
     const canvas = document.getElementById('outputCanvas');
-    const link = document.createElement('a');
 
-    // Use a lower quality setting (e.g., 0.8) for image compression
-    link.href = canvas.toDataURL('image/jpeg', 0.8); // Adjust quality for compression
-    link.download = 'stretched-image.jpg';
+    // Create a temporary canvas element for resizing
+    const tempCanvas = document.createElement('canvas');
+    const tempContext = tempCanvas.getContext('2d');
 
-    // Check for iOS devices
-    if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-        const blob = dataURLToBlob(link.href);
-        const blobUrl = URL.createObjectURL(blob);
+    // Set the temporary canvas dimensions to resize the original canvas
+    tempCanvas.width = 1080;
+    tempCanvas.height = 1080;
 
-        // Open the image in a new tab
-        const newWindow = window.open(blobUrl, '_blank');
+    // Draw the original canvas content onto the temporary canvas (resize if necessary)
+    tempContext.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height);
 
-        // Inform users to save the image manually
-        alert('Press and hold the image in the new tab to save it to your camera roll.');
-    } else {
-        link.click(); // Trigger download for other devices
-    }
+    // Convert the resized canvas to a data URL with specified compression settings
+    const imageDataURL = tempCanvas.toDataURL('image/jpeg', 0.8); // Use image/jpeg format with 80% quality
+
+    // Create a temporary anchor element to trigger the download
+    const downloadLink = document.createElement('a');
+    downloadLink.href = imageDataURL;
+    downloadLink.download = 'processed_image.jpg'; // Specify the filename for the downloaded image
+
+    // Append the anchor element to the document body and click it programmatically
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Clean up: remove the temporary anchor element and canvas
+    document.body.removeChild(downloadLink);
+    tempCanvas.remove(); // Remove the temporary canvas
 }
 
-// Helper function to convert data URL to Blob
-function dataURLToBlob(dataURL) {
-    const byteString = atob(dataURL.split(',')[1]);
-    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], { type: mimeString });
-}
