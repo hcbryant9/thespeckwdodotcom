@@ -20,9 +20,7 @@ function handleImageUpload(event) {
 
 function displayImageOnCanvas(imgElement, canvas) {
     const ctx = canvas.getContext('2d');
-    const size = 1080; // Desired size for Instagram
-
-    // Stretch the image to fill 1080x1080
+    const size = 1080; 
     canvas.width = size;
     canvas.height = size;
 
@@ -39,14 +37,11 @@ function downloadImage() {
     // Set the temporary canvas dimensions to resize the original canvas
     tempCanvas.width = 1080;
     tempCanvas.height = 1080;
-
-    // Draw the original canvas content onto the temporary canvas (resize if necessary)
+    
     tempContext.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height);
 
-    // Convert the resized canvas to a data URL with specified compression settings
     const imageDataURL = tempCanvas.toDataURL('image/jpeg', 0.8); // Use image/jpeg format with 80% quality
 
-    // Create a temporary anchor element to trigger the download
     const downloadLink = document.createElement('a');
     downloadLink.href = imageDataURL;
     downloadLink.download = 'processed_image.jpg'; // Specify the filename for the downloaded image

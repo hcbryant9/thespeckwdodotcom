@@ -19,7 +19,7 @@
         width: 60%;
         margin: 0 auto;
         padding: 10px 0;
-        background-color: #ffffff;
+        background-color: #008080;
         text-align: center;
         overflow: hidden;
         white-space: nowrap;
@@ -39,20 +39,19 @@
 
     table {
         border-collapse: collapse;
-        border: 1px solid #000000;
+        
     }
 
     #table1 td, #table2 td {
-        border: 1px solid #000000;
+        
         padding: 10px 0;
         margin: 0;
         text-align: center;
     }
 
     #outputCanvas {
-        width: 1080px;
-        height: 1080px;
-        max-width: 100%;
+        width: 50%;
+        height: 50%;
         display: block;
         margin: 0 auto;
     }
@@ -72,6 +71,47 @@
     .index-btn {
         cursor: pointer;
     }
+    .frame {
+            
+            padding: 10px;
+            border: 2px solid #000;
+            background-color: #C0C0C0; 
+            box-shadow: inset -2px -2px 0 0 #969696, inset 2px 2px 0 0 #808080;
+    }
+    body { 
+            font-family: sans-serif; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #008080; /* Teal background for Netscape feel */
+    }
+    .instagram-btn {
+            background-color: #e0e0e0;
+            color: #000;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 2px solid #b0b0b0;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #808080;
+            cursor: pointer;
+            margin-top: 0px;
+            text-shadow: 1px 1px #fff;
+            z-index: 1000; 
+            pointer-events: auto;
+            margin-bottom: 3px;
+        }
+
+        .instagram-btn:hover {
+            background-color: #d5d5d5;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+        }
 </style>
 
 <body class="light-theme">
@@ -80,22 +120,27 @@
     </div>
     
     <center>
+        
+        
         <small>v:0.0.4</small><br>
         <br>
+        <div class = frame>
         <table id="table2">
             <tr>
-                <small>square</small>
+                
                 <td>
                     <canvas id="outputCanvas" width="1080" height="1080"></canvas>
                 </td>
             </tr>
         </table>
+        </div>
         <br>
         <label for="uploadInput" class="index-btn">upload image</label> 
         <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event, 1080, 1080, 'outputCanvas')">
         <br>
-        <button class="index-btn" onclick="downloadImage()">download image</button>
+        <button class="instagram" onclick="downloadImage()">download image</button>
         <br><br>
+    
     </center>
     
     <script src="instagram.js"></script>
