@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="assets/images/covers/hairy.jpg" type="image/png" />
     <link rel="apple-touch-icon" href="assets/images/covers/hairy.jpg" type="image/png" />
-    <title>HANK1WDO.COM</title>
+    <title>INSTAGRAM</title>
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
@@ -19,7 +19,7 @@
         width: 60%;
         margin: 0 auto;
         padding: 10px 0;
-        background-color: #008080;
+        background-color: #ffffff;
         text-align: center;
         overflow: hidden;
         white-space: nowrap;
@@ -73,9 +73,9 @@
     }
     .frame {
             
-            padding: 10px;
+            padding: 1px;
             border: 2px solid #000;
-            background-color: #C0C0C0; 
+            background-color: #f3f3f3; 
             box-shadow: inset -2px -2px 0 0 #969696, inset 2px 2px 0 0 #808080;
     }
     body { 
@@ -85,7 +85,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #008080; /* Teal background for Netscape feel */
+            background-color: #ffffff; /* Teal background for Netscape feel */
     }
     .instagram-btn {
             background-color: #e0e0e0;
@@ -122,23 +122,25 @@
     <center>
         
         
-        <small>v:0.0.4</small><br>
+        <small>v:0.0.5</small><br>
         <br>
-        <div class = frame>
+        
         <table id="table2">
             <tr>
                 
                 <td>
+                    <div class = frame>
                     <canvas id="outputCanvas" width="1080" height="1080"></canvas>
+                    </div>
                 </td>
             </tr>
         </table>
-        </div>
+       
         <br>
         <label for="uploadInput" class="index-btn">upload image</label> 
         <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event, 1080, 1080, 'outputCanvas')">
         <br>
-        <button class="instagram" onclick="downloadImage()">download image</button>
+        <button class="index-btn" onclick="downloadImage()">download image</button>
         <br><br>
     
     </center>

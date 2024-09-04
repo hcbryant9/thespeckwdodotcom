@@ -14,6 +14,7 @@ const websiteBTN = document.getElementById("website");
 const pumpBTN = document.getElementById("pump");
 const lucidityBTN = document.getElementById("lucidity");
 const guessBTN = document.getElementById("guess");
+const igBTN = document.getElementById("ig");
 
 const aboutBTN = document.getElementById("about-me");
 const technologyPhotoBTN = document.getElementById("technology-photo");
@@ -26,7 +27,7 @@ const lucidPhotoBTN = document.getElementById("lucid-photo");
 const pitchPhotoBTN = document.getElementById("pitch-photo");
 const guessPhotoBTN = document.getElementById("guess-photo");
 const monoPhotoBTN = document.getElementById("mono-photo");
-
+const igPhotoBTN = document.getElementById("ig-photo");
 
 
 //adding event handler for the click event
@@ -42,7 +43,7 @@ lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidi
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
 monoPhotoBTN.addEventListener('click', function(){window.location.href = "upelanding.html";});
-
+igPhotoBTN.addEventListener('click', function(){window.location.href = "instagram.html"})
 const clickCounts = {};
 let currentProjectKey = null;
 
@@ -122,6 +123,12 @@ const projects = {
         tools: "OpenCV, JavaScript, HTML",
         timeline: "Spring 2024",
         filename: "upelanding"
+    },
+    ig:{
+        title:"instagram-refitter",
+        description: "Resize images to the constraits of instagram.com",
+        timeline: "Summer 2024",
+        filename: "instagram"
     }
 };
 
