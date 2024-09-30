@@ -14,7 +14,8 @@ const websiteBTN = document.getElementById("website");
 const pumpBTN = document.getElementById("pump");
 const lucidityBTN = document.getElementById("lucidity");
 const guessBTN = document.getElementById("guess");
-const igBTN = document.getElementById("ig");
+
+const bodyBTN = document.getElementById("body");
 
 const aboutBTN = document.getElementById("about-me");
 const technologyPhotoBTN = document.getElementById("technology-photo");
@@ -27,7 +28,8 @@ const lucidPhotoBTN = document.getElementById("lucid-photo");
 const pitchPhotoBTN = document.getElementById("pitch-photo");
 const guessPhotoBTN = document.getElementById("guess-photo");
 const monoPhotoBTN = document.getElementById("mono-photo");
-const igPhotoBTN = document.getElementById("ig-photo");
+
+const bodyPhotoBTN = document.getElementById("body-photo");
 
 
 //adding event handler for the click event
@@ -43,7 +45,10 @@ lucidPhotoBTN.addEventListener('click',function(){window.location.href = "lucidi
 pitchPhotoBTN.addEventListener('click',function(){window.location.href = "pitch.html";});
 guessPhotoBTN.addEventListener('click',function(){window.location.href= "guesshue.html";});
 monoPhotoBTN.addEventListener('click', function(){window.location.href = "upelanding.html";});
-igPhotoBTN.addEventListener('click', function(){window.location.href = "instagram.html"})
+
+bodyPhotoBTN.addEventListener('click', function(){window.location.href="body.html"});
+
+
 const clickCounts = {};
 let currentProjectKey = null;
 
@@ -129,6 +134,13 @@ const projects = {
         description: "Resize images to the constraits of instagram.com",
         timeline: "Summer 2024",
         filename: "instagram"
+    },
+    body:{
+        title:"body-synthesis",
+        description: "interactive sound installation showed at aisle isle on 9/27/2024",
+        tools:"python, pure-data, osc, machine-learning, opencv",
+        timeline: "August - September 2024",
+        filename: "body"
     }
 };
 
