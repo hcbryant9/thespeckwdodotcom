@@ -96,6 +96,108 @@ function halftoneImage(imageData) {
     return new ImageData(outputData, width, height);
 }
 
+function leeImage(imageData, blurRadius, bloomIntensity) {
+    const { data, width, height } = imageData;
+    const blurredData = blurImage(data, width, height, blurRadius);
+    const outputData = new Uint8ClampedArray(data.length);
+
+    // Add bloom effect by blending original and blurred images
+    for (let i = 0; i < data.length; i += 4) {
+        // Original pixel values
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        // Blurred pixel values
+        const blurredR = blurredData[i];
+        const blurredG = blurredData[i + 1];
+        const blurredB = blurredData[i + 2];
+
+        // Blend original and blurred colors for bloom effect
+        outputData[i] = Math.min(r + blurredR * bloomIntensity, 255);
+        outputData[i + 1] = Math.min(g + blurredG * bloomIntensity, 255);
+        outputData[i + 2] = Math.min(b + blurredB * bloomIntensity, 255);
+        outputData[i + 3] = 255; // Ensure alpha is fully opaque
+    }
+
+    return new ImageData(outputData, width, height);
+}
+
+// Gaussian Blur Implementation
+function blurImage(data, width, height, radius) {
+    const kernelSize = radius * 2 + 1;
+    const kernel = createGaussianKernel(radius);
+    const blurredData = new Uint8ClampedArray(data.length);
+
+    // Horizontal pass
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            applyKernel(data, blurredData, width, height, x, y, kernel, kernelSize, true);
+        }
+    }
+
+    // Vertical pass
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            applyKernel(blurredData, blurredData, width, height, x, y, kernel, kernelSize, false);
+        }
+    }
+
+    return blurredData;
+}
+
+// Apply Gaussian Kernel
+function applyKernel(inputData, outputData, width, height, x, y, kernel, kernelSize, horizontal) {
+    const halfSize = Math.floor(kernelSize / 2);
+    let r = 0, g = 0, b = 0, weightSum = 0;
+
+    for (let i = -halfSize; i <= halfSize; i++) {
+        const offset = horizontal ? i : i * width;
+        const currentX = x + (horizontal ? i : 0);
+        const currentY = y + (horizontal ? 0 : i);
+
+        if (currentX >= 0 && currentX < width && currentY >= 0 && currentY < height) {
+            const index = (currentY * width + currentX) * 4;
+            const weight = kernel[i + halfSize];
+
+            r += inputData[index] * weight;
+            g += inputData[index + 1] * weight;
+            b += inputData[index + 2] * weight;
+            weightSum += weight;
+        }
+    }
+
+    const index = (y * width + x) * 4;
+    outputData[index] = r / weightSum;
+    outputData[index + 1] = g / weightSum;
+    outputData[index + 2] = b / weightSum;
+    outputData[index + 3] = 255; // Alpha channel
+}
+
+// Create a Gaussian Kernel
+function createGaussianKernel(radius) {
+    const size = radius * 2 + 1;
+    const kernel = new Float32Array(size);
+    const sigma = radius / 2;
+    const sigma2 = 2 * sigma * sigma;
+    const sqrtSigmaPi2 = Math.sqrt(Math.PI * sigma2);
+    let sum = 0;
+
+    for (let i = 0; i < size; i++) {
+        const x = i - radius;
+        kernel[i] = Math.exp(-(x * x) / sigma2) / sqrtSigmaPi2;
+        sum += kernel[i];
+    }
+
+    // Normalize kernel
+    for (let i = 0; i < size; i++) {
+        kernel[i] /= sum;
+    }
+
+    return kernel;
+}
+
+
 
 function bloomImage(imageData, threshold, blurAmount, intensity) {
     const brightImageData = thresholdBrightness(imageData, threshold);

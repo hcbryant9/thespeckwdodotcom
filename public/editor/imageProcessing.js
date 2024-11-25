@@ -54,7 +54,28 @@ function applyHalftone(){
     canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
 }
 
+function applyLee(){
+    document.getElementById('leeInputDiv').style.display = "block";
+    const canvas = document.getElementById('outputCanvas');
+    saveCanvasState(canvas, 'lee');
 
+    
+    const intensityInput = document.getElementById('leeIntensityInput');
+    const blurInput = document.getElementById('leeBlurInput');
+    // const strokeIntensityInput = document.getElementById('strokeIntensityInput');
+    // const textureOpacityInput = document.getElementById('leeTextureOpacityInput');
+    // const brushSizeInput = document.getElementById('leeBrushSize');
+
+    const intensity = parseFloat(intensityInput.value);
+    const blurRadius = parseInt(blurInput.value);
+    // const strokeIntensity = parseFloat(strokeIntensityInput);
+    // const textureOpacity=parseFloat(textureOpacityInput);
+    // const brushSize = parseInt(brushSizeInput);
+
+    const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width, canvas.height);
+    const halftoneImageData = leeImage(imageData, blurRadius, intensity);
+    canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
+}
 
 function applyBloom() {
     document.getElementById('bloomInputDiv').style.display = "block";
@@ -65,6 +86,7 @@ function applyBloom() {
     const blurInput = document.getElementById('blurInput');
     const intensityInput = document.getElementById('bloomIntensityInput');
 
+    
     const blurAmount = parseInt(blurInput.value);
     const intensity = parseFloat(intensityInput.value);
     
@@ -72,8 +94,6 @@ function applyBloom() {
     const bloomImageData = bloomImage(imageData, threshold, blurAmount, intensity)
     canvas.getContext('2d').putImageData(bloomImageData,0,0);
 }
-
-
 
 function applyMultiply(){
     const outCanvas = document.getElementById('outputCanvas'); //get current canvas
@@ -167,6 +187,8 @@ function applyDarken(){
     const addImageData = blendImages(outImageData, layImageData, 'darken');
     outCanvas.getContext('2d').putImageData(addImageData, 0,0);
 }
+
+
 
 function addTextToImage(){
     document.getElementById('fontOptions').style.display = "block";
