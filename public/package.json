@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/hcbryant9/thespeckwdodotcom#readme",
   "devDependencies": {
-    "firebase-tools": "^12.2.1"
+    "firebase-tools": "^13.6.0"
   }
 }
