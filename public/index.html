@@ -92,7 +92,25 @@
     }
     
 
-    
+    .hand-image {
+        cursor: pointer;
+    }
+    #hand{
+        width:200px;
+        height:150px;
+    }
+    @keyframes dramaticFall {
+        0% { transform: rotate(0deg) translateY(0); opacity: 1; }
+        20% { transform: rotate(20deg) translateY(5px); }
+        40% { transform: rotate(-20deg) translateY(10px); }
+        60% { transform: rotate(30deg) translateY(30px) scale(1.1); }
+        80% { transform: rotate(-60deg) translateY(100px) scale(1.2); opacity: 0.7; }
+        100% { transform: rotate(720deg) translateY(500px) scale(0); opacity: 0; }
+    }
+
+    .fall-off {
+        animation: dramaticFall 2s cubic-bezier(0.6, 0.2, 0.4, 1) forwards;
+    }
 
     
 </style>
@@ -122,7 +140,7 @@
         <br>
         <br>
         
-        <table id="table2">
+        <!-- <table id="table2">
             <tr>
                 <td>
                     <canvas id="outputCanvas" width="520" height="350"></canvas>
@@ -130,10 +148,18 @@
             </tr>
         </table><br>
         <label for="uploadInput" class="index-btn">infiltrate page</label> 
-        <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)">
+        <input class="hidden-input" type="file" accept="image/*" id="uploadInput" onchange="handleImageUpload(event)"> -->
         
-    </center>
     
+    <div class="container">
+        <img id = "hand" class = "hand-image" src = "assets/images/kinect/kinect-arm-elipse-01.png" alt ="shake"/>
+        </div>
+        <br><small id="greeting"><i>Click to shake</i></small>
+        <br><small id="ouch"><i></i></small>
+        <br><br>
+    </center>
+    <script src="about.js"></script>
+
     <script src="app.js"></script>
     
     <noscript>you need to enable JavaScript to view the full site</noscript>

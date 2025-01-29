@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Distortion to Shape</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        input {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Distortion Tool</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        const imageInput = document.getElementById("imageInput");
+
+        // Define the shape (must have at least 4 points)
+        const shape = [
+            { x: 150, y: 20 },
+            { x: 280, y: 150 },
+            { x: 150, y: 280 },
+            { x: 20, y: 150 }
+        ];
+
+
+        // Divide the shape into triangles
+        const triangles = [
+            [shape[0], shape[1], shape[2]], // First triangle
+            [shape[0], shape[2], shape[3]]  // Second triangle
+        ];
+
+        // Function to draw a single triangle from an image
+        function drawTriangle(img, tri, sx, sy, sw, sh) {
+            // Create a clipping path for the triangle
+            ctx.beginPath();
+            ctx.moveTo(tri[0].x, tri[0].y);
+            ctx.lineTo(tri[1].x, tri[1].y);
+            ctx.lineTo(tri[2].x, tri[2].y);
+            ctx.closePath();
+            ctx.clip();
+
+            // Transform the image to fit the triangle
+            ctx.save();
+            const [p0, p1, p2] = tri;
+
+            // Set up the transformation matrix
+            const transform = ctx.getTransform();
+            const a = p1.x - p0.x, b = p2.x - p0.x;
+            const c = p1.y - p0.y, d = p2.y - p0.y;
+            ctx.setTransform(a / sw, c / sw, b / sh, d / sh, p0.x, p0.y);
+
+            // Draw the image section
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+
+            // Restore the context
+            ctx.setTransform(transform);
+            ctx.restore();
+        }
+
+        // Function to map the image onto the shape
+        function mapImageToShape(img) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const imgWidth = img.width;
+            const imgHeight = img.height;
+
+            // Stretch the image to fit each triangle
+            for (const tri of triangles) {
+                drawTriangle(img, tri, 0, 0, imgWidth, imgHeight);
+            }
+        }
+
+        // Handle image upload
+        imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const img = new Image();
+            img.onload = () => mapImageToShape(img);
+            img.src = URL.createObjectURL(file);
+        });
+    </script>
+</body>
+</html>
