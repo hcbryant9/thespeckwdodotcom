@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const hand = document.getElementById('hand');
   const greeting = document.getElementById('greeting');
   const ouch = document.getElementById('ouch');
+  const help = document.getElementById('help');
 
   let shakerCount = 0;
   let rotateDeg = 0;
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ouch.innerHTML = '<i>Okay, my arm is about to fall off</i>';
       } else if (shakerCount > 8 && shakerCount < 12) {
           ouch.innerHTML = '<i>Please, I am begging you</i>';
-      } else if (shakerCount > 25) {
+      } else if (shakerCount > 20) {
           shake = false;
           ouch.innerHTML = '<i>My Arm!</i>';
           greeting.innerHTML = '<i>You just ripped my arm off!</i>';
@@ -41,11 +42,18 @@ document.addEventListener('DOMContentLoaded', function () {
           // Trigger the fall-off animation
           hand.classList.add('fall-off');
 
-          // Remove hand after animation ends
-          setTimeout(() => {
-              hand.style.display = 'none';
-          }, 2000); // Matches animation duration
-          return;
+           // Remove hand after animation ends
+           setTimeout(() => {
+            hand.style.display = 'none';
+
+            // After 5 seconds, display the new text
+            setTimeout(() => {
+                greeting.innerHTML = '';
+                help.innerHTML = '<i>Help me find my hand, it must be somewhere...</i>';
+            }, 3000);
+
+        }, 2000);
+        return;
       }
       if(shake){
         // Run the shake effect faster and longer
