@@ -63,38 +63,69 @@ function bayerImage(imageData){
 
 }
 
-function halftoneImage(imageData) {
+function halftoneImage(imageData, gridSize, useDots = true) {
     const { data, width, height } = imageData;
     const outputData = new Uint8ClampedArray(data.length);
 
-    // Define the grid size (adjust this to control the density of halftone dots)
-    const gridSize = 30; // Experiment with this value
-
-    // Loop through each pixel in the image
     for (let y = 0; y < height; y += gridSize) {
         for (let x = 0; x < width; x += gridSize) {
-            // Calculate the index into the image data array
             const index = (y * width + x) * 4;
-
-            // Get the color components of the pixel
             const r = data[index];
             const g = data[index + 1];
             const b = data[index + 2];
-
-            // Determine the brightness of the pixel (use a weighted average)
             const brightness = (0.3 * r + 0.59 * g + 0.11 * b) / 255;
+            const shapeSize = gridSize * brightness;
 
-            // Calculate the radius of the halftone dot based on brightness
-            const dotRadius = gridSize * brightness;
-
-            // Draw a filled circle (dot) centered at (x, y) with the calculated radius
-            drawFilledCircle(outputData, width, height, x, y, dotRadius, r, g, b);
+            if (useDots) {
+                drawFilledCircle(outputData, width, height, x, y, shapeSize, r, g, b);
+            } else {
+                drawFilledSquare(outputData, width, height, x, y, shapeSize, r, g, b);
+            }
         }
     }
 
-    // Create a new ImageData object using the modified pixel data
     return new ImageData(outputData, width, height);
 }
+
+function drawFilledCircle(outputData, width, height, cx, cy, radius, r, g, b) {
+    const intRadius = Math.floor(radius);
+    const squaredRadius = intRadius * intRadius;
+
+    for (let dy = -intRadius; dy <= intRadius; dy++) {
+        for (let dx = -intRadius; dx <= intRadius; dx++) {
+            if (dx * dx + dy * dy <= squaredRadius) {
+                const x = cx + dx;
+                const y = cy + dy;
+                if (x >= 0 && x < width && y >= 0 && y < height) {
+                    const index = (y * width + x) * 4;
+                    outputData[index] = r;
+                    outputData[index + 1] = g;
+                    outputData[index + 2] = b;
+                    outputData[index + 3] = 255;
+                }
+            }
+        }
+    }
+}
+
+function drawFilledSquare(outputData, width, height, cx, cy, size, r, g, b) {
+    const halfSize = Math.floor(size / 2);
+    
+    for (let dy = -halfSize; dy <= halfSize; dy++) {
+        for (let dx = -halfSize; dx <= halfSize; dx++) {
+            const x = cx + dx;
+            const y = cy + dy;
+            if (x >= 0 && x < width && y >= 0 && y < height) {
+                const index = (y * width + x) * 4;
+                outputData[index] = r;
+                outputData[index + 1] = g;
+                outputData[index + 2] = b;
+                outputData[index + 3] = 255;
+            }
+        }
+    }
+}
+
 
 function leeImage(imageData, blurRadius, bloomIntensity) {
     const { data, width, height } = imageData;
@@ -254,28 +285,6 @@ function combineImages(originalImageData, bloomImageData, intensity) {
     return originalImageData;
 }
 
-
-function drawFilledCircle(outputData, width, height, cx, cy, radius, r, g, b) {
-    const intRadius = Math.floor(radius);
-    const squaredRadius = intRadius * intRadius;
-
-    for (let dy = -intRadius; dy <= intRadius; dy++) {
-        for (let dx = -intRadius; dx <= intRadius; dx++) {
-            const distanceSquared = dx * dx + dy * dy;
-            if (distanceSquared <= squaredRadius) {
-                const x = cx + dx;
-                const y = cy + dy;
-                if (x >= 0 && x < width && y >= 0 && y < height) {
-                    const index = (y * width + x) * 4;
-                    outputData[index] = r;
-                    outputData[index + 1] = g;
-                    outputData[index + 2] = b;
-                    outputData[index + 3] = 255; // Alpha channel
-                }
-            }
-        }
-    }
-}
 
 function blendImages(oldImageData, newImageData, blendMode = 'multiply') {
     // Check if oldImageData is null or undefined

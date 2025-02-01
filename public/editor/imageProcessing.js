@@ -46,11 +46,27 @@ function applyMonochrome() {
 
 function applyHalftone(){
     
+    document.getElementById('halftoneInputDiv').style.display = "block";
     const canvas = document.getElementById('outputCanvas');
-    saveCanvasState(canvas, 'halftone');
+    const gridSizeInput = document.getElementById("halftoneGridSize");
+    const gridSize = parseInt(gridSizeInput.value);
+    saveCanvasState(canvas, 'halftone', { gridSize: gridSize});
 
     const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width, canvas.height);
-    const halftoneImageData = halftoneImage(imageData);
+    const halftoneImageData = halftoneImage(imageData, gridSize, true);
+    canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
+}
+
+function applyMosaic(){
+    
+    document.getElementById('mosaicInputDiv').style.display = "block";
+    const canvas = document.getElementById('outputCanvas');
+    const gridSizeInput = document.getElementById("mosaicGridSize");
+    const gridSize = parseInt(gridSizeInput.value);
+    saveCanvasState(canvas, 'mosaic', { gridSize: gridSize});
+
+    const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width, canvas.height);
+    const halftoneImageData = halftoneImage(imageData, gridSize, false);
     canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
 }
 

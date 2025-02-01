@@ -105,6 +105,12 @@
     #leeInputDiv{
         display: none;
     }
+    #halftoneInputDiv{
+        display: none;
+    }
+    #mosaicInputDiv{
+        display: none;
+    }
     .small-label {
         font-size: 12px;
         margin-right: 5px;
@@ -169,6 +175,7 @@
     <button class="index-btn" onclick="applyHalftone()">Halftone</button>
     <button class="index-btn" onclick="applyBloom()">Bloom</button>
     <button class="index-btn" onclick="applyLee()">Austin Lee</button>
+    <button class="index-btn" onclick="applyMosaic()">Mosaic Tiling</button>
     <!-- <button class="index-btn" onclick="applyBlur()">Blur</button> -->
     <br><br>
     
@@ -188,6 +195,17 @@
     <label for="bloomIntensityInput">Bloom Intesity: </label>
     <input type="number" id="bloomIntensityInput" value="0.8" min="0.1" max="1.0">
     </div>
+
+    <div id = "halftoneInputDiv">
+    <label for="halftoneGridSize">Grid Size</label>
+    <input type="number" id="halftoneGridSize" value = "30" min="1" max="100">
+    </div>
+
+    <div id = "mosaicInputDiv">
+    <label for="mosaicGridSize">Mosaic Grid Size</label>
+    <input type="number" id="mosaicGridSize" value = "100" min="1" max="1000">
+    </div>
+
     <div id = "leeInputDiv">
     <label for="leeIntensityInput">Bloom Intesity: </label>
     <input type="number" id="leeIntensityInput" value="1" min="0.1" max="5.0">
@@ -214,7 +232,7 @@
     <footer>
         
         <br>
-        <center>v1.2.0<br>
+        <center>v1.0.4<br>
             <nav>
                 <center>
                 <a href="upelanding.html">project home page</a> <br>
