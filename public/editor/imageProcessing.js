@@ -70,6 +70,20 @@ function applyMosaic(){
     canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
 }
 
+function applyRectangle(){
+    document.getElementById('rectangleInputDiv').style.display = "block";
+    const canvas = document.getElementById('outputCanvas');
+    const widthSizeInput = document.getElementById("rectangleWidthSize");
+    const widthSize = parseInt(widthSizeInput.value);
+    const heightSizeInput = document.getElementById("rectangleHeightSize");
+    const heightSize = parseInt(heightSizeInput.value);
+    saveCanvasState(canvas, 'rectangle');
+
+    const imageData = canvas.getContext('2d').getImageData(0,0,canvas.width, canvas.height);
+    const halftoneImageData = rectangleImage(imageData, widthSize, heightSize);
+    canvas.getContext('2d').putImageData(halftoneImageData, 0, 0);
+}
+
 function applyLee(){
     document.getElementById('leeInputDiv').style.display = "block";
     const canvas = document.getElementById('outputCanvas');
@@ -203,9 +217,6 @@ function applyDarken(){
     const addImageData = blendImages(outImageData, layImageData, 'darken');
     outCanvas.getContext('2d').putImageData(addImageData, 0,0);
 }
-
-
-
 function addTextToImage(){
     document.getElementById('fontOptions').style.display = "block";
     const canvas = document.getElementById('outputCanvas');

@@ -153,6 +153,54 @@ function leeImage(imageData, blurRadius, bloomIntensity) {
 
     return new ImageData(outputData, width, height);
 }
+function rectangleImage(imageData, rectWidth, rectHeight) {
+    const { data, width, height } = imageData;
+    
+
+    // Determine grid size
+    const cols = Math.floor(width / rectWidth);
+    const rows = Math.floor(height / rectHeight);
+    const numRects = cols * rows;
+
+    // Create an array of rectangle positions
+    const rectPositions = [];
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            rectPositions.push({ x: col * rectWidth, y: row * rectHeight });
+        }
+    }
+
+    // Shuffle the positions randomly
+    for (let i = rectPositions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rectPositions[i], rectPositions[j]] = [rectPositions[j], rectPositions[i]];
+    }
+
+    // Rearrange image using shuffled positions
+    const shuffledData = new Uint8ClampedArray(data.length);
+
+    for (let i = 0; i < numRects; i++) {
+        const srcX = (i % cols) * rectWidth;
+        const srcY = Math.floor(i / cols) * rectHeight;
+        const { x: destX, y: destY } = rectPositions[i];
+
+        for (let y = 0; y < rectHeight; y++) {
+            for (let x = 0; x < rectWidth; x++) {
+                const srcIndex = ((srcY + y) * width + (srcX + x)) * 4;
+                const destIndex = ((destY + y) * width + (destX + x)) * 4;
+
+                shuffledData[destIndex] = data[srcIndex];
+                shuffledData[destIndex + 1] = data[srcIndex + 1];
+                shuffledData[destIndex + 2] = data[srcIndex + 2];
+                shuffledData[destIndex + 3] = data[srcIndex + 3]; // Preserve alpha
+            }
+        }
+    }
+
+    return new ImageData(shuffledData, width, height);
+}
+
+
 
 // Gaussian Blur Implementation
 function blurImage(data, width, height, radius) {

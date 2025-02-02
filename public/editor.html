@@ -111,6 +111,9 @@
     #mosaicInputDiv{
         display: none;
     }
+    #rectangleInputDiv{
+        display: none;
+    }
     .small-label {
         font-size: 12px;
         margin-right: 5px;
@@ -176,6 +179,7 @@
     <button class="index-btn" onclick="applyBloom()">Bloom</button>
     <button class="index-btn" onclick="applyLee()">Austin Lee</button>
     <button class="index-btn" onclick="applyMosaic()">Mosaic Tiling</button>
+    <button class="index-btn" onclick="applyRectangle()">Puzzle</button>
     <!-- <button class="index-btn" onclick="applyBlur()">Blur</button> -->
     <br><br>
     
@@ -205,7 +209,12 @@
     <label for="mosaicGridSize">Mosaic Grid Size</label>
     <input type="number" id="mosaicGridSize" value = "100" min="1" max="1000">
     </div>
-
+    <div id = "rectangleInputDiv">
+    <label for="rectangleHeightSize">Height</label>
+    <input type="number" id="rectangleHeightSize" value = "100" min="1" max="1000">
+    <label for="rectangleWidthSize">Width</label>
+    <input type="number" id="rectangleWidthSize" value = "100" min="1" max="1000">
+    </div>
     <div id = "leeInputDiv">
     <label for="leeIntensityInput">Bloom Intesity: </label>
     <input type="number" id="leeIntensityInput" value="1" min="0.1" max="5.0">
