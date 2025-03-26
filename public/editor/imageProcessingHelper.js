@@ -199,6 +199,61 @@ function rectangleImage(imageData, rectWidth, rectHeight) {
 
     return new ImageData(shuffledData, width, height);
 }
+function waveShuffleImage(imageData) {
+    const { data, width, height } = imageData;
+    const outputData = new Uint8ClampedArray(data); // Copy original image data
+
+    const rectWidth = 50;  // Adjust size as needed
+    const rectHeight = 50;
+
+    // Determine grid size
+    const cols = Math.floor(width / rectWidth);
+    const rows = Math.floor(height / rectHeight);
+    const numRects = cols * rows;
+
+    // Create grid of positions
+    const rectPositions = [];
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            rectPositions.push({ x: col * rectWidth, y: row * rectHeight });
+        }
+    }
+
+    // Apply a wave-like distortion to rearrange the tiles
+    const waveAmplitude = rectHeight * 1.5;  // How strong the wave effect is
+    const waveFrequency = 2 * Math.PI / cols; // Determines how many waves fit in the width
+
+    const shuffledPositions = rectPositions.map(({ x, y }, index) => {
+        const waveOffset = Math.sin(y * waveFrequency) * waveAmplitude;
+        let newX = Math.round(x + waveOffset) % width;
+        if (newX < 0) newX += width; // Wrap-around effect
+
+        return { x: newX, y };
+    });
+
+    // Rearrange image using wave-transformed positions
+    const shuffledData = new Uint8ClampedArray(data.length);
+
+    for (let i = 0; i < numRects; i++) {
+        const srcX = (i % cols) * rectWidth;
+        const srcY = Math.floor(i / cols) * rectHeight;
+        const { x: destX, y: destY } = shuffledPositions[i];
+
+        for (let y = 0; y < rectHeight; y++) {
+            for (let x = 0; x < rectWidth; x++) {
+                const srcIndex = ((srcY + y) * width + (srcX + x)) * 4;
+                const destIndex = ((destY + y) * width + (destX + x)) * 4;
+
+                shuffledData[destIndex] = data[srcIndex];
+                shuffledData[destIndex + 1] = data[srcIndex + 1];
+                shuffledData[destIndex + 2] = data[srcIndex + 2];
+                shuffledData[destIndex + 3] = data[srcIndex + 3]; // Preserve alpha
+            }
+        }
+    }
+
+    return new ImageData(shuffledData, width, height);
+}
 
 
 
