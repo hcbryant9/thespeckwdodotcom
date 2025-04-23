@@ -91,5 +91,5 @@ july24BTN.addEventListener('click', function(){
     window.location.href = "july24.html";
 });
 drinkBTN.addEventListener('click', function(){
-    window.location.href = "25.html"
+    window.location.href = "twentyfive.html"
 });
