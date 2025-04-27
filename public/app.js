@@ -6,6 +6,10 @@ const videosBTN = document.getElementById("video-photo");
 const jpgBTN = document.getElementById("jpg-photo");
 const projectsBTN = document.getElementById("project-photo");
 
+const blogBTN = document.getElementById("blog-photo");
+const musicBTN = document.getElementById("music-photo");
+const websiteBTN = document.getElementById("websites-photo");
+
 //adding event handler for the click event
 
 
@@ -21,6 +25,20 @@ projectsBTN.addEventListener('click',function(){
 jpgBTN.addEventListener('click',function(){
     console.log('button clicked');
     window.location.href = "jpgs.html";
+});
+blogBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "twentyfive.html";
+});
+
+musicBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "https://johndoeband.web.app/";
+});
+
+websiteBTN.addEventListener('click',function(){
+    console.log('button clicked');
+    window.location.href = "websites.html";
 });
 
 function handleImageUpload(event) {
