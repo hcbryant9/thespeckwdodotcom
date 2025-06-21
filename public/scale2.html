@@ -2,47 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Image Distortion</title>
   <style>
     body {
       font-family: sans-serif;
       background: #f9f9f9;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
+      margin: 0;
     }
+
     canvas {
-      border: 1px solid #aaa;
-      margin-bottom: 20px;
-      max-width: 100%;
+      width: 50vw;            /* Scales with viewport width */
+      max-width: 500px;       /* Prevents it from being too wide on desktop */
       height: auto;
+      border: 1px solid #aaa;
+      margin-bottom: 10px;
     }
     .slider-container {
-      margin: 10px 0;
+      margin: 15px 0;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
     }
+
     label {
       display: block;
+      font-size: 1rem;
       margin-bottom: 5px;
     }
+
     input[type="range"] {
-      width: 300px;
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
-<h2>Elektrobild Style Inside-Out Distortion</h2>
-<input type="file" id="upload" accept="image/*" /><br/><br/>
-<canvas id="canvas" width="300" height="300"></canvas>
+  
 
-<div class="slider-container">
-  <label for="hSlider">Horizontal Distortion: <span id="hVal">0</span></label>
-  <input type="range" id="hSlider" min="-60" max="60" step="1" value="0" />
-</div>
+  <input type="file" id="upload" class="index-btn" accept="image/*" /><br/><br/>
+  <canvas id="canvas" width="300" height="300"></canvas>
 
-<div class="slider-container">
-  <label for="vSlider">Vertical Distortion: <span id="vVal">0</span></label>
-  <input type="range" id="vSlider" min="-60" max="60" step="1" value="0" />
-</div>
+  <div class="slider-container">
+    <label for="hSlider">Horizontal Distortion: <span id="hVal">0</span></label>
+    <input type="range" id="hSlider" min="-60" max="60" step="1" value="0" />
+  </div>
+
+  <div class="slider-container">
+    <label for="vSlider">Vertical Distortion: <span id="vVal">0</span></label>
+    <input type="range" id="vSlider" min="-60" max="60" step="1" value="0" />
+  </div>
 
 <script>
   const canvas = document.getElementById('canvas');
@@ -53,36 +65,26 @@
   const hVal = document.getElementById('hVal');
   const vVal = document.getElementById('vVal');
 
-  // Increased slice count
   let anzX = 120;
   let anzY = 120;
-
-  let algX = [];
-  let sumX = 0;
-  let algY = [];
-  let sumY = 0;
-
+  let algX = [], sumX = 0;
+  let algY = [], sumY = 0;
   let img = new Image();
-  let IMGw = 0;
-  let IMGh = 0;
+  let IMGw = 0, IMGh = 0;
 
   function __retalg(a, b, direction) {
     let half = b / 2;
     let dist = Math.abs(a - half);
-    if (direction > 0) {
-      dist = half - dist;
-    }
+    if (direction > 0) dist = half - dist;
     return Math.exp(dist / 4);
   }
 
   function calculateAlg(distortion) {
     let dir = distortion <= 0 ? -1 : 1;
     let absDist = Math.abs(distortion);
-
     let segments = Math.max(2, Math.round(absDist));
-    let alg = [];
-    let sum = 0;
-    for(let i = 0; i <= segments; i++) {
+    let alg = [], sum = 0;
+    for (let i = 0; i <= segments; i++) {
       let val = __retalg(i, segments, dir);
       alg.push(val);
       sum += val;
@@ -99,7 +101,6 @@
 
     const canvasW = canvas.width;
     const canvasH = canvas.height;
-
     const distX = mapDistortion(parseInt(hSlider.value, 10));
     const distY = mapDistortion(parseInt(vSlider.value, 10));
 
@@ -109,30 +110,23 @@
     let { alg: algXTmp, sum: sumXTmp, segments: segmentsX } = calculateAlg(distX);
     let { alg: algYTmp, sum: sumYTmp, segments: segmentsY } = calculateAlg(distY);
 
-    algX = algXTmp;
-    sumX = sumXTmp;
-    anzX = segmentsX;
+    algX = algXTmp; sumX = sumXTmp; anzX = segmentsX;
+    algY = algYTmp; sumY = sumYTmp; anzY = segmentsY;
 
-    algY = algYTmp;
-    sumY = sumYTmp;
-    anzY = segmentsY;
-
-    // Clear canvas (no background fill)
     ctx.clearRect(0, 0, canvasW, canvasH);
 
     let offsetX = 0;
-    for(let i = 0; i < anzX; i++) {
+    for (let i = 0; i < anzX; i++) {
       const srcX = (i / anzX) * IMGw;
       const srcW = IMGw / anzX;
       const destW = (algX[i] / sumX) * canvasW;
 
       let offsetY = 0;
-      for(let j = 0; j < anzY; j++) {
+      for (let j = 0; j < anzY; j++) {
         const srcY = (j / anzY) * IMGh;
         const srcH = IMGh / anzY;
         const destH = (algY[j] / sumY) * canvasH;
 
-        // Apply +1 overlap to avoid tiny seams
         ctx.drawImage(
           img,
           srcX, srcY, srcW + 1, srcH + 1,
@@ -152,8 +146,10 @@
     let url = URL.createObjectURL(file);
     img = new Image();
     img.onload = () => {
-      const maxDim = 500;
-      let scale = Math.min(maxDim / img.width, maxDim / img.height, 1);
+      const maxW = window.innerWidth - 40;
+      const maxH = window.innerHeight * 0.6;
+
+      let scale = Math.min(maxW / img.width, maxH / img.height, 1);
 
       canvas.width = img.width * scale;
       canvas.height = img.height * scale;
