@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Electrobild-like Nonlinear Compress/Stretch</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 40px;
+    }
+    canvas {
+      border: 1px solid #aaa;
+      image-rendering: pixelated;
+      margin-bottom: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+    .slider-container {
+      margin: 10px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="range"] {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Electrobild-like Nonlinear Compress/Stretch</h2>
+
+  <input type="file" id="upload" accept="image/*" />
+  <br /><br />
+  <canvas id="canvas" width="300" height="300"></canvas>
+
+  <div class="slider-container">
+    <label for="hSlider">Horizontal Compress/Stretch: <span id="hVal">0.5</span></label>
+    <input type="range" id="hSlider" min="0.0" max="1" step="0.01" value="1" />
+  </div>
+
+  <div class="slider-container">
+    <label for="vSlider">Vertical Compress/Stretch: <span id="vVal">0.5</span></label>
+    <input type="range" id="vSlider" min="0.0" max="1" step="0.01" value="1" />
+  </div>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const upload = document.getElementById('upload');
+  const hSlider = document.getElementById('hSlider');
+  const vSlider = document.getElementById('vSlider');
+  const hVal = document.getElementById('hVal');
+  const vVal = document.getElementById('vVal');
+
+  const fixedWidth = 300;
+  const fixedHeight = 300;
+
+  let originalImageData = null;
+
+  // Bilinear interpolation
+  function bilinearSample(imageData, x, y) {
+    const { width, height, data } = imageData;
+    x = Math.min(width - 1.001, Math.max(0, x));
+    y = Math.min(height - 1.001, Math.max(0, y));
+
+    const x1 = Math.floor(x);
+    const y1 = Math.floor(y);
+    const x2 = Math.min(width - 1, x1 + 1);
+    const y2 = Math.min(height - 1, y1 + 1);
+
+    const dx = x - x1;
+    const dy = y - y1;
+
+    function getPixel(ix, iy) {
+      const idx = (iy * width + ix) * 4;
+      return [
+        data[idx],
+        data[idx + 1],
+        data[idx + 2],
+        data[idx + 3],
+      ];
+    }
+
+    const p11 = getPixel(x1, y1);
+    const p21 = getPixel(x2, y1);
+    const p12 = getPixel(x1, y2);
+    const p22 = getPixel(x2, y2);
+
+    const top = p11.map((v, i) => v * (1 - dx) + p21[i] * dx);
+    const bottom = p12.map((v, i) => v * (1 - dx) + p22[i] * dx);
+
+    return top.map((v, i) => v * (1 - dy) + bottom[i] * dy);
+  }
+
+  // Nonlinear warp function, keeping center fixed, compress/stretch edges
+  function warpCoord(u, scale) {
+    if (scale === 1) return u;
+    const sign = u < 0 ? -1 : 1;
+    const absU = Math.abs(u);
+    // Avoid division by zero
+    const s = scale;
+    // Use power function with exponent 1/scale to control compression/stretch
+    return sign * Math.pow(absU, 1 / s) / Math.pow(1, 1 / s);
+  }
+
+  function distortImage(hScale, vScale) {
+    if (!originalImageData) return;
+
+    const width = fixedWidth;
+    const height = fixedHeight;
+
+    const src = originalImageData;
+    const dst = ctx.createImageData(width, height);
+
+    for (let y = 0; y < height; y++) {
+      // Normalize Y to [-1,1]
+      const uY = 2 * y / (height - 1) - 1;
+      // Warp Y
+      const warpedUY = warpCoord(uY, vScale);
+      // Map back to source Y
+      const srcY = ((warpedUY + 1) / 2) * (height - 1);
+
+      for (let x = 0; x < width; x++) {
+        // Normalize X to [-1,1]
+        const uX = 2 * x / (width - 1) - 1;
+        // Warp X
+        const warpedUX = warpCoord(uX, hScale);
+        // Map back to source X
+        const srcX = ((warpedUX + 1) / 2) * (width - 1);
+
+        const pixel = bilinearSample(src, srcX, srcY);
+        const dstIndex = (y * width + x) * 4;
+
+        dst.data[dstIndex] = pixel[0];
+        dst.data[dstIndex + 1] = pixel[1];
+        dst.data[dstIndex + 2] = pixel[2];
+        dst.data[dstIndex + 3] = pixel[3];
+      }
+    }
+
+    ctx.putImageData(dst, 0, 0);
+  }
+
+  function update() {
+    const hScale = parseFloat(hSlider.value);
+    const vScale = parseFloat(vSlider.value);
+
+    hVal.textContent = hScale.toFixed(2);
+    vVal.textContent = vScale.toFixed(2);
+
+    distortImage(hScale, vScale);
+  }
+
+  upload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      canvas.width = fixedWidth;
+      canvas.height = fixedHeight;
+
+      ctx.drawImage(img, 0, 0, fixedWidth, fixedHeight);
+      originalImageData = ctx.getImageData(0, 0, fixedWidth, fixedHeight);
+
+      hSlider.value = 1;
+      vSlider.value = 1;
+      update();
+
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
+  });
+
+  hSlider.addEventListener('input', update);
+  vSlider.addEventListener('input', update);
+</script>
+
+</body>
+</html>
