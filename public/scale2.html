@@ -38,13 +38,99 @@
     input[type="range"] {
       width: 100%;
     }
+    .hidden-input {
+    display: none;
+  }
+  .upload-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  margin: 10px 0;
+}
+
+/* Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: black;
+  border: 1px solid black;
+  border-radius: 0;  /* Sharp edges */
+}
+
+/* Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 0;  /* Sharp edges */
+  cursor: pointer;
+  margin-top: -4px; /* Center the thumb vertically */
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: black;
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+/* IE (Optional, legacy support) */
+input[type="range"]::-ms-track {
+  height: 8px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: black;
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: black;
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+
   </style>
 </head>
 <body>
 
   
+  <div class="upload-container">
+  <label for="upload" class="index-btn">Upload Photo</label>
+  <input type="file" id="upload" class="hidden-input" accept="image/*" />
+  </div>
 
-  <input type="file" id="upload" class="index-btn" accept="image/*" /><br/><br/>
   <canvas id="canvas" width="300" height="300"></canvas>
 
   <div class="slider-container">
