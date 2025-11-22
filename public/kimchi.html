@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Kimchi" />
+
+    <meta name="description" content="Kimchi" />
+    <meta property="og:description" content="Kimchi" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images//cache/cache_one_cover.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/images//cache/cache_one_cover.png" type="image/png" />
+    
+    <title>Kimchi</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<style>
+    body{
+        background-image: url("./assets/images/kimchi/wood2.jpg");
+    }
+    footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    
+    .layout {
+      display: block;
+      min-height: 100vh;
+     
+    }
+    .scrolling-banner {
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px 0;
+        background-color: #ffffff;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+    }
+    
+    .scrolling-banner span {
+        display: inline-block;
+        padding-left: 15%;
+        animation: scrollText 15s linear infinite;
+    }
+    
+    @keyframes scrollText {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    table {
+        border-collapse: collapse;
+        /* border: 1px solid #000000; */
+        width: 100%; /* Make table fill the main div */
+        margin: 0 auto; /* Center table horizontally if smaller */
+    }
+    #table1 td {
+        /* border: 1px solid #000000; */
+        padding: 10px 0 0 0; /* Add padding to the top */
+        margin: 0; /* Remove margin */
+        text-align: center; /* Center content horizontally */
+    }
+    #table2 td{
+        /* border: 1px solid #000000; */
+        margin: 0; /* Remove margin */
+        text-align: center; /* Center content horizontally */
+    }
+   
+    #jpg-photo,
+    #project-photo,
+    #video-photo,
+    #blog-photo,
+    #websites-photo,
+    #music-photo {
+        width: 50%; /* Responsive width */
+        max-width: 180px;
+        height: auto;
+        display: block;
+        margin: 0 auto; /* Center images horizontally */
+    }
+    #outputCanvas {
+        width: 520px;
+        height: 350px;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    .hidden-input {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+   .main {
+      flex: 1;
+      padding: 20px;
+      background: transparent;
+      background-image: url('assets/images/wood2.jpg');
+      background-size: 110% auto;
+      background-repeat: repeat;
+      background-position: center center;
+      box-sizing: border-box;
+      border: 32px solid transparent;
+      /* border-image: url('assets/images/frame.jpg') 100 round; */
+      border-radius: 12px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 25px;
+      max-width: 600px;
+      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.13);
+    }
+
+    #table1 img {
+        width: 150px !important;
+        height: 100px !important;
+        max-width: none !important;
+    }
+
+    .caption-link {
+      color: #1565c0;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.08em;
+    }
+    .caption-link:visited {
+      color: #0d47a1;
+    }
+    .caption-link:hover {
+      color: #1976d2;
+    }
+</style>
+
+<body>
+    <center>
+    <img id="kimchi-gif" src="assets/images/kimchi/kimchi-cabbages.gif">
+    </center>
+    <div class="layout">
+        <br>
+        
+        Welcome to my Kimchi Page
+       
+      
+        
+      
+
+    </div>
+   
+</body>
+</html>
