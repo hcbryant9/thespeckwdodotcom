@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descale Vertical Strips</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  canvas { border: 1px solid black; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h2>Descale Image Using Vertical Strips (4 Corners)</h2>
+
+<input type="file" id="imageInput" accept="image/*"><br><br>
+
+<label>Strip Width: <span id="stripWidthLabel">40</span> px</label><br>
+<input type="range" id="stripWidth" min="2" max="200" value="40">
+
+<canvas id="outputCanvas"></canvas>
+
+<script>
+const imageInput = document.getElementById("imageInput");
+const stripSlider = document.getElementById("stripWidth");
+const stripLabel = document.getElementById("stripWidthLabel");
+const outputCanvas = document.getElementById("outputCanvas");
+const ctxOut = outputCanvas.getContext("2d");
+
+let img = null;
+
+imageInput.addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const image = new Image();
+  image.onload = () => { img = image; draw(); };
+  image.src = URL.createObjectURL(file);
+});
+
+stripSlider.addEventListener("input", () => {
+  stripLabel.textContent = stripSlider.value;
+  draw();
+});
+
+function draw() {
+  if (!img) return;
+
+  const stripWidth = parseInt(stripSlider.value);
+  const size = 1024; // output square canvas
+  outputCanvas.width = size;
+  outputCanvas.height = size;
+
+  // Step 1: Stretch input image to square
+  const squareCanvas = document.createElement("canvas");
+  squareCanvas.width = size;
+  squareCanvas.height = size;
+  const ctxSq = squareCanvas.getContext("2d");
+  ctxSq.drawImage(img, 0, 0, size, size);
+
+  const imgData = ctxSq.getImageData(0, 0, size, size);
+  const w = size, h = size;
+
+  // Step 2: Count how many strips go into each derived image
+  const totalStrips = Math.ceil(w / stripWidth);
+  const stripsPerDerived = [0, 0, 0, 0];
+
+  for (let strip = 0; strip < totalStrips; strip++) {
+    stripsPerDerived[strip % 4]++;
+  }
+
+  // Step 3: Create derived images
+  const derived = [];
+  const derivedCtx = [];
+  const derivedData = [];
+
+  for (let i = 0; i < 4; i++) {
+    const dw = stripsPerDerived[i] * stripWidth;
+    const c = document.createElement("canvas");
+    c.width = dw;
+    c.height = h;
+    derived.push(c);
+    derivedCtx.push(c.getContext("2d"));
+    derivedData.push(derivedCtx[i].createImageData(dw, h));
+  }
+
+  // Step 4: Fill derived images
+  const positions = [0, 0, 0, 0]; // x-position for each derived image
+  for (let x = 0; x < w; x++) {
+    const stripIndex = Math.floor(x / stripWidth);
+    const derivedIndex = stripIndex % 4;
+    const dw = derived[derivedIndex].width;
+
+    for (let y = 0; y < h; y++) {
+      const srcIdx = (y * w + x) * 4;
+      const dstIdx = (y * dw + positions[derivedIndex]) * 4;
+
+      derivedData[derivedIndex].data[dstIdx]     = imgData.data[srcIdx];
+      derivedData[derivedIndex].data[dstIdx + 1] = imgData.data[srcIdx + 1];
+      derivedData[derivedIndex].data[dstIdx + 2] = imgData.data[srcIdx + 2];
+      derivedData[derivedIndex].data[dstIdx + 3] = 255;
+    }
+    positions[derivedIndex] += stripWidth;
+  }
+
+  for (let i = 0; i < 4; i++) {
+    derivedCtx[i].putImageData(derivedData[i], 0, 0);
+  }
+
+  // Step 5: Draw derived images into output canvas (2x2)
+  const half = size / 2;
+  ctxOut.clearRect(0, 0, size, size);
+
+  ctxOut.drawImage(derived[0], 0, 0, half, half);      // top-left
+  ctxOut.drawImage(derived[1], half, 0, half, half);   // top-right
+  ctxOut.drawImage(derived[2], 0, half, half, half);   // bottom-left
+  ctxOut.drawImage(derived[3], half, half, half, half);// bottom-right
+}
+</script>
+
+</body>
+</html>
